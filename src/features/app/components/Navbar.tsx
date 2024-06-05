@@ -1,0 +1,32 @@
+import Link from "next/link";
+
+interface NavbarProps {
+  isLoaded: boolean;
+  isLoggedIn: boolean;
+  logOut: () => void;
+}
+
+export function Navbar({ isLoaded, isLoggedIn, logOut }: NavbarProps) {
+  return (
+    <div className="py-4 bg-gray-100 border flex justify-between">
+      <Link href="/">Home</Link>
+      <div>
+        {isLoaded ? <div>Loaded</div> : <div>Not unloaded</div>}
+        {isLoggedIn ? (
+          <div>
+            <button onClick={logOut}>Log out</button>
+          </div>
+        ) : (
+          <div>
+            <Link href="/log-in" className="block">
+              Log In
+            </Link>
+            <Link href="/sign-up" className="block">
+              Sign Up
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
