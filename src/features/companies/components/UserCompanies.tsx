@@ -13,8 +13,8 @@ export function UserCompanies({ id }: UserCompaniesProps) {
 
   return (
     <div>
-      {userCompaniesQuery.data.results.map(({ name }) => (
-        <div>{name}</div>
+      {userCompaniesQuery.data.results.map(({ id, name }) => (
+        <div key={id}>{name}</div>
       ))}
     </div>
   );
