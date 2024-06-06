@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { User } from "@/features/users";
 
 import { useUserCompanies } from "../api/getUserCompanies";
@@ -14,7 +16,9 @@ export function UserCompanies({ id }: UserCompaniesProps) {
   return (
     <div>
       {userCompaniesQuery.data.results.map(({ id, name }) => (
-        <div key={id}>{name}</div>
+        <div key={id}>
+          <Link href={`/companies/${id}`}>{name}</Link>
+        </div>
       ))}
     </div>
   );
