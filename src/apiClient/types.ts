@@ -2,10 +2,6 @@ import { AxiosError } from "axios";
 
 export type APIError = AxiosError<{ errors: JSONAPIErrorObject[] }>;
 
-// export interface APIError {
-//   errors: JSONAPIErrorObject[];
-// }
-
 interface JSONAPIErrorObject {
   status: number;
   title: string;
@@ -13,4 +9,9 @@ interface JSONAPIErrorObject {
   source?: {
     pointer: string;
   };
+}
+
+export interface APIList<ResultType> {
+  next_page_token: string | null;
+  results: ResultType[];
 }
