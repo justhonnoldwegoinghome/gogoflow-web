@@ -9,6 +9,7 @@ import { useAuthStore, useLoad, useLogOut } from "@/features/authentication";
 export default function App({ Component, pageProps }: AppProps) {
   const isLoaded = useAuthStore((s) => s.isLoaded);
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const userId = useAuthStore((s) => s.userId);
 
   const logOutMutation = useLogOut();
 
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Navbar
           isLoaded={isLoaded}
           isLoggedIn={isLoggedIn}
+          userId={userId}
           logOut={logOutMutation.trigger}
         />
         <Component {...pageProps} />

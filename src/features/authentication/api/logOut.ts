@@ -1,4 +1,5 @@
 import useSWRMutation from "swr/mutation";
+import { useRouter } from "next/router";
 
 import { post } from "@/apiClient";
 
@@ -11,7 +12,16 @@ export function logOut() {
 export function useLogOut() {
   const _logOut = useAuthStore((s) => s.logOut);
 
-  return useSWRMutation("/log-out", () => logOut().then(_logOut), {
-    throwOnError: false,
-  });
+  const push = useRouter().push;
+
+  return useSWRMutation(
+    "/log-out",
+    () =>
+      logOut()
+        .then(_logOut)
+        .then(() => push("/")),
+    {
+      throwOnError: false,
+    }
+  );
 }
