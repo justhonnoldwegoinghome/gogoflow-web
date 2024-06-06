@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 
-import { Company, CompanySummary } from "@/features/companies";
+import {
+  Company,
+  CompanySummary,
+  DeleteCompanyButton,
+} from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 import { CompanyAssistants } from "@/features/assistants";
 
@@ -14,12 +18,14 @@ export default function CompanyPage() {
 
   return (
     <LoggedIn>
-      {() => (
+      {(userId) => (
         <div>
-          <h1>Company</h1>
+          <h1 className="font-bold">About the company</h1>
           <CompanySummary id={id} />
+          <DeleteCompanyButton id={id} userId={userId} />
           <br />
-          <h2>Assistants</h2>
+          <br />
+          <h2 className="font-bold">Company's assistants</h2>
           <CompanyAssistants id={id} />
         </div>
       )}
