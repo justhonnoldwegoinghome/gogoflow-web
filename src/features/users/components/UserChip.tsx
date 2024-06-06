@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useUser } from "../api/getUser";
 import { User } from "../types";
 
@@ -10,5 +12,9 @@ export function UserChip({ id }: UserChipProps) {
 
   if (!userQuery.data) return <div></div>;
 
-  return <div>{userQuery.data.email}</div>;
+  return (
+    <Link href="/me" className="block">
+      {userQuery.data.email}
+    </Link>
+  );
 }
