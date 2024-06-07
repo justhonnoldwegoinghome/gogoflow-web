@@ -17,7 +17,7 @@ export function UserCompanies({ id }: UserCompaniesProps) {
     <div>
       {userCompaniesQuery.data.results.map(({ id, name }) => (
         <div key={id}>
-          <Link href={`/companies/${id}`}>{name}</Link>
+          <Link href={`/c/${id}`}>{name}</Link>
         </div>
       ))}
     </div>
