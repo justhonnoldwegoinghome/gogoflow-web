@@ -6,7 +6,7 @@ import { Company } from "@/features/companies";
 import { File } from "../types";
 
 export function getCompanyChatFiles({ id }: { id: Company["id"] }) {
-  return get<APIList<File>>(`/files`, {
+  return get<APIList<File>>("/files", {
     params: {
       company_id: id,
       purpose: "chat",
