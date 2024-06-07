@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 
 import {
   Company,
-  CompanyChatSettings,
-  CompanySummary,
+  CompanyDashboard,
   DeleteCompanyButton,
 } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
+import Link from "next/link";
 
 export default function CompanyPage() {
   const query = useRouter().query;
@@ -21,12 +21,12 @@ export default function CompanyPage() {
       {(userId) => (
         <div>
           <h1 className="font-bold">About the company</h1>
-          <CompanySummary id={id} />
+          <CompanyDashboard id={id} />
           <DeleteCompanyButton id={id} userId={userId} />
           <br />
           <br />
-          <h2 className="font-bold">Chat settings</h2>
-          <CompanyChatSettings id={id} />
+          <h2 className="font-bold">Features</h2>
+          <Link href={`/c/${id}/chat`}>Chat</Link>
         </div>
       )}
     </LoggedIn>

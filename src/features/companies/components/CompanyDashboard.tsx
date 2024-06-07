@@ -1,11 +1,11 @@
 import { useCompany } from "../api/getCompany";
 import { Company } from "../types";
 
-interface CompanyProps {
+interface CompanyDashboardProps {
   id: Company["id"];
 }
 
-export function CompanySummary({ id }: CompanyProps) {
+export function CompanyDashboard({ id }: CompanyDashboardProps) {
   const companyQuery = useCompany({ id });
 
   if (!companyQuery.data) return <div></div>;
