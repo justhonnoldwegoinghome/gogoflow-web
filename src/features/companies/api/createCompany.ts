@@ -12,7 +12,7 @@ interface CreateCompanyParams {
 }
 
 function createCompany({ data }: CreateCompanyParams) {
-  return post<Company["id"]>("/companies", data);
+  return post<Company>("/companies", data);
 }
 
 export function useCreateCompany() {
@@ -21,7 +21,7 @@ export function useCreateCompany() {
   return useSWRMutation(
     "/companies",
     (_, { arg }: { arg: CreateCompanyParams }) =>
-      createCompany(arg).then((res) => push(`/companies/${res.data}`)),
+      createCompany(arg).then((res) => push(`/companies/${res.data.id}`)),
     {
       throwOnError: false,
     }

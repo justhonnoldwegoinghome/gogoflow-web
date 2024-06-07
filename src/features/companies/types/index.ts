@@ -7,3 +7,8 @@ export interface Company {
   member_ids: User["id"][];
   name: string;
 }
+
+export interface CompanyChatSettings {
+  company_id: Company["id"];
+  is_shopee_authorized: boolean;
+}
