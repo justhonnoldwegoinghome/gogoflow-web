@@ -2,6 +2,7 @@ import { Company } from "@/features/companies";
 
 import { useCompanyChatFiles } from "../api/getCompanyChatFiles";
 import { DeleteFile } from "./DeleteFile";
+import { UploadFiles } from "./UploadFiles";
 
 interface CompanyChatFilesProps {
   id: Company["id"];
@@ -14,6 +15,7 @@ export function CompanyChatFiles({ id }: CompanyChatFilesProps) {
 
   return (
     <div>
+      <UploadFiles companyId={id} purpose="chat" />
       {companyChatFilesQuery.data.results.map((f) => (
         <div key={f.id} className="flex gap-12">
           <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/files/${f.id}/content`}>
