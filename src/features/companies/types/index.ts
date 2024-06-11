@@ -6,9 +6,9 @@ export interface Company {
   admin_id: User["id"];
   member_ids: User["id"][];
   name: string;
-}
-
-export interface CompanyChatSettings {
-  company_id: Company["id"];
-  is_shopee_authorized: boolean;
+  shopee: {
+    shop_id: string | null;
+    is_authorized: boolean;
+    authorized_at: string | null;
+  };
 }
