@@ -14,7 +14,7 @@ export function GenerateShopeeAuthLinkForm({
     companyId,
   });
 
-  const [shopeeShopId, setShopeeShopId] = useState("");
+  const [shopeeShopId, setShopeeShopId] = useState(0);
 
   return (
     <form
@@ -27,11 +27,11 @@ export function GenerateShopeeAuthLinkForm({
       }}
     >
       <input
-        type="text"
+        type="number"
         placeholder="Shopee Shop ID"
         className="block border border-black"
         value={shopeeShopId}
-        onChange={(e) => setShopeeShopId(e.target.value)}
+        onChange={(e) => setShopeeShopId(Number(e.target.value))}
       />
       <button type="submit">Submit</button>
 

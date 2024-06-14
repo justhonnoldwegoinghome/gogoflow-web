@@ -7,7 +7,7 @@ export interface Company {
   member_ids: User["id"][];
   name: string;
   shopee: {
-    shop_id: string | null;
+    shop_id: number | null;
     is_authorized: boolean;
     authorized_at: string | null;
   };
