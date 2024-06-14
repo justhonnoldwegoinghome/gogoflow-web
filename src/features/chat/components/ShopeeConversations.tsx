@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Company } from "@/features/companies";
 
 import { useShopeeConversations } from "../api/getShopeeConversations";
@@ -21,6 +23,9 @@ export function ShopeeConversations({ companyId }: ShopeeConversationsProps) {
         <div key={i} className="border">
           <p>{`Conversation id: ${c.conversation_id}`}</p>
           <p>{`Latest message from id: ${c.latest_message_from_id}`}</p>
+          <Link href={`/c/${companyId}/sc/${c.conversation_id}/messages`}>
+            View messages
+          </Link>
         </div>
       ))}
     </div>

@@ -6,3 +6,4 @@ export interface ChatSettings {
 }
 
 export type ShopeeConversation = any;
+export type ShopeeConversationMessage = any;
