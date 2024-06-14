@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 import { CompanyChatFiles } from "@/features/files";
-import { ChatSettings } from "@/features/chat";
+import { ChatSettings, ShopeeConversations } from "@/features/chat";
 
 export default function CompanyChatPage() {
   const query = useRouter().query;
@@ -21,6 +21,8 @@ export default function CompanyChatPage() {
           <ChatSettings companyId={id} />
           <h2 className="font-bold">Files</h2>
           <CompanyChatFiles id={id} />
+          <h2 className="font-bold">Shopee conversations</h2>
+          <ShopeeConversations companyId={id} />
         </div>
       )}
     </LoggedIn>

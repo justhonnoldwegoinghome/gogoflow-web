@@ -4,3 +4,5 @@ export interface ChatSettings {
   company_id: Company["id"];
   is_auto_reply: boolean;
 }
+
+export type ShopeeConversation = any;
