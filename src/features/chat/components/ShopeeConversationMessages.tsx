@@ -24,8 +24,21 @@ export function ShopeeConversationMessages({
       <div className="flex flex-col items-start gap-8">
         {shopeeConversationMessagesQuery.data.results.map((m, i) => (
           <div key={i} className="border">
-            <p>{`Message id: ${m.message_id}`}</p>
-            <button onClick={() => console.log(m)}>Log msg</button>
+            <div>
+              <p>{m.processed.id}</p>
+              <p>{m.processed.created_at}</p>
+              <p>{m.processed.sender_role}</p>
+              <p>{m.processed.content.text}</p>
+            </div>
+            <br />
+            <div>
+              <button
+                onClick={() => console.log(m.raw)}
+                className="text-blue-500"
+              >
+                Log raw message
+              </button>
+            </div>
           </div>
         ))}
       </div>
