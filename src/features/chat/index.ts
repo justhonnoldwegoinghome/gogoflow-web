@@ -1,3 +1,3 @@
 export { ChatSettings } from "./components/ChatSettings";
-export { ShopeeConversations } from "./components/ShopeeConversations";
+export { Conversations } from "./components/Conversations";
 export { ShopeeConversationMessages } from "./components/ShopeeConversationMessages";

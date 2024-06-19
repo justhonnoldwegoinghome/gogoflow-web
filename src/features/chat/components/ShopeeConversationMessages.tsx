@@ -30,12 +30,11 @@ export function ShopeeConversationMessages({
               <p>{m.processed.sender_role}</p>
               <p>{m.processed.content.text}</p>
             </div>
-            <br />
-            <div>
-              <button
-                onClick={() => console.log(m.raw)}
-                className="text-blue-500"
-              >
+            <div className="text-blue-500">
+              <div className="underline underline-offset-2">{`message_type: ${m.raw.message_type}`}</div>
+              <div>{`status: ${m.raw.status}`}</div>
+              <div>{`content.text: ${m.raw.content.text}`}</div>
+              <button onClick={() => console.log(m.raw)}>
                 Log raw message
               </button>
             </div>
