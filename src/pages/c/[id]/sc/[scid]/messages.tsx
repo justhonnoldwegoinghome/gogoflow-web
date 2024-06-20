@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { ShopeeConversationMessages } from "@/features/chat";
+import { ConversationMessages } from "@/features/chat";
 
 export default function Page() {
   const query = useRouter().query;
@@ -17,7 +17,7 @@ export default function Page() {
     <LoggedIn>
       {(userId) => (
         <div>
-          <ShopeeConversationMessages companyId={id} conversationId={scid} />
+          <ConversationMessages companyId={id} conversationId={scid} />
         </div>
       )}
     </LoggedIn>
