@@ -22,10 +22,10 @@ export function Navbar({ isLoaded, isLoggedIn, userId, logOut }: NavbarProps) {
           </div>
         ) : (
           <div>
-            <Link href="/log-in" className="block">
+            <Link href="/auth/log-in" className="block">
               Log In
             </Link>
-            <Link href="/sign-up" className="block">
+            <Link href="/auth/request-sign-up" className="block">
               Sign Up
             </Link>
           </div>
