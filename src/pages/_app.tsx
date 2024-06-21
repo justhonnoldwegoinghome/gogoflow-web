@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const swrConfig: SWRConfiguration = {
     dedupingInterval: 500,
+    shouldRetryOnError: false,
     onError: (e: APIError) => {
       console.log(e.response?.data.errors);
     },

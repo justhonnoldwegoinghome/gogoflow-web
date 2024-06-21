@@ -12,7 +12,7 @@ interface RequestSignUpParams {
 }
 
 function requestSignUp({ data }: RequestSignUpParams) {
-  return post<User["id"]>("/auth/request-sign-up", data);
+  return post<User>("/auth/request-sign-up", data);
 }
 
 export function useRequestSignUp() {

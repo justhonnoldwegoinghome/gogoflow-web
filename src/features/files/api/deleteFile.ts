@@ -12,14 +12,12 @@ function deleteFile({ id }: { id: File["id"] }) {
 export function useDeleteFile({
   id,
   companyId,
-  purpose,
 }: {
   id: File["id"];
   companyId: Company["id"];
-  purpose: File["purpose"];
 }) {
   return useSWRMutation(
-    purpose === "chat" ? `/companies/${companyId}/chat-files` : "/",
+    `/companies/${companyId}/files`,
     () => deleteFile({ id }),
     {
       throwOnError: false,

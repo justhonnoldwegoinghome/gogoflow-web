@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Company, CompanyDashboard } from "@/features/companies";
@@ -14,16 +13,7 @@ export default function CompanyPage() {
 
   return (
     <LoggedIn>
-      {(userId) => (
-        <div>
-          <h1 className="font-bold">About the company</h1>
-          <CompanyDashboard id={id} userId={userId} />
-          <br />
-          <br />
-          <h2 className="font-bold">Features</h2>
-          <Link href={`/c/${id}/chat`}>Chat</Link>
-        </div>
-      )}
+      {(userId) => <CompanyDashboard id={id} userId={userId} />}
     </LoggedIn>
   );
 }

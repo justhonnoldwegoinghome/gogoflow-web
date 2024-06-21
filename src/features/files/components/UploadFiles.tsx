@@ -3,21 +3,18 @@ import { useCallback, useRef, useState } from "react";
 import { Company } from "@/features/companies";
 
 import { useUploadFiles } from "../api/uploadFiles";
-import { File as IFile } from "../types";
 
 interface UploadFilesProps {
   companyId: Company["id"];
-  purpose: IFile["purpose"];
 }
 
-export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
+export function UploadFiles({ companyId }: UploadFilesProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = useState<File[]>([]);
 
   const uploadFilesMutation = useUploadFiles({
     companyId,
-    purpose,
   });
 
   const handleSubmit = useCallback(() => {
@@ -26,7 +23,6 @@ export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
         files,
         data: {
           company_id: companyId,
-          purpose: purpose,
         },
       })
       .then(() => {
@@ -38,8 +34,8 @@ export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
   }, [files, fileInputRef]);
 
   return (
-    <div className="border">
-      <label htmlFor="42" className="cursor-pointer border-2 border-dotted">
+    <div className="border w-fit">
+      <label htmlFor="42" className="cursor-pointer">
         <p>Upload files</p>
       </label>
       <input

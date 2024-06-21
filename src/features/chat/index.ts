@@ -1,3 +1,2 @@
-export { ChatSettings } from "./components/ChatSettings";
-export { Conversations } from "./components/Conversations";
+export { ChatDashboard } from "./components/ChatDashboard";
 export { ConversationMessages } from "./components/ConversationMessages";

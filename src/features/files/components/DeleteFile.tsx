@@ -6,11 +6,10 @@ import { useDeleteFile } from "../api/deleteFile";
 interface DeleteFileProps {
   id: File["id"];
   companyId: Company["id"];
-  purpose: File["purpose"];
 }
 
-export function DeleteFile({ id, companyId, purpose }: DeleteFileProps) {
-  const deleteFileMutation = useDeleteFile({ id, companyId, purpose });
+export function DeleteFile({ id, companyId }: DeleteFileProps) {
+  const deleteFileMutation = useDeleteFile({ id, companyId });
 
   return (
     <div>

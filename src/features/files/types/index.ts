@@ -6,7 +6,6 @@ export interface File {
   uploaded_at: string;
   uploader_id: User["id"];
   company_id: Company["id"];
-  purpose: "chat";
   name: string;
 }
 

@@ -3,13 +3,10 @@ import useSWRMutation from "swr/mutation";
 import { post } from "@/apiClient";
 import { Company } from "@/features/companies";
 
-import { File as IFile } from "../types";
-
 interface UploadFilesParams {
   files: File[];
   data: {
     company_id: Company["id"];
-    purpose: IFile["purpose"];
   };
 }
 
@@ -23,17 +20,9 @@ function uploadFiles({ files, data }: UploadFilesParams) {
   return post<string>("/files", formData);
 }
 
-export function useUploadFiles({
-  companyId,
-  purpose,
-}: {
-  companyId: Company["id"];
-  purpose: IFile["purpose"];
-}) {
-  const key = purpose === "chat" ? `/companies/${companyId}/chat-files` : "/";
-
+export function useUploadFiles({ companyId }: { companyId: Company["id"] }) {
   return useSWRMutation(
-    key,
+    `/companies/${companyId}/files`,
     (_, { arg }: { arg: UploadFilesParams }) => uploadFiles(arg),
     {
       throwOnError: false,
