@@ -60,7 +60,7 @@ export function AssignFilesToChatForm({
           ))}
       </div>
       <button type="submit" className="p-3 bg-green-300">
-        Submit
+        {assignFilesToChatMutation.isMutating ? "Spinner" : "Submit"}
       </button>
     </form>
   );

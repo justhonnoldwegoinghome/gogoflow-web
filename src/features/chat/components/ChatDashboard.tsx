@@ -1,6 +1,6 @@
 import { Company } from "@/features/companies";
 
-import { ChatSettings } from "./ChatSettings";
+import { Chat } from "./Chat";
 import { Conversations } from "./Conversations";
 
 interface ChatDashboardProps {
@@ -12,7 +12,7 @@ export function ChatDashboard({ id }: ChatDashboardProps) {
     <div className="flex flex-col gap-12">
       <div>
         <h2 className="font-semibold">Chat settings</h2>
-        <ChatSettings companyId={id} />
+        <Chat companyId={id} />
       </div>
 
       <div>

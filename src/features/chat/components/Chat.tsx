@@ -2,19 +2,19 @@ import { useState } from "react";
 
 import { Company } from "@/features/companies";
 
-import { useChatSettings } from "../api/getChatSettings";
+import { useChat } from "../api/getChat";
 import { ChatFileCard } from "./ChatFileCard";
 import { AssignFilesToChatForm } from "./AssignFilesToChatForm";
 
-interface ChatSettingsProps {
+interface ChatProps {
   companyId: Company["id"];
 }
 
-export function ChatSettings({ companyId }: ChatSettingsProps) {
+export function Chat({ companyId }: ChatProps) {
   const [showAssignFilesToChatForm, setShowAssignFileToChatForm] =
     useState(false);
 
-  const chatSettingsQuery = useChatSettings({ companyId });
+  const chatSettingsQuery = useChat({ companyId });
 
   if (!chatSettingsQuery.data) return <div></div>;
 

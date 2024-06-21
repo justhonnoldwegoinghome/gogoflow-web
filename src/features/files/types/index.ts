@@ -9,7 +9,7 @@ export interface File {
   name: string;
 }
 
-export interface CompanyChatSettings {
+export interface CompanyChat {
   company_id: Company["id"];
   is_shopee_authorized: boolean;
 }
