@@ -4,19 +4,19 @@ import { useState } from "react";
 import { File, useCompanyFileList } from "@/features/files";
 import { Company } from "@/features/companies";
 
-import { useAssignFilesToChat } from "../api/assignFilesToChat";
+import { useAssignFiles } from "../api/assignFiles";
 
-interface AssignFilesToChatFormProps {
+interface AssignFilesFormProps {
   companyId: Company["id"];
   existingFileIdList: File["id"][];
 }
 
-export function AssignFilesToChatForm({
+export function AssignFilesForm({
   companyId,
   existingFileIdList,
-}: AssignFilesToChatFormProps) {
+}: AssignFilesFormProps) {
   const companyFileListQuery = useCompanyFileList({ id: companyId });
-  const assignFilesToChatMutation = useAssignFilesToChat({ companyId });
+  const assignFilesMutation = useAssignFiles({ companyId });
 
   const [selectedFileIdList, setSelectedFileIdList] = useState<File["id"][]>(
     []
@@ -28,7 +28,7 @@ export function AssignFilesToChatForm({
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        assignFilesToChatMutation
+        assignFilesMutation
           .trigger({
             data: { fileIdList: selectedFileIdList },
           })
@@ -60,7 +60,7 @@ export function AssignFilesToChatForm({
           ))}
       </div>
       <button type="submit" className="p-3 bg-blue-300 w-full">
-        {assignFilesToChatMutation.isMutating ? "Spinner" : "Submit"}
+        {assignFilesMutation.isMutating ? "Spinner" : "Submit"}
       </button>
     </form>
   );

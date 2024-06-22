@@ -6,29 +6,26 @@ import { File } from "@/features/files";
 
 import { Chat } from "../types";
 
-interface UnassignFileFromChatParams {
+interface UnassignFileParams {
   companyId: Company["id"];
   data: {
     fileId: File["id"];
   };
 }
 
-export function unassignFileFromChat({
-  companyId,
-  data,
-}: UnassignFileFromChatParams) {
-  return post<Chat>(`/companies/${companyId}:unassign-file-from-chat`, {
+export function unassignFile({ companyId, data }: UnassignFileParams) {
+  return post<Chat>(`/companies/${companyId}/chat:unassign-file`, {
     file_id: data["fileId"],
   });
 }
 
-export function useUnassignFileFromChat({
+export function useUnassignFile({
   companyId,
-}: Pick<UnassignFileFromChatParams, "companyId">) {
+}: Pick<UnassignFileParams, "companyId">) {
   return useSWRMutation(
     `/companies/${companyId}/chat`,
-    (_, { arg }: { arg: Pick<UnassignFileFromChatParams, "data"> }) =>
-      unassignFileFromChat({
+    (_, { arg }: { arg: Pick<UnassignFileParams, "data"> }) =>
+      unassignFile({
         companyId,
         data: arg["data"],
       }),

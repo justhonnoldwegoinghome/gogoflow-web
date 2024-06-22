@@ -4,15 +4,14 @@ import { Company } from "@/features/companies";
 
 import { useChat } from "../api/getChat";
 import { ChatFileCard } from "./ChatFileCard";
-import { AssignFilesToChatForm } from "./AssignFilesToChatForm";
+import { AssignFilesForm } from "./AssignFilesForm";
 
 interface ChatProps {
   companyId: Company["id"];
 }
 
 export function Chat({ companyId }: ChatProps) {
-  const [showAssignFilesToChatForm, setShowAssignFileToChatForm] =
-    useState(false);
+  const [showAssignFilesForm, setShowAssignFileToChatForm] = useState(false);
 
   const chatSettingsQuery = useChat({ companyId });
 
@@ -40,14 +39,14 @@ export function Chat({ companyId }: ChatProps) {
       <br />
       <button
         className="p-3 bg-blue-300"
-        onClick={() => setShowAssignFileToChatForm(!showAssignFilesToChatForm)}
+        onClick={() => setShowAssignFileToChatForm(!showAssignFilesForm)}
       >
         Assign files to chat
       </button>
 
       <div className="mt-8 w-fit">
-        {showAssignFilesToChatForm && (
-          <AssignFilesToChatForm
+        {showAssignFilesForm && (
+          <AssignFilesForm
             companyId={companyId}
             existingFileIdList={file_id_list}
           />
