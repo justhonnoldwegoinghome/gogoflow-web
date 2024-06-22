@@ -27,7 +27,7 @@ export function Chat({ companyId }: ChatProps) {
       <p>{"Chat files: "}</p>
       <div className="ml-4 w-fit">
         {file_id_list.length === 0 ? (
-          <p>No files assigned to chat yet.</p>
+          <p className="text-gray-500">No files assigned to chat yet.</p>
         ) : (
           <div>
             {file_id_list.map((fid) => (
@@ -39,18 +39,20 @@ export function Chat({ companyId }: ChatProps) {
 
       <br />
       <button
-        className="bg-gray-300"
+        className="p-3 bg-blue-300"
         onClick={() => setShowAssignFileToChatForm(!showAssignFilesToChatForm)}
       >
         Assign files to chat
       </button>
 
-      {showAssignFilesToChatForm && (
-        <AssignFilesToChatForm
-          companyId={companyId}
-          existingFileIdList={file_id_list}
-        />
-      )}
+      <div className="mt-8 w-fit">
+        {showAssignFilesToChatForm && (
+          <AssignFilesToChatForm
+            companyId={companyId}
+            existingFileIdList={file_id_list}
+          />
+        )}
+      </div>
     </div>
   );
 }

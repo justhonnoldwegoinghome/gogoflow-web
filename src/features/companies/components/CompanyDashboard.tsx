@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Link from "next/link";
 
 import { User } from "@/features/users";
@@ -42,17 +41,13 @@ export function CompanyDashboard({ id, userId }: CompanyDashboardProps) {
         <div>{`Authorized at: ${shopee.authorized_at}`}</div>
         <Link
           href={`/c/${id}/generate-shopee-auth-link`}
-          className={clsx("block w-fit p-3", {
-            "bg-gray-200": companyQuery.data.shopee.is_authorized,
-            "bg-green-200": !companyQuery.data.shopee.is_authorized,
-          })}
+          className="block w-fit p-3 bg-blue-300"
         >
           Authorize
         </Link>
       </div>
 
       <div>
-        <h2 className="font-semibold">About the company's shopee account</h2>
         <h2 className="font-semibold">Features</h2>
         <Link href={`/c/${id}/chat`}>Chat</Link>
       </div>

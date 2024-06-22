@@ -35,7 +35,7 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
 
   return (
     <div className="border w-fit">
-      <label htmlFor="42" className="cursor-pointer">
+      <label htmlFor="42" className="cursor-pointer p-8 block">
         <p>Upload files</p>
       </label>
       <input
@@ -59,12 +59,7 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
         ))}
       </div>
 
-      <button
-        onClick={handleSubmit}
-        className={
-          files.length > 0 ? "bg-blue-200" : "bg-red-200 cursor-not-allowed"
-        }
-      >
+      <button onClick={handleSubmit} className="p-3 w-full bg-blue-300">
         Submit
       </button>
     </div>

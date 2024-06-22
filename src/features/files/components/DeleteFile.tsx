@@ -13,7 +13,12 @@ export function DeleteFile({ id, companyId }: DeleteFileProps) {
 
   return (
     <div>
-      <button onClick={() => deleteFileMutation.trigger()}>Delete</button>
+      <button
+        onClick={() => deleteFileMutation.trigger()}
+        className="p-3 text-red-500"
+      >
+        Delete
+      </button>
     </div>
   );
 }
