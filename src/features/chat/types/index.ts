@@ -18,7 +18,7 @@ export interface Conversation {
   buyer_avatar: string | null;
 }
 
-export interface ConversationMessage {
+export interface Message {
   id: string;
   conversation_id: string;
   source: "shopee";

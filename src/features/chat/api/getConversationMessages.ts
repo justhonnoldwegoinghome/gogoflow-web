@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { APIList, get } from "@/apiClient";
 import { Company } from "@/features/companies";
 
-import { ConversationMessage } from "../types";
+import { Message } from "../types";
 
 export function getConversationMessages({
   companyId,
@@ -18,17 +18,14 @@ export function getConversationMessages({
   pageSize: number | null;
   nextPageToken: string | null;
 }) {
-  return get<APIList<ConversationMessage>>(
-    `/conversations/${conversationId}/messages`,
-    {
-      params: {
-        company_id: companyId,
-        source,
-        page_size: pageSize,
-        next_page_token: nextPageToken,
-      },
-    }
-  );
+  return get<APIList<Message>>(`/conversations/${conversationId}/messages`, {
+    params: {
+      company_id: companyId,
+      source,
+      page_size: pageSize,
+      next_page_token: nextPageToken,
+    },
+  });
 }
 
 export function useConversationMessages({
