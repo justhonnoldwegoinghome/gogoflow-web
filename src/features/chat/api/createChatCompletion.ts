@@ -13,7 +13,7 @@ interface CreateChatCompletionParams {
 }
 
 export function createChatCompletion({ data }: CreateChatCompletionParams) {
-  return post<ChatCompletion>("/chat-completion", {
+  return post<ChatCompletion>("/chat-completions", {
     company_id: data["companyId"],
     input_message_list: data["inputMessageList"],
   });

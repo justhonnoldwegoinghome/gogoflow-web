@@ -18,8 +18,9 @@ export function getConversations({
   convoType: "all" | "pinned" | "unread";
   nextPageToken?: string;
 }) {
-  return get<APIList<Conversation>>(`/companies/${companyId}/conversations`, {
+  return get<APIList<Conversation>>("/conversations", {
     params: {
+      company_id: companyId,
       source,
       page_size: pageSize,
       convo_type: convoType,
