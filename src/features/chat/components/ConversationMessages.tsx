@@ -3,6 +3,7 @@ import _ from "lodash";
 import { Company } from "@/features/companies";
 
 import { useConversationMessages } from "../api/getConversationMessages";
+import { CreateChatCompletionForm } from "./CreateChatCompletionForm";
 
 interface ShopeeConversationMessagesProps {
   companyId: Company["id"];
@@ -44,7 +45,10 @@ export function ConversationMessages({
       </div>
       <br />
 
-      <button className="p-3 bg-green-200">Generate response</button>
+      <CreateChatCompletionForm
+        companyId={companyId}
+        inputMessageList={conversationMessagesQuery.data.results}
+      />
     </div>
   );
 }

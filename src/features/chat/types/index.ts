@@ -27,3 +27,12 @@ export interface Message {
   is_supported: boolean;
   text: string;
 }
+
+export interface ChatCompletion {
+  id: string;
+  created_at: string;
+  company_id: Company["id"];
+  input_message_list: Message[];
+  model: string;
+  output_text: string;
+}
