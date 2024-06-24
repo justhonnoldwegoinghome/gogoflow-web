@@ -1,3 +1,4 @@
+import { TypographyP } from "@/components/typography";
 import { Company } from "@/features/companies";
 
 import { useCompanyFileList } from "../api/getCompanyFileList";
@@ -14,12 +15,17 @@ export function CompanyFileList({ id }: CompanyFileListProps) {
   if (!companyFileListQuery.data) return <div></div>;
 
   return (
-    <div className="flex flex-col gap-4 w-fit">
-      <div>
-        {companyFileListQuery.data.results.map((f) => (
-          <FileCard key={f.id} id={f.id} companyId={id} />
-        ))}
+    <div className="py-4 w-fit">
+      <div className="flex flex-col gap-4">
+        {companyFileListQuery.data.results.length === 0 ? (
+          <TypographyP>No files added yet</TypographyP>
+        ) : (
+          companyFileListQuery.data.results.map((f) => (
+            <FileCard key={f.id} id={f.id} companyId={id} />
+          ))
+        )}
       </div>
+      <br />
       <div>
         <UploadFiles companyId={id} />
       </div>

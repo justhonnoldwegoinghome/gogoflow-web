@@ -1,14 +1,6 @@
 import { LoggedIn } from "@/features/authentication";
-import { CreateCompanyForm } from "@/features/companies";
+import { CreateCompany } from "@/features/companies";
 
-export default function CreateCompany() {
-  return (
-    <LoggedIn>
-      {() => (
-        <div>
-          <CreateCompanyForm />
-        </div>
-      )}
-    </LoggedIn>
-  );
+export default function Page() {
+  return <LoggedIn>{() => <CreateCompany />}</LoggedIn>;
 }

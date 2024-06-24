@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { CompleteSignUpForm } from "@/features/authentication";
+import { CompleteSignUp } from "@/features/authentication";
 
 export default function Page() {
   const query = useRouter().query;
@@ -10,5 +10,5 @@ export default function Page() {
 
   token = token as string;
 
-  return <CompleteSignUpForm token={token} />;
+  return <CompleteSignUp token={token} />;
 }

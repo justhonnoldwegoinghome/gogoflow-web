@@ -1,3 +1,4 @@
+import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 
 import { File } from "../types";
@@ -13,12 +14,13 @@ export function DeleteFile({ id, companyId }: DeleteFileProps) {
 
   return (
     <div>
-      <button
+      <Button
+        variant="destructive"
         onClick={() => deleteFileMutation.trigger()}
-        className="p-3 text-red-500"
+        isLoading={deleteFileMutation.isMutating}
       >
         Delete
-      </button>
+      </Button>
     </div>
   );
 }

@@ -4,20 +4,19 @@ import { Company } from "@/features/companies";
 
 import { useChat } from "../api/getChat";
 import { ChatFileCard } from "./ChatFileCard";
-import { AssignFilesForm } from "./AssignFilesForm";
+import { AssignFiles } from "./AssignFiles";
+import { Button } from "@/components/button";
 
 interface ChatProps {
   companyId: Company["id"];
 }
 
 export function Chat({ companyId }: ChatProps) {
-  const [showAssignFilesForm, setShowAssignFileToChatForm] = useState(false);
+  const [showAssignFiles, setShowAssignFileToChatForm] = useState(false);
 
-  const chatSettingsQuery = useChat({ companyId });
-
-  if (!chatSettingsQuery.data) return <div></div>;
-
-  const { company_id, is_auto_reply, file_id_list } = chatSettingsQuery.data;
+  const chatQuery = useChat({ companyId });
+  if (!chatQuery.data) return <div></div>;
+  const { company_id, is_auto_reply, file_id_list } = chatQuery.data;
 
   return (
     <div>
@@ -28,7 +27,7 @@ export function Chat({ companyId }: ChatProps) {
         {file_id_list.length === 0 ? (
           <p className="text-gray-500">No files assigned to chat yet.</p>
         ) : (
-          <div>
+          <div className="flex flex-col gap-4">
             {file_id_list.map((fid) => (
               <ChatFileCard key={fid} id={fid} companyId={companyId} />
             ))}
@@ -37,16 +36,16 @@ export function Chat({ companyId }: ChatProps) {
       </div>
 
       <br />
-      <button
-        className="p-3 bg-blue-300"
-        onClick={() => setShowAssignFileToChatForm(!showAssignFilesForm)}
+      <Button
+        type="button"
+        onClick={() => setShowAssignFileToChatForm(!showAssignFiles)}
       >
         Assign files to chat
-      </button>
+      </Button>
 
       <div className="mt-8 w-fit">
-        {showAssignFilesForm && (
-          <AssignFilesForm
+        {showAssignFiles && (
+          <AssignFiles
             companyId={companyId}
             existingFileIdList={file_id_list}
           />

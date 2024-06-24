@@ -1,5 +1,7 @@
-import { useCallback, useRef, useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
+import { Button } from "@/components/button";
+import { Input } from "@/components/form";
 import { Company } from "@/features/companies";
 
 import { useUploadFiles } from "../api/uploadFiles";
@@ -34,34 +36,38 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
   }, [files, fileInputRef]);
 
   return (
-    <div className="border w-fit">
-      <label htmlFor="42" className="cursor-pointer p-8 block">
-        <p>Upload files</p>
-      </label>
-      <input
+    <div className="flex flex-col gap-2">
+      <div>
+        {files.map((f, i) => (
+          <div key={i}>
+            <a
+              href={URL.createObjectURL(f)}
+              download={f.name}
+              className="text-gray-700"
+            >
+              {f.name}
+            </a>
+          </div>
+        ))}
+      </div>
+      <Input
         type="file"
-        id="42"
         multiple
-        hidden
         accept=".txt,.doc,.docx,.pdf"
         onChange={(e) =>
           setFiles([...files, ...Array.from(e.target.files || [])])
         }
         ref={fileInputRef}
       />
-      <div>
-        {files.map((f, i) => (
-          <div key={i}>
-            <a href={URL.createObjectURL(f)} download={f.name}>
-              {f.name}
-            </a>
-          </div>
-        ))}
-      </div>
 
-      <button onClick={handleSubmit} className="p-3 w-full bg-blue-300">
-        Submit
-      </button>
+      {files.length > 0 && (
+        <Button
+          onClick={handleSubmit}
+          isLoading={uploadFilesMutation.isMutating}
+        >
+          Submit
+        </Button>
+      )}
     </div>
   );
 }

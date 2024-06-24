@@ -1,5 +1,5 @@
-import { RequestSignUpForm } from "@/features/authentication";
+import { RequestSignUp } from "@/features/authentication";
 
-export default function SignUp() {
-  return <RequestSignUpForm />;
+export default function Page() {
+  return <RequestSignUp />;
 }

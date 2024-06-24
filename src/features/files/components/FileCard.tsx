@@ -1,3 +1,4 @@
+import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
 import { useFile } from "../api/getFile";
@@ -11,11 +12,10 @@ interface FileCardProps {
 
 export function FileCard({ id, companyId }: FileCardProps) {
   const fileQuery = useFile({ id });
-
-  if (!fileQuery.data) return <div>Spinner</div>;
+  if (!fileQuery.data) return <Spinner />;
 
   return (
-    <div className="flex gap-8 items-center justify-between border p-1">
+    <div className="flex gap-8 items-center justify-between">
       <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/files/${id}/content`}>
         {fileQuery.data.name}
       </a>

@@ -1,5 +1,5 @@
-import { LogInForm } from "@/features/authentication";
+import { LogIn } from "@/features/authentication";
 
-export default function LogIn() {
-  return <LogInForm />;
+export default function Page() {
+  return <LogIn />;
 }
