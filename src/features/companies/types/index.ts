@@ -4,11 +4,11 @@ export interface Company {
   id: string;
   created_at: string;
   admin_id: User["id"];
-  member_ids: User["id"][];
+  member_id_list: User["id"][];
   name: string;
-}
-
-export interface CompanyChatSettings {
-  company_id: Company["id"];
-  is_shopee_authorized: boolean;
+  shopee: {
+    shop_id: number | null;
+    is_authorized: boolean;
+    authorized_at: string | null;
+  };
 }

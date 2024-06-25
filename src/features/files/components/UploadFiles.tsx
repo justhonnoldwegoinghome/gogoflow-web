@@ -1,23 +1,22 @@
-import { useCallback, useRef, useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
+import { Button } from "@/components/button";
+import { Input } from "@/components/form";
 import { Company } from "@/features/companies";
 
 import { useUploadFiles } from "../api/uploadFiles";
-import { File as IFile } from "../types";
 
 interface UploadFilesProps {
   companyId: Company["id"];
-  purpose: IFile["purpose"];
 }
 
-export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
+export function UploadFiles({ companyId }: UploadFilesProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = useState<File[]>([]);
 
   const uploadFilesMutation = useUploadFiles({
     companyId,
-    purpose,
   });
 
   const handleSubmit = useCallback(() => {
@@ -26,7 +25,6 @@ export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
         files,
         data: {
           company_id: companyId,
-          purpose: purpose,
         },
       })
       .then(() => {
@@ -38,39 +36,38 @@ export function UploadFiles({ companyId, purpose }: UploadFilesProps) {
   }, [files, fileInputRef]);
 
   return (
-    <div className="border">
-      <label htmlFor="42" className="cursor-pointer border-2 border-dotted">
-        <p>Upload files</p>
-      </label>
-      <input
+    <div className="flex flex-col gap-2">
+      <div>
+        {files.map((f, i) => (
+          <div key={i}>
+            <a
+              href={URL.createObjectURL(f)}
+              download={f.name}
+              className="text-gray-700"
+            >
+              {f.name}
+            </a>
+          </div>
+        ))}
+      </div>
+      <Input
         type="file"
-        id="42"
         multiple
-        hidden
         accept=".txt,.doc,.docx,.pdf"
         onChange={(e) =>
           setFiles([...files, ...Array.from(e.target.files || [])])
         }
         ref={fileInputRef}
       />
-      <div>
-        {files.map((f, i) => (
-          <div key={i}>
-            <a href={URL.createObjectURL(f)} download={f.name}>
-              {f.name}
-            </a>
-          </div>
-        ))}
-      </div>
 
-      <button
-        onClick={handleSubmit}
-        className={
-          files.length > 0 ? "bg-blue-200" : "bg-red-200 cursor-not-allowed"
-        }
-      >
-        Submit
-      </button>
+      {files.length > 0 && (
+        <Button
+          onClick={handleSubmit}
+          isLoading={uploadFilesMutation.isMutating}
+        >
+          Submit
+        </Button>
+      )}
     </div>
   );
 }

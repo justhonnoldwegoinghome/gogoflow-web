@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 
-import {
-  Company,
-  CompanyDashboard,
-  DeleteCompanyButton,
-} from "@/features/companies";
+import { TypographyH2 } from "@/components/typography";
+import { Button } from "@/components/button";
 import { LoggedIn } from "@/features/authentication";
-import Link from "next/link";
+import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
+import { CompanyFileList } from "@/features/files";
 
-export default function CompanyPage() {
-  const query = useRouter().query;
+export default function Page() {
+  const { query, push } = useRouter();
   let { id } = query;
 
   if (!id) return <div />;
@@ -20,13 +18,25 @@ export default function CompanyPage() {
     <LoggedIn>
       {(userId) => (
         <div>
-          <h1 className="font-bold">About the company</h1>
-          <CompanyDashboard id={id} />
-          <DeleteCompanyButton id={id} userId={userId} />
-          <br />
-          <br />
-          <h2 className="font-bold">Features</h2>
-          <Link href={`/c/${id}/chat`}>Chat</Link>
+          <div className="ml-auto w-fit">
+            <Button onClick={() => push(`/c/${id}/chat`)} variant="link">
+              Go to chat
+            </Button>
+          </div>
+          <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-1">
+              <TypographyH2>Company</TypographyH2>
+              <UpdateCompany id={id} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <TypographyH2>Files</TypographyH2>
+              <CompanyFileList id={id} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <TypographyH2>Delete account</TypographyH2>
+              <DeleteCompany id={id} userId={userId} />
+            </div>
+          </div>
         </div>
       )}
     </LoggedIn>
