@@ -15,7 +15,7 @@ export function MessageCardUI({ message }: MessageCardUIProps) {
         "border-blue-500 text-blue-500": sender_role === "seller",
       })}
     >
-      <p>{text}</p>
+      <p>{text ? text : "UNSUPPORTED"}</p>
       <div className="text-gray-600 text-sm">
         <p>{`Sent at: ${sent_at}`}</p>
         <p>{`Sent by: ${sender_role}`}</p>

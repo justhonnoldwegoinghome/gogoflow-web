@@ -25,7 +25,7 @@ export interface Message {
   sender_role: "seller" | "buyer";
   sent_at: string;
   is_supported: boolean;
-  text: string;
+  text: string | null;
 }
 
 export interface ChatCompletion {
