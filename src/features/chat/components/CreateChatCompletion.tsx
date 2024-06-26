@@ -25,7 +25,7 @@ export function CreateChatCompletion({
 
   return (
     <div>
-      <p className="mb-2 font-semibold">Response:</p>
+      <p className="mb-2 font-semibold">Suggested response:</p>
       <Textarea
         value={response}
         onChange={(e) => setResponse(e.target.value)}
@@ -41,11 +41,8 @@ export function CreateChatCompletion({
         }
         isLoading={createChatCompletionMutation.isMutating}
       >
-        Generate response
+        Generate
       </Button>
-      <br />
-      <br />
-      <Button disabled={!response}>Send response</Button>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Company } from "@/features/companies";
 import { useConversationMessageList } from "../api/getConversationMessageList";
 import { CreateChatCompletion } from "./CreateChatCompletion";
 import { MessageCardUI } from "./MessageCardUI";
+import { SendMessage } from "./SendMessage";
 
 interface ConversationMessageListProps {
   companyId: Company["id"];
@@ -31,6 +32,7 @@ export function ConversationMessageList({
   return (
     <div className="max-w-screen-tablet mx-auto">
       <TypographyH1>Messages</TypographyH1>
+
       <br />
 
       <div className="flex flex-col items-start gap-8">
@@ -50,12 +52,17 @@ export function ConversationMessageList({
           </div>
         ))}
       </div>
+
       <br />
 
       <CreateChatCompletion
         companyId={companyId}
         inputMessageList={conversationMessageListQuery.data.results}
       />
+
+      <br />
+
+      <SendMessage companyId={companyId} conversationId={conversationId} />
     </div>
   );
 }
