@@ -28,7 +28,7 @@ export function LogIn() {
               type="text"
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.toLocaleLowerCase())}
             />
             <Input
               type="password"
