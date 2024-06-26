@@ -8,6 +8,7 @@ import "@/styles/globals.css";
 import { APIError } from "@/apiClient";
 import { LoggedIn, useLoad } from "@/features/authentication";
 import { UserMenu } from "@/features/users";
+import { Toaster, useToast } from "@/components/ui/toaster";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -17,11 +18,22 @@ const openSans = Open_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   useLoad();
 
+  const { toast } = useToast();
+
   const swrConfig: SWRConfiguration = {
     dedupingInterval: 500,
     shouldRetryOnError: false,
     onError: (e: APIError) => {
-      console.log(e.response?.data.errors);
+      if (e.response) {
+        e.response.data.errors.forEach((e) =>
+          toast({
+            variant: "destructive",
+            title: e.title,
+            description: e.detail || "",
+          })
+        );
+      }
+      // console.log(e.response?.data.errors);
     },
   };
 
@@ -61,6 +73,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </div>
         </main>
+        <Toaster />
       </div>
     </SWRConfig>
   );
