@@ -1,12 +1,11 @@
-import {
-  Toast,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-  ToastViewport,
-} from "./toast";
+import { ToastProvider } from "@radix-ui/react-toast";
+
 import { useToast } from "./useToast";
+import { Toast } from "./Toast";
+import { ToastTitle } from "./ToastTitle";
+import { ToastDescription } from "./ToastDescription";
+import { ToastClose } from "./ToastClose";
+import { ToastViewport } from "./ToastViewport";
 
 export function Toaster() {
   const { toasts } = useToast();

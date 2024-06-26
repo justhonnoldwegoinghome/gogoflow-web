@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 import { APIError } from "@/apiClient";
 import { LoggedIn, useLoad } from "@/features/authentication";
 import { UserMenu } from "@/features/users";
-import { Toaster, useToast } from "@/components/ui/toaster";
+import { Toaster, useToast } from "@/components/toaster";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -33,7 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
           })
         );
       }
-      // console.log(e.response?.data.errors);
     },
   };
 
