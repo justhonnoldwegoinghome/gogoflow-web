@@ -4,3 +4,4 @@ export { UpdateCompany } from "./components/UpdateCompany";
 export { DeleteCompany } from "./components/DeleteCompany";
 export { CreateCompany } from "./components/CreateCompany";
 export { GenerateShopeeAuthLink } from "./components/GenerateShopeeAuthLink";
+export { CompleteShopeeAuth } from "./components/CompleteShopeeAuth";
