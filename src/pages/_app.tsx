@@ -6,9 +6,10 @@ import Link from "next/link";
 
 import "@/styles/globals.css";
 import { APIError } from "@/apiClient";
+import { Toaster, useToast } from "@/components/toaster";
+import { Button } from "@/components/button";
 import { LoggedIn, useLoad } from "@/features/authentication";
 import { UserMenu } from "@/features/users";
-import { Toaster, useToast } from "@/components/toaster";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -41,23 +42,22 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={clsx(openSans.className, "min-h-screen flex flex-col")}>
         {/* Nav bar */}
         <div className="bg-white">
-          <div className="flex justify-between items-center max-w-screen-laptop mx-auto h-24 bg-white px-[2vw]">
-            <Link
-              href="/"
-              className="w-10 h-10 rounded-md bg-gradient-to-r from-pink-500 to-indigo-500"
-            ></Link>
+          <div className="flex justify-between items-center max-w-screen-laptop mx-auto h-24 bg-white px-[3vw]">
+            <Button asChild>
+              <Link
+                href="/"
+                className="w-10 h-10 rounded-md bg-gradient-to-r from-pink-500 to-indigo-500"
+              ></Link>
+            </Button>
             <LoggedIn
               fallback={
                 <div className="flex gap-2">
-                  <Link
-                    href="/auth/request-sign-up"
-                    className="block rounded p-3 bg-gray-100"
-                  >
-                    Sign Up
-                  </Link>
-                  <Link href="/auth/log-in" className="block rounded p-3">
-                    Log In
-                  </Link>
+                  <Button asChild>
+                    <Link href="/auth/request-sign-up">Sign up</Link>
+                  </Button>
+                  <Button asChild variant="ghost">
+                    <Link href="/auth/log-in">Log in</Link>
+                  </Button>
                 </div>
               }
             >
@@ -68,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
         {/* Page content */}
         <main className="flex-1 bg-white">
-          <div className="max-w-screen-laptop mx-auto px-[2vw] pt-8 pb-24">
+          <div className="max-w-screen-laptop mx-auto px-[3vw] pt-8 pb-24">
             <Component {...pageProps} />
           </div>
         </main>

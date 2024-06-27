@@ -1,18 +1,15 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
+import { Button } from "@/components/button";
 import { User } from "@/features/users";
 
 import { useUserCompanyList } from "../api/getUserCompanyList";
-import { Button } from "@/components/button";
 
 interface UserCompanyListProps {
   id: User["id"];
 }
 
 export function UserCompanyList({ id }: UserCompanyListProps) {
-  const push = useRouter().push;
-
   const userCompanyListQuery = useUserCompanyList({ id });
   if (!userCompanyListQuery.data) return <div></div>;
 
@@ -20,25 +17,14 @@ export function UserCompanyList({ id }: UserCompanyListProps) {
     <div>
       <div>
         {userCompanyListQuery.data.results.length === 0 ? (
-          <div>
-            <Button
-              type="button"
-              variant="link"
-              onClick={() => push("/me/create-company")}
-            >
-              Create company
-            </Button>
-          </div>
+          <Button key={id} asChild>
+            <Link href={"/me/create-company"}>Create company</Link>
+          </Button>
         ) : (
           userCompanyListQuery.data.results.map(({ id, name }) => (
-            <div key={id}>
-              <Link
-                href={`/c/${id}`}
-                className="hover:underline underline-offset-4"
-              >
-                {name}
-              </Link>
-            </div>
+            <Button key={id} asChild variant="link">
+              <Link href={`/c/${id}`}>{name}</Link>
+            </Button>
           ))
         )}
       </div>
