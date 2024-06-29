@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { TypographyH2 } from "@/components/typography";
@@ -7,7 +8,7 @@ import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
 import { CompanyFileList } from "@/features/files";
 
 export default function Page() {
-  const { query, push } = useRouter();
+  const { query } = useRouter();
   let { id } = query;
 
   if (!id) return <div />;
@@ -19,8 +20,8 @@ export default function Page() {
       {(userId) => (
         <div>
           <div className="ml-auto w-fit">
-            <Button onClick={() => push(`/c/${id}/chat`)} variant="link">
-              Go to chat
+            <Button asChild variant="link">
+              <Link href={`/c/${id}/chat`}>Go to chat</Link>
             </Button>
           </div>
           <div className="flex flex-col gap-12">
