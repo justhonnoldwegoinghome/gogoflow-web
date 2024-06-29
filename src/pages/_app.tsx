@@ -3,6 +3,7 @@ import { SWRConfig, SWRConfiguration } from "swr";
 import { Open_Sans } from "next/font/google";
 import type { AppProps } from "next/app";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
 
 import "@/styles/globals.css";
 import { APIError } from "@/apiClient";
@@ -73,6 +74,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </div>
         </main>
         <Toaster />
+        <Analytics mode="production" />
       </div>
     </SWRConfig>
   );
