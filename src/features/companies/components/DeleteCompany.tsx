@@ -1,4 +1,15 @@
-import { TypographyP } from "@/components/typography";
+import { useState } from "react";
+
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/dialog";
 import { Button } from "@/components/button";
 import { User } from "@/features/users";
 
@@ -11,21 +22,43 @@ interface DeleteCompanyProps {
 }
 
 export function DeleteCompany({ id, userId }: DeleteCompanyProps) {
+  const [open, setOpen] = useState(false);
   const deleteCompanyMutation = useDeleteCompany({ id, userId });
 
   return (
-    <div className="flex flex-col gap-4">
-      <TypographyP>
-        Once you delete your account, there is no going back. Please be certain.
-      </TypographyP>
-      <Button
-        variant="destructive"
-        onClick={() => deleteCompanyMutation.trigger()}
-        isLoading={deleteCompanyMutation.isMutating}
-        className="w-fit"
-      >
-        Delete company
-      </Button>
+    <div>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="destructive">Delete company</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete company</DialogTitle>
+            <DialogDescription>
+              Once you delete your account, there is no going back. Please be
+              certain.
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={() =>
+                deleteCompanyMutation.trigger().then(() => setOpen(false))
+              }
+              isLoading={deleteCompanyMutation.isMutating}
+            >
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

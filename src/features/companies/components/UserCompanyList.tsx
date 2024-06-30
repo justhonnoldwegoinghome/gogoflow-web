@@ -16,18 +16,16 @@ export function UserCompanyList({ id }: UserCompanyListProps) {
   return (
     <div>
       <div>
-        {userCompanyListQuery.data.results.length === 0 ? (
-          <Button key={id} asChild>
-            <Link href={"/me/create-company"}>Create company</Link>
-          </Button>
-        ) : (
-          userCompanyListQuery.data.results.map(({ id, name }) => (
-            <Button key={id} asChild variant="link">
-              <Link href={`/c/${id}`}>{name}</Link>
-            </Button>
-          ))
-        )}
+        <Button key={id} asChild>
+          <Link href={"/me/create-company"}>Create company</Link>
+        </Button>
       </div>
+      <br />
+      {userCompanyListQuery.data.results.map(({ id, name }) => (
+        <Button key={id} asChild variant="link">
+          <Link href={`/c/${id}`}>{name}</Link>
+        </Button>
+      ))}
     </div>
   );
 }
