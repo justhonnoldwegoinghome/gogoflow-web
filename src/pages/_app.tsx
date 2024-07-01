@@ -10,7 +10,7 @@ import { APIError } from "@/apiClient";
 import { Toaster, useToast } from "@/components/toaster";
 import { Button } from "@/components/button";
 import { LoggedIn, useLoad } from "@/features/authentication";
-import { UserMenu } from "@/features/users";
+import { UserDropdownMenu } from "@/features/users";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -62,7 +62,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 </div>
               }
             >
-              {(userId) => <UserMenu id={userId} />}
+              {(userId) => <UserDropdownMenu id={userId} />}
             </LoggedIn>
           </div>
         </div>
