@@ -2,12 +2,13 @@ import _ from "lodash";
 import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
-import { APIList, get } from "@/apiClient";
+import { APIList, get, PageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { Conversation } from "../types";
+import { ConvoType, Source } from "../components/ConversationListContainer";
 
-export function getConversationList({
+function getConversationList({
   companyId,
   source,
   pageSize,
@@ -15,10 +16,10 @@ export function getConversationList({
   nextPageToken,
 }: {
   companyId: Company["id"];
-  source: "shopee";
-  pageSize: number;
-  convoType: "all" | "pinned" | "unread";
-  nextPageToken: string | null;
+  source: Source;
+  pageSize: PageSize;
+  convoType: ConvoType;
+  nextPageToken: PageToken;
 }) {
   return get<APIList<Conversation>>("/conversations", {
     params: {
@@ -37,12 +38,12 @@ export function useConversationListInfinite({
   source,
   convoType,
 }: {
-  pageSize: number;
+  pageSize: PageSize;
   companyId: Company["id"];
-  source: "shopee";
-  convoType: "all" | "unread" | "pinned";
+  source: Source;
+  convoType: ConvoType;
 }) {
-  const { data, size, setSize } = useSWRInfinite(
+  const { data, size, setSize, isValidating } = useSWRInfinite(
     (idx, previousPageData) =>
       getKey(idx, pageSize, companyId, previousPageData, source, convoType),
     (k) =>
@@ -74,16 +75,17 @@ export function useConversationListInfinite({
       : undefined,
     hasEnded,
     loadMore: () => setSize(size + 1),
+    isValidating,
   };
 }
 
 function getKey(
   pageIndex: number,
-  pageSize: number,
+  pageSize: PageSize,
   companyId: Company["id"],
   previousPageData: APIList<Conversation>,
-  source: "shopee",
-  convoType: "all" | "unread" | "pinned"
+  source: Source,
+  convoType: ConvoType
 ) {
   // In the documentation, SWR uses `key` for two purposes:
   // 1) Serve as an index for its cache

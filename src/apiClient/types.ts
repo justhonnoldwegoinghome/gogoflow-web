@@ -11,7 +11,10 @@ interface JSONAPIErrorObject {
   };
 }
 
+export type PageSize = number;
+export type PageToken = string | null;
+
 export interface APIList<ResultType> {
-  next_page_token: string | null;
+  next_page_token: PageToken;
   results: ResultType[];
 }
