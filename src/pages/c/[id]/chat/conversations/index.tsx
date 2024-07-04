@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyConversationList } from "@/features/chat";
+import { ConversationListContainer } from "@/features/chat";
 
 export default function Page() {
   const { query } = useRouter();
@@ -12,5 +12,9 @@ export default function Page() {
 
   id = id as Company["id"];
 
-  return <LoggedIn>{(userId) => <CompanyConversationList id={id} />}</LoggedIn>;
+  return (
+    <LoggedIn>
+      {(userId) => <ConversationListContainer companyId={id} />}
+    </LoggedIn>
+  );
 }

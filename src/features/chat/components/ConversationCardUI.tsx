@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
+import { ArrowUpRight } from "lucide-react";
 
 import { format } from "@/utils/format";
 import { Button } from "@/components/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar";
 
 import { Conversation } from "../types";
 
@@ -19,14 +21,15 @@ export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
     <div className="flex gap-2 justify-between p-4 rounded-lg border">
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 items-center">
-          <img
-            src={
-              buyer_avatar ||
-              "https://images.unsplash.com/photo-1557683304-673a23048d34?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdyYWRpZW50fGVufDB8fDB8fHww"
-            }
-            className="w-8 h-8 rounded-full shrink-0"
-            alt="buyer_avatar"
-          />
+          <Avatar>
+            <AvatarImage
+              src={
+                buyer_avatar ||
+                "https://images.unsplash.com/photo-1557683304-673a23048d34?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGdyYWRpZW50fGVufDB8fDB8fHww"
+              }
+            />
+            <AvatarFallback>Buyer</AvatarFallback>
+          </Avatar>
           <p>{buyer_name}</p>
         </div>
         <div className="text-gray-600 text-sm">
@@ -39,6 +42,7 @@ export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
       <br />
       <div>
         <Button onClick={() => push(`${asPath}/${id}/messages`)} variant="link">
+          <ArrowUpRight className="mr-2 h-4 w-4" />
           View messages
         </Button>
       </div>
