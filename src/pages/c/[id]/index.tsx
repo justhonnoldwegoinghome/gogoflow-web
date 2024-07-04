@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { ArrowUpRight } from "lucide-react";
 
 import { TypographyH2 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { LoggedIn } from "@/features/authentication";
 import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
-import { CompanyFileList } from "@/features/files";
 
 export default function Page() {
   const { query } = useRouter();
@@ -19,19 +19,24 @@ export default function Page() {
     <LoggedIn>
       {(userId) => (
         <div>
-          <div className="ml-auto w-fit">
+          <div className="ml-auto w-fit flex flex-col">
             <Button asChild variant="link">
-              <Link href={`/c/${id}/chat`}>Go to chat</Link>
+              <Link href={`/c/${id}/files`}>
+                <ArrowUpRight className="mr-2 h-4 w-4" />
+                Files
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href={`/c/${id}/chat`}>
+                <ArrowUpRight className="mr-2 h-4 w-4" />
+                Chat
+              </Link>
             </Button>
           </div>
           <div className="flex flex-col gap-12">
             <div className="flex flex-col gap-1">
               <TypographyH2>Company</TypographyH2>
               <UpdateCompany id={id} />
-            </div>
-            <div className="flex flex-col gap-1">
-              <TypographyH2>Files</TypographyH2>
-              <CompanyFileList id={id} />
             </div>
             <div className="flex flex-col gap-1">
               <TypographyH2>Delete account</TypographyH2>
