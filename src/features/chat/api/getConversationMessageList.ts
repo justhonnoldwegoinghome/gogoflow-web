@@ -9,20 +9,20 @@ export function getConversationMessageList({
   companyId,
   conversationId,
   source,
-  pageSize,
+  maxPageSize,
   nextPageToken,
 }: {
   companyId: Company["id"];
   conversationId: string;
   source: "shopee";
-  pageSize: number | null;
+  maxPageSize: number | null;
   nextPageToken: string | null;
 }) {
   return get<APIList<Message>>(`/conversations/${conversationId}/messages`, {
     params: {
       company_id: companyId,
       source,
-      page_size: pageSize,
+      max_page_size: maxPageSize,
       next_page_token: nextPageToken,
     },
   });
@@ -32,13 +32,13 @@ export function useConversationMessageList({
   companyId,
   conversationId,
   source,
-  pageSize,
+  maxPageSize,
   nextPageToken,
 }: {
   companyId: Company["id"];
   conversationId: string;
   source: "shopee";
-  pageSize: number | null;
+  maxPageSize: number | null;
   nextPageToken: string | null;
 }) {
   return useSWR(
@@ -48,7 +48,7 @@ export function useConversationMessageList({
         companyId,
         conversationId,
         source,
-        pageSize,
+        maxPageSize,
         nextPageToken,
       })
   );

@@ -2,7 +2,7 @@ import _ from "lodash";
 import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
-import { APIList, get, PageSize, PageToken } from "@/apiClient";
+import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { Conversation } from "../types";
@@ -11,13 +11,13 @@ import { ConvoType, Source } from "../components/ConversationListContainer";
 function getConversationList({
   companyId,
   source,
-  pageSize,
+  maxPageSize,
   convoType,
   nextPageToken,
 }: {
   companyId: Company["id"];
   source: Source;
-  pageSize: PageSize;
+  maxPageSize: MaxPageSize;
   convoType: ConvoType;
   nextPageToken: PageToken;
 }) {
@@ -25,7 +25,7 @@ function getConversationList({
     params: {
       company_id: companyId,
       source,
-      page_size: pageSize,
+      max_page_size: maxPageSize,
       convo_type: convoType,
       next_page_token: nextPageToken,
     },
@@ -33,24 +33,24 @@ function getConversationList({
 }
 
 export function useConversationListInfinite({
-  pageSize,
+  maxPageSize,
   companyId,
   source,
   convoType,
 }: {
-  pageSize: PageSize;
+  maxPageSize: MaxPageSize;
   companyId: Company["id"];
   source: Source;
   convoType: ConvoType;
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (idx, previousPageData) =>
-      getKey(idx, pageSize, companyId, previousPageData, source, convoType),
+      getKey(idx, maxPageSize, companyId, previousPageData, source, convoType),
     (k) =>
       getConversationList({
         companyId,
         source,
-        pageSize,
+        maxPageSize,
         convoType,
         nextPageToken: k.pageToken,
       }),
@@ -81,7 +81,7 @@ export function useConversationListInfinite({
 
 function getKey(
   pageIndex: number,
-  pageSize: PageSize,
+  maxPageSize: MaxPageSize,
   companyId: Company["id"],
   previousPageData: APIList<Conversation>,
   source: Source,
@@ -98,7 +98,7 @@ function getKey(
   if (pageIndex === 0)
     return {
       pageIndex,
-      pageSize,
+      maxPageSize,
       companyId,
       resource: "conversations",
       source,
@@ -110,7 +110,7 @@ function getKey(
   if (previousPageData && !previousPageData.next_page_token)
     return {
       pageIndex,
-      pageSize,
+      maxPageSize,
       companyId,
       resource: "conversations",
       source,
@@ -120,7 +120,7 @@ function getKey(
 
   return {
     pageIndex,
-    pageSize,
+    maxPageSize,
     companyId,
     resource: "conversations",
     source,

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { PageSize } from "@/apiClient";
+import { MaxPageSize } from "@/apiClient";
 import {
   Select,
   SelectTrigger,
@@ -29,7 +29,7 @@ export function ConversationListContainer({
 }: ConversationListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [convoType, setConvoType] = useState<ConvoType>("all");
-  const [pageSize, setPageSize] = useState<PageSize>(5);
+  const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
@@ -40,7 +40,7 @@ export function ConversationListContainer({
         changeSource={(s) => setSource(s)}
         convoType={convoType}
         changeConvoType={(ct) => setConvoType(ct)}
-        pageSize={pageSize}
+        maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
       <br />
@@ -48,7 +48,7 @@ export function ConversationListContainer({
         companyId={companyId}
         source={source}
         convoType={convoType}
-        pageSize={pageSize}
+        maxPageSize={maxPageSize}
       />
     </div>
   );
@@ -59,8 +59,8 @@ interface ConversionListControllerProps {
   changeSource: (s: Source) => void;
   convoType: ConvoType;
   changeConvoType: (ct: ConvoType) => void;
-  pageSize: PageSize;
-  changePageSize: (ps: PageSize) => void;
+  maxPageSize: MaxPageSize;
+  changePageSize: (ps: MaxPageSize) => void;
 }
 
 const sourceMapping = [
@@ -105,7 +105,7 @@ function ConversionListController({
   changeSource,
   convoType,
   changeConvoType,
-  pageSize,
+  maxPageSize,
   changePageSize,
 }: ConversionListControllerProps) {
   return (
@@ -139,7 +139,7 @@ function ConversionListController({
         </SelectContent>
       </Select>
       <Select
-        value={String(pageSize)}
+        value={String(maxPageSize)}
         onValueChange={(ps) => changePageSize(Number(ps))}
       >
         <SelectTrigger>
@@ -163,20 +163,20 @@ interface ConversationListProps {
   companyId: Company["id"];
   source: "shopee";
   convoType: "all" | "unread" | "pinned";
-  pageSize: number;
+  maxPageSize: number;
 }
 
 function ConversationList({
   companyId,
   source,
   convoType,
-  pageSize,
+  maxPageSize,
 }: ConversationListProps) {
   const { data, hasEnded, loadMore, isValidating } =
     useConversationListInfinite({
       companyId,
       source,
-      pageSize,
+      maxPageSize,
       convoType,
     });
 
