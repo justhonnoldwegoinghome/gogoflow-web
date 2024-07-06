@@ -4,42 +4,44 @@ import { TypographyP } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Input } from "@/components/form";
 
-import { useGenerateShopeeAuthLink } from "../api/generateShopeeAuthLink";
+import { useGenerateShopeeAuthorizationLink } from "../api/generateShopeeAuthorizationLink";
 import { Company } from "../types";
 
-interface GenerateShopeeAuthLinkProps {
+interface GenerateShopeeAuthorizationLinkProps {
   companyId: Company["id"];
 }
 
-export function GenerateShopeeAuthLink({
+export function GenerateShopeeAuthorizationLink({
   companyId,
-}: GenerateShopeeAuthLinkProps) {
-  const [shopeeShopId, setShopeeShopId] = useState(0);
+}: GenerateShopeeAuthorizationLinkProps) {
+  const [shopeeShopId, setShopeeShopId] = useState("");
 
-  const generateShopeeAuthLinkMutation = useGenerateShopeeAuthLink({
-    companyId,
-  });
+  const generateShopeeAuthorizationLinkMutation =
+    useGenerateShopeeAuthorizationLink({
+      companyId,
+    });
 
   return (
     <div className="bg-white w-fit mx-auto p-4 rounded-xl flex flex-col gap-12">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          generateShopeeAuthLinkMutation.trigger({
+          generateShopeeAuthorizationLinkMutation.trigger({
             companyId,
             data: { shopee_shop_id: shopeeShopId },
           });
         }}
       >
         <div className="flex flex-col gap-2">
-          <label>Shopee shop ID</label>
           <Input
-            type="number"
+            type="text"
             placeholder="Shopee Shop ID"
             value={shopeeShopId}
-            onChange={(e) => setShopeeShopId(Number(e.target.value))}
+            onChange={(e) => setShopeeShopId(e.target.value)}
           />
-          <Button isLoading={generateShopeeAuthLinkMutation.isMutating}>
+          <Button
+            isLoading={generateShopeeAuthorizationLinkMutation.isMutating}
+          >
             Submit
           </Button>
         </div>

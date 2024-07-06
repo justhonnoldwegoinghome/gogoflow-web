@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { Company, GenerateShopeeAuthLink } from "@/features/companies";
+import { Company, GenerateShopeeAuthorizationLink } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 
 export default function Page() {
@@ -15,7 +15,7 @@ export default function Page() {
     <LoggedIn>
       {(userId) => (
         <div>
-          <GenerateShopeeAuthLink companyId={id} />
+          <GenerateShopeeAuthorizationLink companyId={id} />
         </div>
       )}
     </LoggedIn>
