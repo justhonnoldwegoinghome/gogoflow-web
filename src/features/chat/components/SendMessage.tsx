@@ -30,14 +30,16 @@ export function SendMessage({ companyId, conversationId }: SendMessageProps) {
         disabled={!text}
         isLoading={sendMessageMutation.isMutating}
         onClick={() =>
-          sendMessageMutation.trigger({
-            conversationId,
-            data: {
-              source: "shopee",
-              companyId,
-              text,
-            },
-          })
+          sendMessageMutation
+            .trigger({
+              conversationId,
+              data: {
+                source: "shopee",
+                companyId,
+                text,
+              },
+            })
+            .then(() => setText(""))
         }
       >
         Send message
