@@ -4,7 +4,7 @@ import { post } from "@/apiClient";
 
 import { Company } from "../types";
 
-interface GenerateShopeeAuthLinkParams {
+interface GenerateShopeeAuthorizationLinkParams {
   companyId: Company["id"];
   data: {
     shopee_shop_id: Company["shopee"]["shop_id"];
@@ -14,21 +14,21 @@ interface GenerateShopeeAuthLinkParams {
 function generateShopeeAuthorizationLink({
   companyId,
   data,
-}: GenerateShopeeAuthLinkParams) {
+}: GenerateShopeeAuthorizationLinkParams) {
   return post<string>(
-    `/companies/${companyId}:generate-shopee-auth-link`,
+    `/companies/${companyId}:generate-shopee-authorization-link`,
     data
   );
 }
 
-export function useGenerateShopeeAuthLink({
+export function useGenerateShopeeAuthorizationLink({
   companyId,
 }: {
   companyId: Company["id"];
 }) {
   return useSWRMutation(
-    `/companies/${companyId}:generate-shopee-auth-link`,
-    (_, { arg }: { arg: GenerateShopeeAuthLinkParams }) =>
+    `/companies/${companyId}:generate-shopee-authorization-link`,
+    (_, { arg }: { arg: GenerateShopeeAuthorizationLinkParams }) =>
       generateShopeeAuthorizationLink(arg).then((res) => {
         window.location.href = res.data;
       }),

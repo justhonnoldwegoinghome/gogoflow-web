@@ -11,7 +11,7 @@ interface JSONAPIErrorObject {
   };
 }
 
-export type PageSize = number;
+export type MaxPageSize = number;
 export type PageToken = string | null;
 
 export interface APIList<ResultType> {

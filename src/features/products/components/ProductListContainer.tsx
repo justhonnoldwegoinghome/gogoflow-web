@@ -14,40 +14,43 @@ import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
-import { useConversationListInfinite } from "../api/getConversationList";
-import { ConversationCardUI } from "./ConversationCardUI";
+import { useProductListInfinite } from "../api/getProductList";
 
 export type Source = "shopee";
-export type ConvoType = "all" | "unread" | "pinned";
+export type Status =
+  | "NORMAL"
+  | "BANNED"
+  | "UNLIST"
+  | "REVIEWING"
+  | "SELLER_DELETE"
+  | "SHOPEE_DELETE";
 
-interface ConversationListContainerProps {
+interface ProductListContainerProps {
   companyId: Company["id"];
 }
 
-export function ConversationListContainer({
-  companyId,
-}: ConversationListContainerProps) {
+export function ProductListContainer({ companyId }: ProductListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
-  const [convoType, setConvoType] = useState<ConvoType>("all");
-  const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
+  const [status, setStatus] = useState<Status>("NORMAL");
+  const [maxPageSize, setPageSize] = useState<MaxPageSize>(20);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Conversations</TypographyH1>
+      <TypographyH1>Products</TypographyH1>
       <br />
       <ConversionListController
         source={source}
         changeSource={(s) => setSource(s)}
-        convoType={convoType}
-        changeConvoType={(ct) => setConvoType(ct)}
+        status={status}
+        changeStatus={(s) => setStatus(s)}
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
       <br />
-      <ConversationList
+      <ProductList
         companyId={companyId}
         source={source}
-        convoType={convoType}
+        status={status}
         maxPageSize={maxPageSize}
       />
     </div>
@@ -57,8 +60,8 @@ export function ConversationListContainer({
 interface ConversionListControllerProps {
   source: Source;
   changeSource: (s: Source) => void;
-  convoType: ConvoType;
-  changeConvoType: (ct: ConvoType) => void;
+  status: Status;
+  changeStatus: (s: Status) => void;
   maxPageSize: MaxPageSize;
   changePageSize: (ps: MaxPageSize) => void;
 }
@@ -70,18 +73,14 @@ const sourceMapping = [
   },
 ];
 
-const convoTypeMapping = [
+const statusMapping = [
   {
-    value: "all",
-    label: "All",
+    value: "NORMAL",
+    label: "Normal",
   },
   {
-    value: "unread",
-    label: "Unread",
-  },
-  {
-    value: "pinned",
-    label: "Pinned",
+    value: "UNLIST",
+    label: "Unlisted",
   },
 ];
 
@@ -103,8 +102,8 @@ const pageSizeMapping = [
 function ConversionListController({
   source,
   changeSource,
-  convoType,
-  changeConvoType,
+  status,
+  changeStatus,
   maxPageSize,
   changePageSize,
 }: ConversionListControllerProps) {
@@ -124,13 +123,13 @@ function ConversionListController({
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select value={convoType} onValueChange={changeConvoType}>
+      <Select value={status} onValueChange={changeStatus}>
         <SelectTrigger>
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {convoTypeMapping.map((c) => (
+            {statusMapping.map((c) => (
               <SelectItem key={c.label} value={c.value}>
                 {c.label}
               </SelectItem>
@@ -159,34 +158,33 @@ function ConversionListController({
   );
 }
 
-interface ConversationListProps {
+interface ProductListProps {
   companyId: Company["id"];
   source: "shopee";
-  convoType: "all" | "unread" | "pinned";
+  status: Status;
   maxPageSize: number;
 }
 
-function ConversationList({
+function ProductList({
   companyId,
   source,
-  convoType,
+  status,
   maxPageSize,
-}: ConversationListProps) {
-  const { data, hasEnded, loadMore, isValidating } =
-    useConversationListInfinite({
-      companyId,
-      source,
-      maxPageSize,
-      convoType,
-    });
+}: ProductListProps) {
+  const { data, hasEnded, loadMore, isValidating } = useProductListInfinite({
+    companyId,
+    source,
+    maxPageSize,
+    status,
+  });
 
   if (!data) return <Spinner />;
 
   return (
     <div>
       <div className="flex flex-col gap-8">
-        {data.results.map((c, i) => (
-          <ConversationCardUI key={i} conversation={c} />
+        {data.results.map((p) => (
+          <div key={p.id}>{p.name}</div>
         ))}
       </div>
       <br />

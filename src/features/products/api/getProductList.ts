@@ -5,53 +5,53 @@ import useSWRInfinite from "swr/infinite";
 import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
-import { Conversation } from "../types";
-import { ConvoType, Source } from "../components/ConversationListContainer";
+import { Product } from "../types";
+import { Source, Status } from "../components/ProductListContainer";
 
-function getConversationList({
+function getProductList({
   companyId,
   source,
+  status,
   maxPageSize,
-  convoType,
   nextPageToken,
 }: {
   companyId: Company["id"];
   source: Source;
+  status: Status;
   maxPageSize: MaxPageSize;
-  convoType: ConvoType;
   nextPageToken: PageToken;
 }) {
-  return get<APIList<Conversation>>("/conversations", {
+  return get<APIList<Product>>("/products", {
     params: {
       company_id: companyId,
       source,
+      status,
       max_page_size: maxPageSize,
-      convo_type: convoType,
       next_page_token: nextPageToken,
     },
   });
 }
 
-export function useConversationListInfinite({
+export function useProductListInfinite({
   maxPageSize,
   companyId,
   source,
-  convoType,
+  status,
 }: {
   maxPageSize: MaxPageSize;
   companyId: Company["id"];
   source: Source;
-  convoType: ConvoType;
+  status: Status;
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (idx, previousPageData) =>
-      getKey(idx, maxPageSize, companyId, previousPageData, source, convoType),
+      getKey(idx, maxPageSize, companyId, previousPageData, source, status),
     (k) =>
-      getConversationList({
+      getProductList({
         companyId,
         source,
+        status,
         maxPageSize,
-        convoType,
         nextPageToken: k.pageToken,
       }),
     {
@@ -83,9 +83,9 @@ function getKey(
   pageIndex: number,
   maxPageSize: MaxPageSize,
   companyId: Company["id"],
-  previousPageData: APIList<Conversation>,
+  previousPageData: APIList<Product>,
   source: Source,
-  convoType: ConvoType
+  status: Status
 ) {
   // In the documentation, SWR uses `key` for two purposes:
   // 1) Serve as an index for its cache
@@ -100,9 +100,9 @@ function getKey(
       pageIndex,
       maxPageSize,
       companyId,
-      resource: "conversations",
+      resource: "products",
       source,
-      convoType,
+      status,
       pageToken: null,
     };
 
@@ -112,9 +112,9 @@ function getKey(
       pageIndex,
       maxPageSize,
       companyId,
-      resource: "conversations",
+      resource: "products",
       source,
-      convoType,
+      status,
       pageToken: null,
     };
 
@@ -124,7 +124,7 @@ function getKey(
     companyId,
     resource: "conversations",
     source,
-    convoType,
+    status,
     pageToken: previousPageData.next_page_token,
   };
 }
