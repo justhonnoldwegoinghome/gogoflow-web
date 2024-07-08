@@ -19,7 +19,7 @@ export default function Page() {
     <LoggedIn>
       {(userId) => (
         <div>
-          <div className="ml-auto w-fit flex flex-col">
+          <div className="ml-auto w-fit flex flex-col items-start">
             <Button asChild variant="link">
               <Link href={`/c/${id}/files`}>
                 <ArrowUpRight className="mr-2 h-4 w-4" />
@@ -30,6 +30,12 @@ export default function Page() {
               <Link href={`/c/${id}/chat`}>
                 <ArrowUpRight className="mr-2 h-4 w-4" />
                 Chat
+              </Link>
+            </Button>
+            <Button asChild variant="link">
+              <Link href={`/c/${id}/products`}>
+                <ArrowUpRight className="mr-2 h-4 w-4" />
+                Products
               </Link>
             </Button>
           </div>
