@@ -57,6 +57,7 @@ export function ConversationMessageList({
 
       <CreateChatCompletion
         companyId={companyId}
+        source="shopee"
         inputMessageList={conversationMessageListQuery.data.results}
       />
 

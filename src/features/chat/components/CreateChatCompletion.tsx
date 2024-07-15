@@ -10,11 +10,13 @@ import { Message } from "../types";
 
 interface CreateChatCompletionProps {
   companyId: Company["id"];
+  source: "shopee";
   inputMessageList: Message[];
 }
 
 export function CreateChatCompletion({
   companyId,
+  source,
   inputMessageList,
 }: CreateChatCompletionProps) {
   const createChatCompletionMutation = useCreateChatCompletion({
@@ -35,7 +37,7 @@ export function CreateChatCompletion({
         onClick={() =>
           createChatCompletionMutation
             .trigger({
-              data: { companyId, inputMessageList },
+              data: { source, companyId, inputMessageList },
             })
             .then((res) => res && setResponse(res.data.output_text))
         }
