@@ -13,13 +13,13 @@ function getProductList({
   source,
   status,
   maxPageSize,
-  nextPageToken,
+  pageToken,
 }: {
   companyId: Company["id"];
   source: Source;
   status: Status;
   maxPageSize: MaxPageSize;
-  nextPageToken: PageToken;
+  pageToken: PageToken;
 }) {
   return get<APIList<Product>>("/products", {
     params: {
@@ -27,7 +27,7 @@ function getProductList({
       source,
       status,
       max_page_size: maxPageSize,
-      next_page_token: nextPageToken,
+      page_token: pageToken,
     },
   });
 }
@@ -52,7 +52,7 @@ export function useProductListInfinite({
         source,
         status,
         maxPageSize,
-        nextPageToken: k.pageToken,
+        pageToken: k.pageToken,
       }),
     {
       revalidateFirstPage: false, // issue 1401 but not needed for less dynamic apps like this
@@ -122,7 +122,7 @@ function getKey(
     pageIndex,
     maxPageSize,
     companyId,
-    resource: "conversations",
+    resource: "products",
     source,
     status,
     pageToken: previousPageData.next_page_token,

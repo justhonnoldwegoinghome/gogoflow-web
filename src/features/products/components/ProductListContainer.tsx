@@ -32,13 +32,13 @@ interface ProductListContainerProps {
 export function ProductListContainer({ companyId }: ProductListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [status, setStatus] = useState<Status>("NORMAL");
-  const [maxPageSize, setPageSize] = useState<MaxPageSize>(20);
+  const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
       <TypographyH1>Products</TypographyH1>
       <br />
-      <ConversionListController
+      <ProductListController
         source={source}
         changeSource={(s) => setSource(s)}
         status={status}
@@ -57,7 +57,7 @@ export function ProductListContainer({ companyId }: ProductListContainerProps) {
   );
 }
 
-interface ConversionListControllerProps {
+interface ProductListControllerProps {
   source: Source;
   changeSource: (s: Source) => void;
   status: Status;
@@ -99,14 +99,14 @@ const pageSizeMapping = [
   },
 ];
 
-function ConversionListController({
+function ProductListController({
   source,
   changeSource,
   status,
   changeStatus,
   maxPageSize,
   changePageSize,
-}: ConversionListControllerProps) {
+}: ProductListControllerProps) {
   return (
     <div className="py-4 flex gap-4">
       <Select value={source} onValueChange={changeSource}>
