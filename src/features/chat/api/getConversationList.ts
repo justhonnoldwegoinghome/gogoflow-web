@@ -13,13 +13,13 @@ function getConversationList({
   source,
   maxPageSize,
   convoType,
-  nextPageToken,
+  pageToken,
 }: {
   companyId: Company["id"];
   source: Source;
   maxPageSize: MaxPageSize;
   convoType: ConvoType;
-  nextPageToken: PageToken;
+  pageToken: PageToken;
 }) {
   return get<APIList<Conversation>>("/conversations", {
     params: {
@@ -27,7 +27,7 @@ function getConversationList({
       source,
       max_page_size: maxPageSize,
       convo_type: convoType,
-      next_page_token: nextPageToken,
+      page_token: pageToken,
     },
   });
 }
@@ -52,7 +52,7 @@ export function useConversationListInfinite({
         source,
         maxPageSize,
         convoType,
-        nextPageToken: k.pageToken,
+        pageToken: k.pageToken,
       }),
     {
       revalidateFirstPage: false, // issue 1401 but not needed for less dynamic apps like this

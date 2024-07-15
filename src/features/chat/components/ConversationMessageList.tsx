@@ -24,7 +24,7 @@ export function ConversationMessageList({
     conversationId,
     source: "shopee",
     maxPageSize: 60,
-    nextPageToken: null,
+    pageToken: null,
   });
 
   if (!conversationMessageListQuery.data) return <Spinner />;
