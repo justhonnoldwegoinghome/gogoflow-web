@@ -182,9 +182,14 @@ function ProductList({
 
   return (
     <div>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-16">
         {data.results.map((p) => (
-          <div key={p.id}>{p.name}</div>
+          <div key={p.id}>
+            <p className="font-bold mb-2">{p.name}</p>
+            <p className="text-gray-600 text-sm whitespace-pre-wrap">
+              {p.description}
+            </p>
+          </div>
         ))}
       </div>
       <br />
