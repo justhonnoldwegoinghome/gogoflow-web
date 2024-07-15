@@ -8,6 +8,7 @@ import { ChatCompletion, Message } from "../types";
 interface CreateChatCompletionParams {
   data: {
     companyId: Company["id"];
+    source: "shopee";
     inputMessageList: Message[];
   };
 }
@@ -15,6 +16,7 @@ interface CreateChatCompletionParams {
 export function createChatCompletion({ data }: CreateChatCompletionParams) {
   return post<ChatCompletion>("/chat-completions", {
     company_id: data["companyId"],
+    source: data["source"],
     input_message_list: data["inputMessageList"],
   });
 }

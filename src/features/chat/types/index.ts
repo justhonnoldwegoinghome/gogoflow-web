@@ -26,6 +26,10 @@ export interface Message {
   sent_at: string;
   is_supported: boolean;
   text: string | null;
+  reference: {
+    type: "product" | "order";
+    id: string;
+  } | null;
 }
 
 export interface ChatCompletion {
