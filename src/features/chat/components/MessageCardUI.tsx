@@ -13,14 +13,15 @@ export function MessageCardUI({ message }: MessageCardUIProps) {
 
   return (
     <div
-      className={clsx("p-4 rounded-lg border", {
-        "border-blue-500 text-blue-500": sender_role === "seller",
+      className={clsx("p-4 rounded-lg", {
+        "border border-primary": sender_role === "buyer",
+        "text-secondary-foreground bg-secondary": sender_role === "seller",
       })}
     >
       <p>{is_supported ? text : "UNSUPPORTED"}</p>
 
       {message.reference && (
-        <div className="mt-4 text-gray-600 text-sm">
+        <div className="mt-4 text-sm">
           <p>
             {message.reference.type === "product"
               ? `Product ID:${message.reference.id}`
@@ -29,7 +30,7 @@ export function MessageCardUI({ message }: MessageCardUIProps) {
         </div>
       )}
 
-      <div className="mt-4 text-end text-gray-600 text-sm">
+      <div className="mt-4 text-end text-xs">
         <p>{format.date(new Date(sent_at))}</p>
         <p>{format.time(new Date(sent_at))}</p>
       </div>
