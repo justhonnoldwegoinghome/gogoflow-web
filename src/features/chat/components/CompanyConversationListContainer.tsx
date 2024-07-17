@@ -14,19 +14,19 @@ import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
-import { useConversationListInfinite } from "../api/getConversationList";
+import { useCompanyConversationListInfinite } from "../api/getCompanyConversationList";
 import { ConversationCardUI } from "./ConversationCardUI";
 
 export type Source = "shopee";
 export type ConvoType = "all" | "unread" | "pinned";
 
-interface ConversationListContainerProps {
-  companyId: Company["id"];
+interface CompanyConversationListContainerProps {
+  id: Company["id"];
 }
 
-export function ConversationListContainer({
-  companyId,
-}: ConversationListContainerProps) {
+export function CompanyConversationListContainer({
+  id,
+}: CompanyConversationListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [convoType, setConvoType] = useState<ConvoType>("all");
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
@@ -44,8 +44,8 @@ export function ConversationListContainer({
         changePageSize={(ps) => setPageSize(ps)}
       />
       <br />
-      <ConversationList
-        companyId={companyId}
+      <CompanyConversationList
+        id={id}
         source={source}
         convoType={convoType}
         maxPageSize={maxPageSize}
@@ -159,22 +159,22 @@ function ConversionListController({
   );
 }
 
-interface ConversationListProps {
-  companyId: Company["id"];
+interface CompanyConversationListProps {
+  id: Company["id"];
   source: "shopee";
   convoType: "all" | "unread" | "pinned";
   maxPageSize: number;
 }
 
-function ConversationList({
-  companyId,
+function CompanyConversationList({
+  id,
   source,
   convoType,
   maxPageSize,
-}: ConversationListProps) {
+}: CompanyConversationListProps) {
   const { data, hasEnded, loadMore, isValidating } =
-    useConversationListInfinite({
-      companyId,
+    useCompanyConversationListInfinite({
+      id,
       source,
       maxPageSize,
       convoType,

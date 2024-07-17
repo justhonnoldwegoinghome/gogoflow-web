@@ -6,24 +6,26 @@ import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { Conversation } from "../types";
-import { ConvoType, Source } from "../components/ConversationListContainer";
+import {
+  ConvoType,
+  Source,
+} from "../components/CompanyConversationListContainer";
 
-function getConversationList({
-  companyId,
+function getCompanyConversationList({
+  id,
   source,
   maxPageSize,
   convoType,
   pageToken,
 }: {
-  companyId: Company["id"];
+  id: Company["id"];
   source: Source;
   maxPageSize: MaxPageSize;
   convoType: ConvoType;
   pageToken: PageToken;
 }) {
-  return get<APIList<Conversation>>("/conversations", {
+  return get<APIList<Conversation>>(`/companies/${id}/conversations`, {
     params: {
-      company_id: companyId,
       source,
       max_page_size: maxPageSize,
       convo_type: convoType,
@@ -32,23 +34,23 @@ function getConversationList({
   });
 }
 
-export function useConversationListInfinite({
+export function useCompanyConversationListInfinite({
+  id,
   maxPageSize,
-  companyId,
   source,
   convoType,
 }: {
+  id: Company["id"];
   maxPageSize: MaxPageSize;
-  companyId: Company["id"];
   source: Source;
   convoType: ConvoType;
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (idx, previousPageData) =>
-      getKey(idx, maxPageSize, companyId, previousPageData, source, convoType),
+      getKey(id, idx, maxPageSize, previousPageData, source, convoType),
     (k) =>
-      getConversationList({
-        companyId,
+      getCompanyConversationList({
+        id,
         source,
         maxPageSize,
         convoType,
@@ -80,9 +82,9 @@ export function useConversationListInfinite({
 }
 
 function getKey(
+  id: Company["id"],
   pageIndex: number,
   maxPageSize: MaxPageSize,
-  companyId: Company["id"],
   previousPageData: APIList<Conversation>,
   source: Source,
   convoType: ConvoType
@@ -97,9 +99,9 @@ function getKey(
   // First page
   if (pageIndex === 0)
     return {
+      id,
       pageIndex,
       maxPageSize,
-      companyId,
       resource: "conversations",
       source,
       convoType,
@@ -109,9 +111,9 @@ function getKey(
   // Last page
   if (previousPageData && !previousPageData.next_page_token)
     return {
+      id,
       pageIndex,
       maxPageSize,
-      companyId,
       resource: "conversations",
       source,
       convoType,
@@ -119,9 +121,9 @@ function getKey(
     };
 
   return {
+    id,
     pageIndex,
     maxPageSize,
-    companyId,
     resource: "conversations",
     source,
     convoType,
