@@ -6,24 +6,23 @@ import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { Product } from "../types";
-import { Source, Status } from "../components/ProductListContainer";
+import { Source, Status } from "../components/CompanyProductListContainer";
 
-function getProductList({
-  companyId,
+function getCompanyProductList({
+  id,
   source,
   status,
   maxPageSize,
   pageToken,
 }: {
-  companyId: Company["id"];
+  id: Company["id"];
   source: Source;
   status: Status;
   maxPageSize: MaxPageSize;
   pageToken: PageToken;
 }) {
-  return get<APIList<Product>>("/products", {
+  return get<APIList<Product>>(`/companies/${id}/products`, {
     params: {
-      company_id: companyId,
       source,
       status,
       max_page_size: maxPageSize,
@@ -32,23 +31,23 @@ function getProductList({
   });
 }
 
-export function useProductListInfinite({
+export function useCompanyProductListInfinite({
+  id,
   maxPageSize,
-  companyId,
   source,
   status,
 }: {
+  id: Company["id"];
   maxPageSize: MaxPageSize;
-  companyId: Company["id"];
   source: Source;
   status: Status;
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (idx, previousPageData) =>
-      getKey(idx, maxPageSize, companyId, previousPageData, source, status),
+      getKey(id, idx, maxPageSize, previousPageData, source, status),
     (k) =>
-      getProductList({
-        companyId,
+      getCompanyProductList({
+        id,
         source,
         status,
         maxPageSize,
@@ -80,9 +79,9 @@ export function useProductListInfinite({
 }
 
 function getKey(
+  id: Company["id"],
   pageIndex: number,
   maxPageSize: MaxPageSize,
-  companyId: Company["id"],
   previousPageData: APIList<Product>,
   source: Source,
   status: Status
@@ -97,9 +96,9 @@ function getKey(
   // First page
   if (pageIndex === 0)
     return {
+      id,
       pageIndex,
       maxPageSize,
-      companyId,
       resource: "products",
       source,
       status,
@@ -109,9 +108,9 @@ function getKey(
   // Last page
   if (previousPageData && !previousPageData.next_page_token)
     return {
+      id,
       pageIndex,
       maxPageSize,
-      companyId,
       resource: "products",
       source,
       status,
@@ -119,9 +118,9 @@ function getKey(
     };
 
   return {
+    id,
     pageIndex,
     maxPageSize,
-    companyId,
     resource: "products",
     source,
     status,

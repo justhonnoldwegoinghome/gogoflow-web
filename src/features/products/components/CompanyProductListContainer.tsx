@@ -14,7 +14,7 @@ import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
-import { useProductListInfinite } from "../api/getProductList";
+import { useCompanyProductListInfinite } from "../api/getCompanyProductList";
 
 export type Source = "shopee";
 export type Status =
@@ -25,11 +25,13 @@ export type Status =
   | "SELLER_DELETE"
   | "SHOPEE_DELETE";
 
-interface ProductListContainerProps {
-  companyId: Company["id"];
+interface CompanyProductListContainerProps {
+  id: Company["id"];
 }
 
-export function ProductListContainer({ companyId }: ProductListContainerProps) {
+export function CompanyProductListContainer({
+  id,
+}: CompanyProductListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [status, setStatus] = useState<Status>("NORMAL");
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
@@ -47,8 +49,8 @@ export function ProductListContainer({ companyId }: ProductListContainerProps) {
         changePageSize={(ps) => setPageSize(ps)}
       />
       <br />
-      <ProductList
-        companyId={companyId}
+      <CompanyProductList
+        id={id}
         source={source}
         status={status}
         maxPageSize={maxPageSize}
@@ -158,25 +160,26 @@ function ProductListController({
   );
 }
 
-interface ProductListProps {
-  companyId: Company["id"];
+interface CompanyProductListProps {
+  id: Company["id"];
   source: "shopee";
   status: Status;
   maxPageSize: number;
 }
 
-function ProductList({
-  companyId,
+function CompanyProductList({
+  id,
   source,
   status,
   maxPageSize,
-}: ProductListProps) {
-  const { data, hasEnded, loadMore, isValidating } = useProductListInfinite({
-    companyId,
-    source,
-    maxPageSize,
-    status,
-  });
+}: CompanyProductListProps) {
+  const { data, hasEnded, loadMore, isValidating } =
+    useCompanyProductListInfinite({
+      id,
+      source,
+      maxPageSize,
+      status,
+    });
 
   if (!data) return <Spinner />;
 
