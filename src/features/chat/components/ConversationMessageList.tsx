@@ -23,7 +23,7 @@ export function ConversationMessageList({
     companyId,
     conversationId,
     source: "shopee",
-    maxPageSize: 60,
+    maxPageSize: 50,
     pageToken: null,
   });
 
