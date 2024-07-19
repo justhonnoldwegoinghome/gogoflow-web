@@ -6,7 +6,7 @@ import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 
 import { useCreateChatCompletion } from "../api/createChatCompletion";
-import { Message } from "../types";
+import { Message } from "@/features/messages";
 
 interface CreateChatCompletionProps {
   companyId: Company["id"];

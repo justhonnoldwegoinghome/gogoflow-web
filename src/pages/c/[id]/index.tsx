@@ -27,9 +27,9 @@ export default function Page() {
               </Link>
             </Button>
             <Button asChild variant="link">
-              <Link href={`/c/${id}/chat`}>
+              <Link href={`/c/${id}/conversations`}>
                 <ArrowUpRight className="mr-2 h-4 w-4" />
-                Chat
+                Conversations
               </Link>
             </Button>
             <Button asChild variant="link">

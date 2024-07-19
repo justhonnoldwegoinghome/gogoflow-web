@@ -3,7 +3,8 @@ import useSWRMutation from "swr/mutation";
 import { post } from "@/apiClient";
 import { Company } from "@/features/companies";
 
-import { ChatCompletion, Message } from "../types";
+import { ChatCompletion } from "../types";
+import { Message } from "@/features/messages";
 
 interface CreateChatCompletionParams {
   data: {
