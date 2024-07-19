@@ -2,8 +2,9 @@ import useSWRMutation from "swr/mutation";
 
 import { post } from "@/apiClient";
 import { Company } from "@/features/companies";
+import { Conversation } from "@/features/conversations";
 
-import { Conversation, Message } from "../types";
+import { Message } from "../types";
 
 interface SendMessageParams {
   conversationId: Conversation["id"];

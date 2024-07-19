@@ -2,7 +2,10 @@ import { useRouter } from "next/router";
 
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { Conversation, ConversationMessageList } from "@/features/chat";
+import {
+  Conversation,
+  ConversationMessageList,
+} from "@/features/conversations";
 
 export default function Page() {
   const query = useRouter().query;

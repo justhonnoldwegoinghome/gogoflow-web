@@ -6,7 +6,7 @@ import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 
 import { useSendMessage } from "../api/sendMessage";
-import { Conversation } from "../types";
+import { Conversation } from "../../conversations/types";
 
 interface SendMessageProps {
   companyId: Company["id"];

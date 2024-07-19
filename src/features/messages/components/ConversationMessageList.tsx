@@ -6,9 +6,9 @@ import { TypographyH1 } from "@/components/typography";
 import { Company } from "@/features/companies";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
-import { CreateChatCompletion } from "./CreateChatCompletion";
 import { MessageCardUI } from "./MessageCardUI";
 import { SendMessage } from "./SendMessage";
+import { CreateChatCompletion } from "@/features/chatCompletions";
 
 interface ConversationMessageListProps {
   companyId: Company["id"];
