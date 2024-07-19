@@ -6,11 +6,7 @@ import { Company } from "@/features/companies";
 import { File } from "../types";
 
 export function getCompanyFileList({ id }: { id: Company["id"] }) {
-  return get<APIList<File>>("/files", {
-    params: {
-      company_id: id,
-    },
-  });
+  return get<APIList<File>>(`/companies/${id}/files`);
 }
 
 export function useCompanyFileList({ id }: { id: Company["id"] }) {

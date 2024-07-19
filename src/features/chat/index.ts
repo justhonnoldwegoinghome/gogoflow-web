@@ -1,4 +1,4 @@
 export type { Conversation } from "./types";
 export { Chat } from "./components/Chat";
-export { ConversationListContainer } from "./components/ConversationListContainer";
+export { CompanyConversationListContainer } from "./components/CompanyConversationListContainer";
 export { ConversationMessageList } from "./components/ConversationMessageList";
