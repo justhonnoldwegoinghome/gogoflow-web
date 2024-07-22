@@ -21,6 +21,12 @@ export default function Page() {
         <div>
           <div className="ml-auto w-fit flex flex-col items-start">
             <Button asChild variant="link">
+              <Link href={`/c/${id}/notifications`}>
+                <ArrowUpRight className="mr-2 h-4 w-4" />
+                Notifications
+              </Link>
+            </Button>
+            <Button asChild variant="link">
               <Link href={`/c/${id}/files`}>
                 <ArrowUpRight className="mr-2 h-4 w-4" />
                 Files
