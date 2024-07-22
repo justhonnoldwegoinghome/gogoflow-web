@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-import { MaxPageSize } from "@/apiClient";
+import { format } from "@/utils/format";
+import { Avatar, AvatarImage } from "@/components/avatar";
+
 import {
   Select,
   SelectTrigger,
@@ -12,10 +16,11 @@ import {
 import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
+import { MaxPageSize } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { useCompanyConversationListInfinite } from "../api/getCompanyConversationList";
-import { ConversationCardUI } from "./ConversationCardUI";
+import { Conversation } from "../types";
 
 export type Source = "shopee";
 export type ConvoType = "all" | "unread" | "pinned";
@@ -29,7 +34,7 @@ export function CompanyConversationListContainer({
 }: CompanyConversationListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [convoType, setConvoType] = useState<ConvoType>("all");
-  const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
+  const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
@@ -87,16 +92,16 @@ const convoTypeMapping = [
 
 const pageSizeMapping = [
   {
-    value: 5,
-    label: "5",
-  },
-  {
     value: 10,
     label: "10",
   },
   {
     value: 20,
     label: "20",
+  },
+  {
+    value: 50,
+    label: "50",
   },
 ];
 
@@ -184,7 +189,7 @@ function CompanyConversationList({
 
   return (
     <div>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         {data.results.map((c, i) => (
           <ConversationCardUI key={i} conversation={c} />
         ))}
@@ -200,5 +205,49 @@ function CompanyConversationList({
         </Button>
       )}
     </div>
+  );
+}
+
+interface ConversationCardUIProps {
+  conversation: Conversation;
+}
+
+export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
+  const { asPath } = useRouter();
+
+  const { id, source, last_message_at, buyer_name, buyer_avatar, num_unread } =
+    conversation;
+
+  return (
+    <Link
+      href={`${asPath}/${id}/messages`}
+      className="flex gap-2 justify-between items-center p-4 rounded-lg border"
+    >
+      <div className="flex gap-2 items-center">
+        <Avatar>
+          {buyer_avatar ? (
+            <AvatarImage src={buyer_avatar} />
+          ) : (
+            <span className="bg-gradient-to-b from-white to-gray-300 block w-10 h-10" />
+          )}
+        </Avatar>
+        <p>{buyer_name}</p>
+      </div>
+      <br />
+      <div className="flex flex-col items-end gap-4">
+        <p className="text-sm text-gray-600 w-fit ml-auto">{`${format.date(
+          new Date(last_message_at)
+        )} | ${format.time(new Date(last_message_at))}`}</p>
+        {num_unread > 0 ? (
+          <span className="text-sm bg-primary text-primary-foreground w-fit px-2 py-1 rounded">
+            {num_unread}
+          </span>
+        ) : (
+          <span className="text-sm bg-secondary text-secondary-foreground w-fit px-2 py-1 rounded">
+            {num_unread}
+          </span>
+        )}
+      </div>
+    </Link>
   );
 }

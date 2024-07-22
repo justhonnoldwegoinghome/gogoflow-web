@@ -47,10 +47,13 @@ export default function App({ Component, pageProps }: AppProps) {
             <Button asChild>
               <Link
                 href="/"
-                className="w-10 h-10 rounded-md bg-gradient-to-r from-pink-500 to-indigo-500"
+                className="w-10 h-10 rounded-md bg-gradient-to-r from-teal-500 to-indigo-500"
               ></Link>
             </Button>
             <LoggedIn
+              loader={
+                <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
+              }
               fallback={
                 <div className="flex gap-2">
                   <Button asChild>

@@ -1,7 +1,7 @@
 import { Building2, LogOut } from "lucide-react";
 import { useRouter } from "next/router";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar";
+import { Avatar, AvatarImage } from "@/components/avatar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -38,8 +38,8 @@ export function UserDropdownMenu({ id }: UserMenuProps) {
           <AvatarImage
             src="
           https://images.unsplash.com/photo-1608889175250-c3b0c1667d3a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt={`Profile photo of ${userQuery.data.email}`}
           />
-          <AvatarFallback>User</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
