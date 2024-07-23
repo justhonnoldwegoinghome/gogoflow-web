@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
+import { Message } from "@/features/messages";
 
 import { useCreateChatCompletion } from "../api/createChatCompletion";
-import { Message } from "@/features/messages";
+import { ChatCompletion } from "../types";
 
 interface CreateChatCompletionProps {
   companyId: Company["id"];
@@ -23,15 +24,20 @@ export function CreateChatCompletion({
     companyId,
   });
 
-  const [response, setResponse] = useState("");
+  const [outputTextList, setOutputTextList] = useState<
+    ChatCompletion["output_text_list"]
+  >([]);
 
   return (
     <div>
       <p className="mb-2 font-semibold">Suggested response:</p>
-      <Textarea
-        value={response}
-        onChange={(e) => setResponse(e.target.value)}
-      />
+      <div className="flex flex-col gap-4">
+        {outputTextList.length === 0 ? (
+          <Textarea />
+        ) : (
+          outputTextList.map((o, i) => <Textarea key={i} value={o} />)
+        )}
+      </div>
       <br />
       <Button
         onClick={() =>
@@ -39,7 +45,7 @@ export function CreateChatCompletion({
             .trigger({
               data: { source, companyId, inputMessageList },
             })
-            .then((res) => res && setResponse(res.data.output_text))
+            .then((res) => res && setOutputTextList(res.data.output_text_list))
         }
         isLoading={createChatCompletionMutation.isMutating}
       >
