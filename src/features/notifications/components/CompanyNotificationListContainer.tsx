@@ -17,6 +17,9 @@ import { MaxPageSize } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { useCompanyNotificationListInfinite } from "../api/getCompanyNotificationList";
+import { useMarkAsRead } from "../api/markAsRead";
+import { useMarkAsUnread } from "../api/markAsUnread";
+import { useNotification } from "../api/getNotification";
 import { Notification } from "../types";
 
 interface CompanyNotificationListContainerProps {
@@ -109,8 +112,8 @@ function CompanyNotificationList({
   return (
     <div>
       <div className="flex flex-col gap-6">
-        {data.results.map((c, i) => (
-          <NotificationCardUI key={i} notification={c} />
+        {data.results.map((n) => (
+          <NotificationCard key={n.id} id={n.id} />
         ))}
       </div>
       <br />
@@ -127,27 +130,63 @@ function CompanyNotificationList({
   );
 }
 
-interface NotificationCardUIProps {
-  notification: Notification;
+interface NotificationCardProps {
+  id: Notification["id"];
 }
 
-export function NotificationCardUI({ notification }: NotificationCardUIProps) {
-  const { id, recipient_company_id, created_at, is_read, text, reference } =
-    notification;
+export function NotificationCard({ id }: NotificationCardProps) {
+  const notificationQuery = useNotification({ id });
+  const markAsReadMutation = useMarkAsRead({
+    id,
+  });
+  const markAsUnreadMutation = useMarkAsUnread({
+    id,
+  });
 
-  if (reference && reference.type === "conversation")
-    return (
-      <Link
-        className="p-4 rounded-lg border"
-        href={`/c/${recipient_company_id}/conversations/${reference.id}/messages`}
-      >
-        <p>{text}</p>
-        <p>{`Read: ${is_read}`}</p>
-        <p className="text-sm text-gray-600 w-fit ml-auto">{`${format.date(
+  if (!notificationQuery.data) return <Spinner />;
+
+  const { recipient_company_id, created_at, is_read, text, reference } =
+    notificationQuery.data;
+
+  return (
+    <div className="p-4 rounded-lg border flex justify-between gap-8">
+      <div>
+        <p className="font-medium">{text}</p>
+        <br />
+        {reference && reference.type === "conversation" && (
+          <Link
+            className="text-sm text-gray-600 hover:underline underline-offset-2"
+            href={`/c/${recipient_company_id}/conversations/${reference.id}/messages`}
+          >
+            {`Conversation ID: ${reference.id}`}
+          </Link>
+        )}
+        <br />
+        <p className="text-sm text-gray-600">{`${format.date(
           new Date(created_at)
         )} | ${format.time(new Date(created_at))}`}</p>
-      </Link>
-    );
+      </div>
 
-  return <div />;
+      <div>
+        {is_read ? (
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => markAsUnreadMutation.trigger()}
+            isLoading={markAsUnreadMutation.isMutating}
+          >
+            Mark as unread
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            onClick={() => markAsReadMutation.trigger()}
+            isLoading={markAsReadMutation.isMutating}
+          >
+            Mark as read
+          </Button>
+        )}
+      </div>
+    </div>
+  );
 }
