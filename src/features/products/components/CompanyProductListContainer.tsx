@@ -34,7 +34,7 @@ export function CompanyProductListContainer({
 }: CompanyProductListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
   const [status, setStatus] = useState<Status>("NORMAL");
-  const [maxPageSize, setPageSize] = useState<MaxPageSize>(5);
+  const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
@@ -88,16 +88,16 @@ const statusMapping = [
 
 const pageSizeMapping = [
   {
-    value: 5,
-    label: "5",
-  },
-  {
     value: 10,
     label: "10",
   },
   {
     value: 20,
     label: "20",
+  },
+  {
+    value: 50,
+    label: "50",
   },
 ];
 

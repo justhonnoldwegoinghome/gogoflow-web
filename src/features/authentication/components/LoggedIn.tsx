@@ -7,15 +7,16 @@ import { useAuthStore } from "../stores/useAuthStore";
 
 interface LoggedInProps {
   children: (userId: User["id"]) => ReactNode;
+  loader?: ReactElement;
   fallback?: ReactElement;
 }
 
-export function LoggedIn({ children, fallback }: LoggedInProps) {
+export function LoggedIn({ children, loader, fallback }: LoggedInProps) {
   const isLoaded = useAuthStore((s) => s.isLoaded);
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const userId = useAuthStore((s) => s.userId);
 
-  if (!isLoaded) return <Spinner />;
+  if (!isLoaded) return loader || <Spinner />;
 
   if (isLoggedIn && userId) {
     return children(userId as User["id"]);
