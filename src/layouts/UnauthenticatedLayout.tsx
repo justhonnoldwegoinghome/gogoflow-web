@@ -23,7 +23,9 @@ export function UnauthenticatedLayout({
 function NavBar() {
   return (
     <div className="max-w-screen-tablet mx-auto flex justify-between items-center py-10 px-[3vw]">
-      <div className="tracking-widest">Shopeeflow</div>
+      <Link href="/" className="block text-lg font-medium tracking-wider">
+        Shopeeflow
+      </Link>
       <div className="flex gap-2">
         <Button asChild>
           <Link href="/auth/request-sign-up">Sign up</Link>

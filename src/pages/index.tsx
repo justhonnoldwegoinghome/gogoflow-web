@@ -14,7 +14,9 @@ export default function Home() {
 function NavBar() {
   return (
     <div className="flex justify-between items-center py-12 px-[3vw]">
-      <div className="tracking-widest">Shopeeflow</div>
+      <Link href="/" className="block text-lg font-medium tracking-wider">
+        Shopeeflow
+      </Link>
       <div className="flex gap-2">
         <Button asChild variant="ghost">
           <Link href="/auth/request-sign-up">Sign up</Link>

@@ -1,10 +1,4 @@
-import {
-  User as UserIcon,
-  Plus,
-  Building2,
-  Settings,
-  LogOut,
-} from "lucide-react";
+import { Plus, Building2, Settings, LogOut } from "lucide-react";
 import { useRouter } from "next/router";
 
 import {
@@ -12,10 +6,10 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuSeparator,
-  DropdownMenuLabel,
   DropdownMenuItem,
   DropdownMenuGroup,
 } from "@/components/dropdownMenu";
+import { Button } from "@/components/button";
 import { useLogOut } from "@/features/authentication";
 import { useUserCompanyList } from "@/features/companies";
 
@@ -43,8 +37,8 @@ export function UserDropdownMenu({ id }: UserMenuProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="text-sm flex gap-2 items-center px-4 py-2 rounded-full bg-secondary">
-        <span>{email}</span>
+      <DropdownMenuTrigger asChild>
+        <Button variant="secondary">{email}</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

@@ -111,7 +111,7 @@ function ConversionListController({
   changePageSize,
 }: ConversionListControllerProps) {
   return (
-    <div className="py-4 flex gap-4">
+    <div className="flex gap-4">
       <Select value={source} onValueChange={changeSource}>
         <SelectTrigger>
           <SelectValue />
@@ -218,7 +218,7 @@ export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
   return (
     <Link
       href={`${asPath}/${id}/messages`}
-      className="flex gap-2 justify-between items-center p-4 rounded-lg border"
+      className="bg-white flex gap-2 justify-between items-center p-4 rounded-lg border"
     >
       <div className="flex gap-2 items-center">
         <Avatar>
@@ -232,7 +232,7 @@ export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
       </div>
       <br />
       <div className="flex flex-col items-end gap-4">
-        <p className="text-sm text-gray-600 w-fit ml-auto">{`${format.date(
+        <p className="text-sm text-muted-foreground w-fit ml-auto">{`${format.date(
           new Date(last_message_at)
         )} | ${format.time(new Date(last_message_at))}`}</p>
         {num_unread > 0 ? (

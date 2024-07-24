@@ -139,14 +139,14 @@ export function NotificationCard({ id }: NotificationCardProps) {
         <br />
         {reference && reference.type === "conversation" && (
           <Link
-            className="text-sm text-gray-600 hover:underline underline-offset-2"
+            className="text-sm text-muted-foreground hover:underline underline-offset-2"
             href={`/c/${recipient_company_id}/conversations/${reference.id}/messages`}
           >
             {`Conversation ID: ${reference.id}`}
           </Link>
         )}
         <br />
-        <p className="text-sm text-gray-600">{`${format.date(
+        <p className="text-sm text-muted-foreground">{`${format.date(
           new Date(created_at)
         )} | ${format.time(new Date(created_at))}`}</p>
       </div>
