@@ -10,7 +10,6 @@ import {
   SelectItem,
 } from "@/components/select";
 import { format } from "@/utils/format";
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { MaxPageSize } from "@/apiClient";
@@ -33,13 +32,11 @@ export function CompanyNotificationListContainer({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Notifications</TypographyH1>
-      <br />
-      <NotificationListController
+      {/* <NotificationListController
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
-      <br />
+      <br /> */}
       <CompanyNotificationList id={id} maxPageSize={maxPageSize} />
     </div>
   );
@@ -101,31 +98,18 @@ function CompanyNotificationList({
   id,
   maxPageSize,
 }: CompanyNotificationListProps) {
-  const { data, hasEnded, loadMore, isValidating } =
-    useCompanyNotificationListInfinite({
-      id,
-      maxPageSize,
-    });
+  const { data } = useCompanyNotificationListInfinite({
+    id,
+    maxPageSize,
+  });
 
   if (!data) return <Spinner />;
 
   return (
-    <div>
-      <div className="flex flex-col gap-6">
-        {data.results.map((n) => (
-          <NotificationCard key={n.id} id={n.id} />
-        ))}
-      </div>
-      <br />
-      {hasEnded ? (
-        <Button disabled variant="outline">
-          End of list
-        </Button>
-      ) : (
-        <Button onClick={loadMore} isLoading={isValidating}>
-          Load more
-        </Button>
-      )}
+    <div className="flex flex-col gap-6">
+      {data.results.map((n) => (
+        <NotificationCard key={n.id} id={n.id} />
+      ))}
     </div>
   );
 }
@@ -155,14 +139,14 @@ export function NotificationCard({ id }: NotificationCardProps) {
         <br />
         {reference && reference.type === "conversation" && (
           <Link
-            className="text-sm text-gray-600 hover:underline underline-offset-2"
+            className="text-sm text-muted-foreground hover:underline underline-offset-2"
             href={`/c/${recipient_company_id}/conversations/${reference.id}/messages`}
           >
             {`Conversation ID: ${reference.id}`}
           </Link>
         )}
         <br />
-        <p className="text-sm text-gray-600">{`${format.date(
+        <p className="text-sm text-muted-foreground">{`${format.date(
           new Date(created_at)
         )} | ${format.time(new Date(created_at))}`}</p>
       </div>

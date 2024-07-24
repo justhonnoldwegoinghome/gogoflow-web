@@ -6,6 +6,7 @@ import {
   Conversation,
   ConversationMessageList,
 } from "@/features/conversations";
+import { CompanyLayout } from "@/layouts";
 
 export default function Page() {
   const query = useRouter().query;
@@ -17,10 +18,12 @@ export default function Page() {
   convoId = convoId as Conversation["id"];
 
   return (
-    <LoggedIn>
-      {(userId) => (
-        <ConversationMessageList companyId={id} conversationId={convoId} />
-      )}
-    </LoggedIn>
+    <CompanyLayout id={id} tab="conversations">
+      <LoggedIn>
+        {(userId) => (
+          <ConversationMessageList companyId={id} conversationId={convoId} />
+        )}
+      </LoggedIn>
+    </CompanyLayout>
   );
 }

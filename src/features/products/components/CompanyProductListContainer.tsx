@@ -9,7 +9,6 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/select";
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
@@ -38,8 +37,6 @@ export function CompanyProductListContainer({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Products</TypographyH1>
-      <br />
       <ProductListController
         source={source}
         changeSource={(s) => setSource(s)}
@@ -110,7 +107,7 @@ function ProductListController({
   changePageSize,
 }: ProductListControllerProps) {
   return (
-    <div className="py-4 flex gap-4">
+    <div className="flex gap-4">
       <Select value={source} onValueChange={changeSource}>
         <SelectTrigger>
           <SelectValue />
@@ -189,7 +186,7 @@ function CompanyProductList({
         {data.results.map((p) => (
           <div key={p.id}>
             <p className="font-bold mb-2">{p.name}</p>
-            <p className="text-gray-600 text-sm whitespace-pre-wrap">
+            <p className="text-muted-foreground text-sm whitespace-pre-wrap">
               {p.description}
             </p>
           </div>
