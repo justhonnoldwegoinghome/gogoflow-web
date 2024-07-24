@@ -35,11 +35,11 @@ export function CompanyNotificationListContainer({
     <div className="max-w-screen-tablet mx-auto">
       <TypographyH1>Notifications</TypographyH1>
       <br />
-      <NotificationListController
+      {/* <NotificationListController
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
-      <br />
+      <br /> */}
       <CompanyNotificationList id={id} maxPageSize={maxPageSize} />
     </div>
   );
@@ -101,31 +101,18 @@ function CompanyNotificationList({
   id,
   maxPageSize,
 }: CompanyNotificationListProps) {
-  const { data, hasEnded, loadMore, isValidating } =
-    useCompanyNotificationListInfinite({
-      id,
-      maxPageSize,
-    });
+  const { data } = useCompanyNotificationListInfinite({
+    id,
+    maxPageSize,
+  });
 
   if (!data) return <Spinner />;
 
   return (
-    <div>
-      <div className="flex flex-col gap-6">
-        {data.results.map((n) => (
-          <NotificationCard key={n.id} id={n.id} />
-        ))}
-      </div>
-      <br />
-      {hasEnded ? (
-        <Button disabled variant="outline">
-          End of list
-        </Button>
-      ) : (
-        <Button onClick={loadMore} isLoading={isValidating}>
-          Load more
-        </Button>
-      )}
+    <div className="flex flex-col gap-6">
+      {data.results.map((n) => (
+        <NotificationCard key={n.id} id={n.id} />
+      ))}
     </div>
   );
 }
