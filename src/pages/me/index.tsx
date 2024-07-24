@@ -1,6 +1,11 @@
 import { LoggedIn } from "@/features/authentication";
-import { UserCompanyList } from "@/features/companies";
+import { UpdateUser } from "@/features/users";
+import { UserLayout } from "@/layouts";
 
 export default function Page() {
-  return <LoggedIn>{(userId) => <UserCompanyList id={userId} />}</LoggedIn>;
+  return (
+    <UserLayout>
+      <LoggedIn>{(userId) => <UpdateUser id={userId} />}</LoggedIn>
+    </UserLayout>
+  );
 }

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-import { TypographyH1 } from "@/components/typography";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
 import { CompanyFileList } from "@/features/files";
+import { CompanyLayout } from "@/layouts";
 
 export default function Page() {
   const { query } = useRouter();
@@ -14,13 +14,8 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <LoggedIn>
-      {(userId) => (
-        <div className="flex flex-col gap-1">
-          <TypographyH1>Files</TypographyH1>
-          <CompanyFileList id={id} />
-        </div>
-      )}
-    </LoggedIn>
+    <CompanyLayout id={id} tab="files">
+      <LoggedIn>{(userId) => <CompanyFileList id={id} />}</LoggedIn>
+    </CompanyLayout>
   );
 }

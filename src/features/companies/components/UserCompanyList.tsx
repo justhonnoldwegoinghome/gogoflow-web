@@ -17,7 +17,7 @@ export function UserCompanyList({ id }: UserCompanyListProps) {
     <div>
       <div>
         <Button key={id} asChild>
-          <Link href={"/me/create-company"}>Create company</Link>
+          <Link href={"/create-company"}>Create company</Link>
         </Button>
       </div>
       <br />

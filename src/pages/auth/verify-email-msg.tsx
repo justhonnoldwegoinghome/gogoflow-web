@@ -1,3 +1,9 @@
+import { UnauthenticatedLayout } from "@/layouts";
+
 export default function Page() {
-  return <div>Please verify your email.</div>;
+  return (
+    <UnauthenticatedLayout>
+      <div>Please verify your email.</div>
+    </UnauthenticatedLayout>
+  );
 }

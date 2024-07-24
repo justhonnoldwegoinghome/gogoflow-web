@@ -13,7 +13,6 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/select";
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { MaxPageSize } from "@/apiClient";
@@ -38,8 +37,6 @@ export function CompanyConversationListContainer({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Conversations</TypographyH1>
-      <br />
       <ConversionListController
         source={source}
         changeSource={(s) => setSource(s)}

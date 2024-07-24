@@ -9,7 +9,6 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/select";
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
@@ -38,8 +37,6 @@ export function CompanyProductListContainer({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Products</TypographyH1>
-      <br />
       <ProductListController
         source={source}
         changeSource={(s) => setSource(s)}

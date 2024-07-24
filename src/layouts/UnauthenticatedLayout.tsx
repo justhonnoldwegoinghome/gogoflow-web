@@ -1,22 +1,31 @@
+import { ReactNode } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/button";
 
-export default function Home() {
+interface UnauthenticatedLayoutProps {
+  children: ReactNode;
+}
+
+export function UnauthenticatedLayout({
+  children,
+}: UnauthenticatedLayoutProps) {
   return (
-    <div className="bg-[url('/water.png')] bg-no-repeat h-[350vh]">
+    <div className="bg-white">
       <NavBar />
-      <main className="py-12 px-[3vw]"></main>
+      <div className="max-w-screen-tablet mx-auto py-12 px-[3vw]">
+        {children}
+      </div>
     </div>
   );
 }
 
 function NavBar() {
   return (
-    <div className="flex justify-between items-center py-12 px-[3vw]">
+    <div className="max-w-screen-tablet mx-auto flex justify-between items-center py-10 px-[3vw]">
       <div className="tracking-widest">Shopeeflow</div>
       <div className="flex gap-2">
-        <Button asChild variant="ghost">
+        <Button asChild>
           <Link href="/auth/request-sign-up">Sign up</Link>
         </Button>
         <Button asChild variant="ghost">

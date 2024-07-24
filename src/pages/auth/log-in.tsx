@@ -1,5 +1,10 @@
 import { LogIn } from "@/features/authentication";
+import { UnauthenticatedLayout } from "@/layouts";
 
 export default function Page() {
-  return <LogIn />;
+  return (
+    <UnauthenticatedLayout>
+      <LogIn />
+    </UnauthenticatedLayout>
+  );
 }

@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 
-import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyConversationListContainer } from "@/features/conversations";
+import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
 import { CompanyLayout } from "@/layouts";
 
 export default function Page() {
@@ -14,9 +13,14 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="conversations">
+    <CompanyLayout id={id} tab="settings">
       <LoggedIn>
-        {(userId) => <CompanyConversationListContainer id={id} />}
+        {(userId) => (
+          <div>
+            <UpdateCompany id={id} />
+            <DeleteCompany id={id} userId={userId} />
+          </div>
+        )}
       </LoggedIn>
     </CompanyLayout>
   );

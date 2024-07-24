@@ -1,4 +1,5 @@
 export { type Company } from "./types";
+export { useUserCompanyList } from "./api/getUserCompanyList";
 export { UserCompanyList } from "./components/UserCompanyList";
 export { UpdateCompany } from "./components/UpdateCompany";
 export { DeleteCompany } from "./components/DeleteCompany";

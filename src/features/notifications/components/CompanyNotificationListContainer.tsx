@@ -10,7 +10,6 @@ import {
   SelectItem,
 } from "@/components/select";
 import { format } from "@/utils/format";
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { MaxPageSize } from "@/apiClient";
@@ -33,8 +32,6 @@ export function CompanyNotificationListContainer({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <TypographyH1>Notifications</TypographyH1>
-      <br />
       {/* <NotificationListController
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
