@@ -1,30 +1,23 @@
-import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { Button } from "@/components/button";
+import { useAuthStore } from "@/features/authentication";
+import { Spinner } from "@/components/spinner";
 
-export default function Home() {
+export default function Page() {
+  const { push } = useRouter();
+
+  const { isLoaded, isLoggedIn } = useAuthStore();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    else if (isLoggedIn) push("/me");
+    else push("/landing");
+  }, [isLoaded, isLoggedIn]);
+
   return (
-    <div className="bg-[url('/water.png')] bg-no-repeat h-[350vh]">
-      <NavBar />
-      <main className="py-12 px-[3vw]"></main>
-    </div>
-  );
-}
-
-function NavBar() {
-  return (
-    <div className="flex justify-between items-center py-12 px-[3vw]">
-      <Link href="/" className="block text-lg font-medium tracking-wider">
-        Shopeeflow
-      </Link>
-      <div className="flex gap-2">
-        <Button asChild variant="ghost">
-          <Link href="/auth/request-sign-up">Sign up</Link>
-        </Button>
-        <Button asChild variant="ghost">
-          <Link href="/auth/log-in">Log in</Link>
-        </Button>
-      </div>
+    <div className="w-screen h-screen flex items-center justify-center">
+      <Spinner />
     </div>
   );
 }
