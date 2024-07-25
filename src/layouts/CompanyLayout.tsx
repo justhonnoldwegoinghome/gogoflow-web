@@ -4,6 +4,16 @@ import { ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
 
 import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/sheet";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -90,30 +100,35 @@ function TopBar({ id, tab }: { id: Company["id"]; tab: Tab }) {
   const { push } = useRouter();
   return (
     <div className="py-6 px-[3vw] flex justify-between gap-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Sheet>
+        <SheetTrigger asChild>
           <Button variant="ghost">
             <Menu />
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuGroup>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <span className="text-start block text-lg font-medium tracking-wider">
+              Shopeeflow
+            </span>
+          </SheetHeader>
+          <div className="flex flex-col gap-1 py-4">
             {navItems.map((n) => (
-              <DropdownMenuItem
-                key={n.label}
-                onSelect={() => push(getHref(id, n.value))}
-                className={clsx("flex gap-2 items-center", {
-                  "font-bold text-primary": tab === n.value,
-                  "text-muted-foreground": tab !== n.value,
-                })}
-              >
-                {n.icon}
-                <span>{n.label}</span>
-              </DropdownMenuItem>
+              <SheetClose asChild key={n.label}>
+                <Button
+                  key={n.label}
+                  variant={tab === n.value ? "secondary" : "ghost"}
+                  className="flex gap-2 items-center w-full justify-start"
+                  onClick={() => push(getHref(id, n.value))}
+                >
+                  {n.icon}
+                  <span>{n.label}</span>
+                </Button>
+              </SheetClose>
             ))}
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </div>
+        </SheetContent>
+      </Sheet>
       <LoggedIn
         loader={
           <div className="w-full h-10 rounded-full bg-secondary animate-pulse" />
