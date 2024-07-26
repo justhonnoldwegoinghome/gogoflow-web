@@ -35,7 +35,7 @@ export function CreateChatCompletion({
         {outputTextList.length === 0 ? (
           <Textarea />
         ) : (
-          outputTextList.map((o, i) => <Textarea key={i} value={o} />)
+          outputTextList.map((o, i) => <Textarea key={i} value={o} disabled />)
         )}
       </div>
       <br />
