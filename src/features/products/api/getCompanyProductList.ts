@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
 import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
-import { pagination } from "@/utils/pagination";
+import { getPaginationKey } from "@/utils";
 import { Company } from "@/features/companies";
 
 import { Product } from "../types";
@@ -45,7 +45,7 @@ export function useCompanyProductListInfinite({
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (_, previousPageData) =>
-      pagination.getKey("products", maxPageSize, previousPageData, {
+      getPaginationKey("products", maxPageSize, previousPageData, {
         companyId: id,
         source,
         status,

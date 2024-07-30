@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { format } from "@/utils/format";
+import { formatDate, formatTime } from "@/utils";
 import { Avatar, AvatarImage } from "@/components/avatar";
 
 import {
@@ -232,9 +232,9 @@ export function ConversationCardUI({ conversation }: ConversationCardUIProps) {
       </div>
       <br />
       <div className="flex flex-col items-end gap-4">
-        <p className="text-sm text-muted-foreground w-fit ml-auto">{`${format.date(
+        <p className="text-sm text-muted-foreground w-fit ml-auto">{`${formatDate(
           new Date(last_message_at)
-        )} | ${format.time(new Date(last_message_at))}`}</p>
+        )} | ${formatTime(new Date(last_message_at))}`}</p>
         {num_unread > 0 ? (
           <span className="text-sm bg-primary text-primary-foreground w-fit px-2 py-1 rounded">
             {num_unread}

@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { Close } from "@radix-ui/react-toast";
 import { X } from "lucide-react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 export const ToastClose = forwardRef<
   React.ElementRef<typeof Close>,

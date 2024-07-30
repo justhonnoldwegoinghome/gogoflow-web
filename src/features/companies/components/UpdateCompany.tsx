@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { format } from "@/utils/format";
+import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
@@ -31,7 +31,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           },
           {
             header: "Created on",
-            value: format.date(new Date(created_at)),
+            value: formatDate(new Date(created_at)),
             disabled: true,
           },
           {
@@ -47,7 +47,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           {
             header: "Shopee connected on",
             value: shopee.authorized_at
-              ? format.date(new Date(shopee.authorized_at))
+              ? formatDate(new Date(shopee.authorized_at))
               : "",
             disabled: true,
           },

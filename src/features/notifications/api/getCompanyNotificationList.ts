@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
 import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
-import { pagination } from "@/utils/pagination";
+import { getPaginationKey } from "@/utils";
 import { Company } from "@/features/companies";
 
 import { Notification } from "../types";
@@ -34,7 +34,7 @@ export function useCompanyNotificationListInfinite({
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (_, previousPageData) =>
-      pagination.getKey("notifications", maxPageSize, previousPageData, {
+      getPaginationKey("notifications", maxPageSize, previousPageData, {
         companyId: id,
       }),
     (k) =>

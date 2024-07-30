@@ -2,9 +2,9 @@ import _ from "lodash";
 import { useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
+import { getPaginationKey } from "@/utils";
 import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
-import { pagination } from "@/utils/pagination";
 
 import { Conversation } from "../types";
 import {
@@ -48,7 +48,7 @@ export function useCompanyConversationListInfinite({
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (_, previousPageData) =>
-      pagination.getKey("conversations", maxPageSize, previousPageData, {
+      getPaginationKey("conversations", maxPageSize, previousPageData, {
         companyId: id,
         source,
         convoType,

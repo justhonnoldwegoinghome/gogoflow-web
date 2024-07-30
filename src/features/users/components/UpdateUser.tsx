@@ -1,4 +1,4 @@
-import { format } from "@/utils/format";
+import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
@@ -26,7 +26,7 @@ export function UpdateUser({ id }: UpdateUserProps) {
         },
         {
           header: "Joined",
-          value: format.date(new Date(joined_at)),
+          value: formatDate(new Date(joined_at)),
           disabled: true,
         },
       ].map(({ header, value, disabled }) => (

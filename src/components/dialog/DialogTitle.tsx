@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 export const DialogTitle = forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,

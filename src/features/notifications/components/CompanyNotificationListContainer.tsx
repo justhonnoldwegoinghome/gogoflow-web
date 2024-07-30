@@ -9,7 +9,7 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/select";
-import { format } from "@/utils/format";
+import { formatDate, formatTime } from "@/utils";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { MaxPageSize } from "@/apiClient";
@@ -146,9 +146,9 @@ export function NotificationCard({ id }: NotificationCardProps) {
           </Link>
         )}
         <br />
-        <p className="text-sm text-muted-foreground">{`${format.date(
+        <p className="text-sm text-muted-foreground">{`${formatDate(
           new Date(created_at)
-        )} | ${format.time(new Date(created_at))}`}</p>
+        )} | ${formatTime(new Date(created_at))}`}</p>
       </div>
 
       <div>
