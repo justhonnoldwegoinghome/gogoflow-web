@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Menu, MessageCircle, Bell, File, Box, Settings } from "lucide-react";
 import { ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
@@ -7,19 +6,9 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/dropdownMenu";
 import { Button } from "@/components/button";
 import { LoggedIn } from "@/features/authentication";
 import { UserDropdownMenu } from "@/features/users";

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { format } from "@/utils/format";
+import { formatDate, formatTime } from "@/utils";
 
 import { Message } from "../types";
 
@@ -31,8 +31,8 @@ export function MessageCardUI({ message }: MessageCardUIProps) {
       )}
 
       <div className="mt-4 text-end text-xs">
-        <p>{format.date(new Date(sent_at))}</p>
-        <p>{format.time(new Date(sent_at))}</p>
+        <p>{formatDate(new Date(sent_at))}</p>
+        <p>{formatTime(new Date(sent_at))}</p>
       </div>
     </div>
   );

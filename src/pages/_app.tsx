@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import { SWRConfig, SWRConfiguration } from "swr";
-import { Open_Sans } from "next/font/google";
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -8,11 +6,7 @@ import "@/styles/globals.css";
 import { APIError } from "@/apiClient";
 import { Toaster, useToast } from "@/components/toaster";
 import { useLoad } from "@/features/authentication";
-
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
+import { font } from "@/styles/font";
 
 export default function App({ Component, pageProps }: AppProps) {
   useLoad();
@@ -37,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <SWRConfig value={swrConfig}>
-      <div className={clsx(openSans.className)}>
+      <div className={font.className}>
         <Component {...pageProps} />
         <Toaster />
         <Analytics mode="production" />

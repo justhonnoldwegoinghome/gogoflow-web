@@ -14,15 +14,10 @@ import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
 import { useCompanyProductListInfinite } from "../api/getCompanyProductList";
+import { Product } from "../types";
 
 export type Source = "shopee";
-export type Status =
-  | "NORMAL"
-  | "BANNED"
-  | "UNLIST"
-  | "REVIEWING"
-  | "SELLER_DELETE"
-  | "SHOPEE_DELETE";
+export type Status = Product["status"];
 
 interface CompanyProductListContainerProps {
   id: Company["id"];
@@ -32,7 +27,7 @@ export function CompanyProductListContainer({
   id,
 }: CompanyProductListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
-  const [status, setStatus] = useState<Status>("NORMAL");
+  const [status, setStatus] = useState<Status>("normal");
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
@@ -74,11 +69,11 @@ const sourceMapping = [
 
 const statusMapping = [
   {
-    value: "NORMAL",
+    value: "normal",
     label: "Normal",
   },
   {
-    value: "UNLIST",
+    value: "unlisted",
     label: "Unlisted",
   },
 ];
@@ -184,11 +179,15 @@ function CompanyProductList({
     <div>
       <div className="flex flex-col gap-16">
         {data.results.map((p) => (
-          <div key={p.id}>
-            <p className="font-bold mb-2">{p.name}</p>
+          <div key={p.id} className="p-4 border rounded-lg">
+            <p className="font-bold">{p.name}</p>
             <p className="text-muted-foreground text-sm whitespace-pre-wrap">
               {p.description}
             </p>
+            <br />
+            {p.variants.map((v) => (
+              <div key={v.id}>{v.name}</div>
+            ))}
           </div>
         ))}
       </div>

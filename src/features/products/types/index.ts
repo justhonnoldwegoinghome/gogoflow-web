@@ -4,11 +4,9 @@ export interface Product {
   created_at: string;
   name: string;
   description: string;
-  status:
-    | "NORMAL"
-    | "BANNED"
-    | "UNLIST"
-    | "REVIEWING"
-    | "SELLER_DELETE"
-    | "SHOPEE_DELETE";
+  status: "normal" | "unlisted";
+  variants: {
+    id: string;
+    name: string;
+  }[];
 }

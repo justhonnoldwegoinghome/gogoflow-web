@@ -11,4 +11,8 @@ export interface Company {
     is_authorized: boolean;
     authorized_at: string | null;
   };
+  chat_settings: {
+    is_auto_reply: boolean;
+    instructions: string;
+  };
 }

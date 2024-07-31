@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Action } from "@radix-ui/react-toast";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/utils";
 
 export const ToastAction = forwardRef<
   React.ElementRef<typeof Action>,

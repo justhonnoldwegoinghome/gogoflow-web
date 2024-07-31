@@ -18,6 +18,7 @@ export default function Page() {
         {(userId) => (
           <div>
             <UpdateCompany id={id} />
+            <br />
             <DeleteCompany id={id} userId={userId} />
           </div>
         )}

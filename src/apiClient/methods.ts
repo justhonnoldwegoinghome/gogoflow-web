@@ -32,18 +32,18 @@ export async function get<T>(
 
 export async function post<T>(
   url: string,
-  data: any,
+  data?: any,
   config: AxiosRequestConfig = {}
 ): Promise<AxiosResponse<T>> {
   return axiosInstance.post<T>(url, data, createWriteConfig(config));
 }
 
-export async function patch<T>(
+export async function put<T>(
   url: string,
-  data: any,
+  data?: any,
   config: AxiosRequestConfig = {}
-) {
-  return axiosInstance.patch<T>(url, data, createWriteConfig(config));
+): Promise<AxiosResponse<T>> {
+  return axiosInstance.put<T>(url, data, createWriteConfig(config));
 }
 
 export async function del<T>(url: string, config: AxiosRequestConfig = {}) {
