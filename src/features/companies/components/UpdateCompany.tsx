@@ -5,11 +5,11 @@ import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
-import { Input } from "@/components/form";
+import { Input, Textarea } from "@/components/form";
 
 import { useCompany } from "../api/getCompany";
-import { Company } from "../types";
 import { useUpdateCompany } from "../api/updateCompany";
+import { Company } from "../types";
 
 interface UpdateCompanyProps {
   id: Company["id"];
@@ -19,24 +19,37 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
   const { push } = useRouter();
 
   const companyQuery = useCompany({ id });
+
   const updateCompanyMutation = useUpdateCompany({ id });
 
   const [updatedName, setUpdatedName] = useState("");
+  const [updatedChatInstructions, setUpdatedChatInstructions] = useState("");
 
   useEffect(() => {
     if (companyQuery.data) setUpdatedName(companyQuery.data.name);
   }, [companyQuery.data]);
 
+  useEffect(() => {
+    if (companyQuery.data)
+      setUpdatedChatInstructions(companyQuery.data.chat_settings.instructions);
+  }, [companyQuery.data]);
+
   if (!companyQuery.data) return <Spinner />;
 
-  const { created_at, name, shopee } = companyQuery.data;
+  const { created_at, name, shopee, chat_settings } = companyQuery.data;
 
   return (
     <form
       className="flex flex-col gap-4"
       onSubmit={(e) => {
         e.preventDefault();
-        updateCompanyMutation.trigger({ id, data: { name: updatedName } });
+        updateCompanyMutation.trigger({
+          id,
+          data: {
+            name: updatedName,
+            chat_instructions: updatedChatInstructions,
+          },
+        });
       }}
     >
       <div className="max-w-screen-mobile">
@@ -72,7 +85,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
                 onClick={() => push(`/c/${id}/generate-shopee-auth-link`)}
                 size="sm"
               >
-                Connect to Shopee
+                Connect
               </Button>
             </div>
           )}
@@ -94,6 +107,36 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           }
           disabled
         />
+      </div>
+
+      <div className="max-w-screen-mobile">
+        <TypographySmall>Chat autoreply</TypographySmall>
+        <Input value={chat_settings.is_auto_reply ? "Yes" : "No"} disabled />
+      </div>
+
+      <div className="max-w-screen-tablet">
+        <TypographySmall>Chat instructions</TypographySmall>
+        <div className="flex gap-4">
+          <Textarea
+            value={updatedChatInstructions}
+            onChange={(e) => setUpdatedChatInstructions(e.currentTarget.value)}
+          />
+          <Button
+            variant={
+              chat_settings.instructions !== updatedChatInstructions
+                ? "default"
+                : "secondary"
+            }
+            disabled={chat_settings.instructions === updatedChatInstructions}
+            size="sm"
+            isLoading={
+              chat_settings.instructions !== updatedChatInstructions &&
+              updateCompanyMutation.isMutating
+            }
+          >
+            Update
+          </Button>
+        </div>
       </div>
     </form>
   );

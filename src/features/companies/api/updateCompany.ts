@@ -8,6 +8,7 @@ interface UpdateCompanyParams {
   id: Company["id"];
   data: {
     name?: Company["name"];
+    chat_instructions?: Company["chat_settings"]["instructions"];
   };
 }
 
