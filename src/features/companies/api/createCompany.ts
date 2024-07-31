@@ -21,7 +21,7 @@ export function useCreateCompany() {
   return useSWRMutation(
     "/companies",
     (_, { arg }: { arg: CreateCompanyParams }) =>
-      createCompany(arg).then((res) => push(`/c/${res.data.id}/conversations`)),
+      createCompany(arg).then((res) => push(`/c/${res.data.id}`)),
     {
       throwOnError: false,
     }
