@@ -1,11 +1,14 @@
 import { Company } from "@/features/companies";
+import { Conversation } from "@/features/conversations";
 import { Message } from "@/features/messages";
 
-export interface ChatCompletion {
+export interface BotResponse {
   id: string;
-  created_at: string;
   company_id: Company["id"];
+  conversation_id: Conversation["id"];
+  source: "shopee";
+  created_at: string;
   input_message_list: Message[];
-  model: string;
   output_text_list: string[];
+  trigger: "manual" | "auto";
 }

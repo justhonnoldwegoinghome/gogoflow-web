@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
-import { CreateChatCompletion } from "@/features/chatCompletions";
+import { CreateBotResponse } from "@/features/botResponses";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
 import { MessageCardUI } from "./MessageCardUI";
@@ -50,7 +50,7 @@ export function ConversationMessageList({
 
       <br />
 
-      <CreateChatCompletion
+      <CreateBotResponse
         companyId={companyId}
         source="shopee"
         inputMessageList={conversationMessageListQuery.data.results}
