@@ -1,4 +1,12 @@
-import { Menu, MessageCircle, Bell, File, Box, Settings } from "lucide-react";
+import {
+  Menu,
+  MessageCircle,
+  Bot,
+  Bell,
+  File,
+  Box,
+  Settings,
+} from "lucide-react";
 import { ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
 
@@ -17,6 +25,7 @@ import { Company } from "@/features/companies";
 type Tab =
   | "conversations"
   | "notifications"
+  | "bot-logs"
   | "files"
   | "products"
   | "settings";
@@ -58,6 +67,11 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
     label: "Notifications",
     value: "notifications",
     icon: <Bell className="h-4 w-4" />,
+  },
+  {
+    label: "Bot logs",
+    value: "bot-logs",
+    icon: <Bot className="h-4 w-4" />,
   },
   {
     label: "Files",
