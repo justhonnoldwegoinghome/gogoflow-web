@@ -13,8 +13,8 @@ export function BotResponseUI({ botResponse }: BotResponseUI) {
   return (
     <div className="p-4 rounded-lg border">
       <div className="flex flex-col gap-4">
-        {botResponse.output_text_list.map((o, i) => (
-          <p key={i}>{o}</p>
+        {botResponse.output_llm_message_list.map((o, i) => (
+          <p key={i}>{o.content}</p>
         ))}
       </div>
       <p>
