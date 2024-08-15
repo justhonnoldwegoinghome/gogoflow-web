@@ -17,6 +17,11 @@ export function BotResponseUI({ botResponse }: BotResponseUI) {
           <p key={i}>{o}</p>
         ))}
       </div>
+      <p>
+        {botResponse.is_require_action
+          ? "Requires action"
+          : "No action required"}
+      </p>
       <br />
       <Link
         className="text-sm text-muted-foreground hover:underline underline-offset-2"

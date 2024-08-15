@@ -11,4 +11,5 @@ export interface BotResponse {
   input_message_list: Message[];
   output_text_list: string[];
   trigger: "manual" | "auto";
+  is_require_action: boolean;
 }
