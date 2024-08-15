@@ -2,11 +2,11 @@ import useSWRMutation from "swr/mutation";
 
 import { post } from "@/apiClient";
 import { Company } from "@/features/companies";
-
-import { ChatCompletion } from "../types";
 import { Message } from "@/features/messages";
 
-interface CreateChatCompletionParams {
+import { BotResponse } from "../types";
+
+interface CreateBotResponseParams {
   data: {
     companyId: Company["id"];
     source: "shopee";
@@ -14,23 +14,23 @@ interface CreateChatCompletionParams {
   };
 }
 
-export function createChatCompletion({ data }: CreateChatCompletionParams) {
-  return post<ChatCompletion>("/chat-completions", {
+export function createBotResponse({ data }: CreateBotResponseParams) {
+  return post<BotResponse>("/bot-responses", {
     company_id: data["companyId"],
     source: data["source"],
     input_message_list: data["inputMessageList"],
   });
 }
 
-export function useCreateChatCompletion({
+export function useCreateBotResponse({
   companyId,
 }: {
   companyId: Company["id"];
 }) {
   return useSWRMutation(
-    `/companies/${companyId}/chat-completions`,
-    (_, { arg }: { arg: Pick<CreateChatCompletionParams, "data"> }) =>
-      createChatCompletion({
+    `/companies/${companyId}/bot-responses`,
+    (_, { arg }: { arg: Pick<CreateBotResponseParams, "data"> }) =>
+      createBotResponse({
         data: arg["data"],
       }),
     {
