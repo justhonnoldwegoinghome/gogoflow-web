@@ -1,12 +1,4 @@
-import {
-  Menu,
-  MessageCircle,
-  Bot,
-  Bell,
-  File,
-  Box,
-  Settings,
-} from "lucide-react";
+import { Menu, MessageCircle, Bot, File, Box, Settings } from "lucide-react";
 import { ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
 
@@ -22,13 +14,7 @@ import { LoggedIn } from "@/features/authentication";
 import { UserDropdownMenu } from "@/features/users";
 import { Company } from "@/features/companies";
 
-type Tab =
-  | "conversations"
-  | "notifications"
-  | "bot-logs"
-  | "files"
-  | "products"
-  | "settings";
+type Tab = "conversations" | "bot-logs" | "files" | "products" | "settings";
 
 interface CompanyLayoutProps {
   id: Company["id"];
@@ -62,11 +48,6 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
     label: "Conversations",
     value: "conversations",
     icon: <MessageCircle className="h-4 w-4" />,
-  },
-  {
-    label: "Notifications",
-    value: "notifications",
-    icon: <Bell className="h-4 w-4" />,
   },
   {
     label: "Bot logs",
