@@ -46,9 +46,10 @@ export function GenerateShopeeAuthorizationLink({
           </Button>
         </div>
 
-        <TypographyP>
-          Note: Can only authorize using shop account (not main account).
-        </TypographyP>
+        <br />
+        <p className="text-muted-foreground">
+          Please authorize using shop account.
+        </p>
       </form>
     </div>
   );
