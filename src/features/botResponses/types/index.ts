@@ -1,5 +1,6 @@
 import { Company } from "@/features/companies";
 import { Conversation } from "@/features/conversations";
+import { Message } from "@/features/messages";
 
 interface LLMMessage {
   role: "assistant" | "user";
@@ -12,7 +13,7 @@ export interface BotResponse {
   conversation_id: Conversation["id"];
   source: "shopee";
   created_at: string;
-  input_llm_message_list: LLMMessage[];
+  input_message_list: Message[];
   output_llm_message_list: LLMMessage[];
   trigger: "manual" | "auto";
   is_require_action: boolean;
