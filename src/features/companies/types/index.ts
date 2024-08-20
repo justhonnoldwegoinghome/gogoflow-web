@@ -6,13 +6,10 @@ export interface Company {
   admin_id: User["id"];
   member_id_list: User["id"][];
   name: string;
-  shopee: {
-    shop_id: string | null;
-    is_authorized: boolean;
-    authorized_at: string | null;
-  };
-  chat_settings: {
-    is_auto_reply: boolean;
-    instructions: string;
-  };
+  shopee_shop_id: string | null;
+  shopee_is_authorized: boolean;
+  shopee_authorized_at: string | null;
+  chat_is_auto_reply: boolean;
+  chat_asst_id: string;
+  chat_asst_instructions: string;
 }

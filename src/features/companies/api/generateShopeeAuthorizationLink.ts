@@ -7,7 +7,7 @@ import { Company } from "../types";
 interface GenerateShopeeAuthorizationLinkParams {
   companyId: Company["id"];
   data: {
-    shopee_shop_id: Company["shopee"]["shop_id"];
+    shopee_shop_id: Company["shopee_shop_id"];
   };
 }
 

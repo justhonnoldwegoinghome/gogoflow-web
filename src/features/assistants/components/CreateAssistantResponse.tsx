@@ -5,26 +5,27 @@ import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 import { Message } from "@/features/messages";
 
-import { useCreateBotResponse } from "../api/createBotResponse";
-import { BotResponse } from "../types";
-import { BotResponseUI } from "./BotResponseUI";
+import { useCreateAssistantResponse } from "../api/createAssistantResponse";
+import { AssistantResponse } from "../types";
+import { AssistantResponseUI } from "./AssistantResponseUI";
 
-interface CreateBotResponseProps {
+interface CreateAssistantResponseProps {
   companyId: Company["id"];
   source: "shopee";
   inputMessageList: Message[];
 }
 
-export function CreateBotResponse({
+export function CreateAssistantResponse({
   companyId,
   source,
   inputMessageList,
-}: CreateBotResponseProps) {
-  const createBotResponseMutation = useCreateBotResponse({
+}: CreateAssistantResponseProps) {
+  const createAssistantResponseMutation = useCreateAssistantResponse({
     companyId,
   });
 
-  const [botResponse, setBotResponse] = useState<BotResponse | null>(null);
+  const [botResponse, setAssistantResponse] =
+    useState<AssistantResponse | null>(null);
 
   return (
     <div>
@@ -37,19 +38,19 @@ export function CreateBotResponse({
 
       <Button
         onClick={() =>
-          createBotResponseMutation
+          createAssistantResponseMutation
             .trigger({
               data: { source, companyId, inputMessageList },
             })
-            .then((res) => res && setBotResponse(res.data))
+            .then((res) => res && setAssistantResponse(res.data))
         }
-        isLoading={createBotResponseMutation.isMutating}
+        isLoading={createAssistantResponseMutation.isMutating}
       >
         Ask bot
       </Button>
       <br />
       <br />
-      {botResponse && <BotResponseUI botResponse={botResponse} />}
+      {botResponse && <AssistantResponseUI botResponse={botResponse} />}
     </div>
   );
 }

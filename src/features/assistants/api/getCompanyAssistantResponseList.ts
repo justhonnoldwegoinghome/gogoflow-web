@@ -6,9 +6,9 @@ import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { getPaginationKey } from "@/utils";
 import { Company } from "@/features/companies";
 
-import { BotResponse } from "../types";
+import { AssistantResponse } from "../types";
 
-function getCompanyBotResponseList({
+function getCompanyAssistantResponseList({
   id,
   maxPageSize,
   pageToken,
@@ -17,15 +17,18 @@ function getCompanyBotResponseList({
   maxPageSize: MaxPageSize;
   pageToken: PageToken;
 }) {
-  return get<APIList<BotResponse>>(`/companies/${id}/bot-responses`, {
-    params: {
-      max_page_size: maxPageSize,
-      page_token: pageToken,
-    },
-  });
+  return get<APIList<AssistantResponse>>(
+    `/companies/${id}/assistant-responses`,
+    {
+      params: {
+        max_page_size: maxPageSize,
+        page_token: pageToken,
+      },
+    }
+  );
 }
 
-export function useCompanyBotResponseListInfinite({
+export function useCompanyAssistantResponseListInfinite({
   id,
   maxPageSize,
 }: {
@@ -38,7 +41,7 @@ export function useCompanyBotResponseListInfinite({
         companyId: id,
       }),
     (k) =>
-      getCompanyBotResponseList({
+      getCompanyAssistantResponseList({
         id,
         maxPageSize,
         pageToken: k.pageToken,

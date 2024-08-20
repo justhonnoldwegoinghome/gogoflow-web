@@ -23,7 +23,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
   const updateCompanyMutation = useUpdateCompany({ id });
 
   const [updatedName, setUpdatedName] = useState("");
-  const [updatedChatInstructions, setUpdatedChatInstructions] = useState("");
+  const [newChatAsstInstructions, setNewChatAsstInstructions] = useState("");
 
   useEffect(() => {
     if (companyQuery.data) setUpdatedName(companyQuery.data.name);
@@ -31,12 +31,20 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
 
   useEffect(() => {
     if (companyQuery.data)
-      setUpdatedChatInstructions(companyQuery.data.chat_settings.instructions);
+      setNewChatAsstInstructions(companyQuery.data.chat_asst_instructions);
   }, [companyQuery.data]);
 
   if (!companyQuery.data) return <Spinner />;
 
-  const { created_at, name, shopee, chat_settings } = companyQuery.data;
+  const {
+    created_at,
+    name,
+    shopee_shop_id,
+    shopee_is_authorized,
+    shopee_authorized_at,
+    chat_is_auto_reply,
+    chat_asst_instructions,
+  } = companyQuery.data;
 
   return (
     <form
@@ -47,7 +55,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           id,
           data: {
             name: updatedName,
-            chat_instructions: updatedChatInstructions,
+            chat_asst_instructions: newChatAsstInstructions,
           },
         });
       }}
@@ -78,8 +86,8 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
       <div className="max-w-screen-mobile">
         <TypographySmall>Shopee connected</TypographySmall>
         <div className="flex gap-4">
-          <Input value={shopee.is_authorized ? "Yes" : "No"} disabled />
-          {!shopee.is_authorized && (
+          <Input value={shopee_is_authorized ? "Yes" : "No"} disabled />
+          {!shopee_is_authorized && (
             <div>
               <Button
                 onClick={() => push(`/c/${id}/generate-shopee-auth-link`)}
@@ -94,15 +102,15 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
 
       <div className="max-w-screen-mobile">
         <TypographySmall>Shopee shop ID</TypographySmall>
-        <Input value={shopee.shop_id || ""} disabled />
+        <Input value={shopee_shop_id || ""} disabled />
       </div>
 
       <div className="max-w-screen-mobile">
         <TypographySmall>Shopee connected on</TypographySmall>
         <Input
           value={
-            shopee.authorized_at
-              ? formatDate(new Date(shopee.authorized_at))
+            shopee_authorized_at
+              ? formatDate(new Date(shopee_authorized_at))
               : ""
           }
           disabled
@@ -111,26 +119,26 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
 
       <div className="max-w-screen-mobile">
         <TypographySmall>Chat autoreply</TypographySmall>
-        <Input value={chat_settings.is_auto_reply ? "Yes" : "No"} disabled />
+        <Input value={chat_is_auto_reply ? "Yes" : "No"} disabled />
       </div>
 
       <div className="max-w-screen-tablet">
         <TypographySmall>Chat instructions</TypographySmall>
         <div className="flex gap-4">
           <Textarea
-            value={updatedChatInstructions}
-            onChange={(e) => setUpdatedChatInstructions(e.currentTarget.value)}
+            value={newChatAsstInstructions}
+            onChange={(e) => setNewChatAsstInstructions(e.currentTarget.value)}
           />
           <Button
             variant={
-              chat_settings.instructions !== updatedChatInstructions
+              chat_asst_instructions !== newChatAsstInstructions
                 ? "default"
                 : "secondary"
             }
-            disabled={chat_settings.instructions === updatedChatInstructions}
+            disabled={chat_asst_instructions === newChatAsstInstructions}
             size="sm"
             isLoading={
-              chat_settings.instructions !== updatedChatInstructions &&
+              chat_asst_instructions !== newChatAsstInstructions &&
               updateCompanyMutation.isMutating
             }
           >
