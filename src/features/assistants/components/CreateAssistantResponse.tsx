@@ -29,13 +29,6 @@ export function CreateAssistantResponse({
 
   return (
     <div>
-      {/* <p className="mb-2 font-semibold">Suggested response:</p> */}
-      {/* {outputTextList.length === 0 ? (
-          <Textarea />
-        ) : (
-          outputTextList.map((o, i) => <Textarea key={i} value={o} disabled />)
-        )} */}
-
       <Button
         onClick={() =>
           createAssistantResponseMutation

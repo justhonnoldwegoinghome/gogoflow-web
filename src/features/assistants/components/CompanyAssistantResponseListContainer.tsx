@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { Bot } from "lucide-react";
 import { useState } from "react";
 
 import {
@@ -99,6 +100,18 @@ function CompanyAssistantResponseList({
   });
 
   if (!data) return <Spinner />;
+
+  if (data.results.length === 0)
+    return (
+      <div className="mx-auto">
+        <div className="flex items-center gap-4">
+          <div className="bg-secondary w-20 h-20 flex items-center justify-center rounded-full">
+            <Bot size={30} />
+          </div>
+          <p>No bot logs yet.</p>
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-6">
