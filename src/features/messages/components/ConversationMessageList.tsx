@@ -30,7 +30,7 @@ export function ConversationMessageList({
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      <div className="flex flex-col items-start gap-8">
+      <div className="flex flex-col items-start gap-4">
         {_.orderBy(
           conversationMessageListQuery.data.results,
           "sent_at",
