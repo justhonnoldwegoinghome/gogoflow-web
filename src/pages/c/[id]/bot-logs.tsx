@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 import { CompanyLayout } from "@/layouts";
-import { CompanyBotResponseListContainer } from "@/features/botResponses";
+import { CompanyAssistantResponseListContainer } from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <CompanyLayout id={id} tab="bot-logs">
       <LoggedIn>
-        {(userId) => <CompanyBotResponseListContainer id={id} />}
+        {(userId) => <CompanyAssistantResponseListContainer id={id} />}
       </LoggedIn>
     </CompanyLayout>
   );

@@ -7,7 +7,7 @@ interface LLMMessage {
   content: string;
 }
 
-export interface BotResponse {
+export interface AssistantResponse {
   id: string;
   company_id: Company["id"];
   conversation_id: Conversation["id"];

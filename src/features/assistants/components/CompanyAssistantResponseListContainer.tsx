@@ -13,31 +13,31 @@ import { Spinner } from "@/components/spinner";
 import { MaxPageSize } from "@/apiClient";
 import { Company } from "@/features/companies";
 
-import { BotResponseUI } from "./BotResponseUI";
-import { useCompanyBotResponseListInfinite } from "../api/getCompanyBotResponseList";
+import { AssistantResponseUI } from "./AssistantResponseUI";
+import { useCompanyAssistantResponseListInfinite } from "../api/getCompanyAssistantResponseList";
 
-interface CompanyBotResponseListContainerProps {
+interface CompanyAssistantResponseListContainerProps {
   id: Company["id"];
 }
 
-export function CompanyBotResponseListContainer({
+export function CompanyAssistantResponseListContainer({
   id,
-}: CompanyBotResponseListContainerProps) {
+}: CompanyAssistantResponseListContainerProps) {
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
     <div className="max-w-screen-tablet mx-auto">
-      {/* <BotResponseListController
+      {/* <AssistantResponseListController
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
       <br /> */}
-      <CompanyBotResponseList id={id} maxPageSize={maxPageSize} />
+      <CompanyAssistantResponseList id={id} maxPageSize={maxPageSize} />
     </div>
   );
 }
 
-interface BotResponseListControllerProps {
+interface AssistantResponseListControllerProps {
   maxPageSize: MaxPageSize;
   changePageSize: (ps: MaxPageSize) => void;
 }
@@ -57,10 +57,10 @@ const pageSizeMapping = [
   },
 ];
 
-function BotResponseListController({
+function AssistantResponseListController({
   maxPageSize,
   changePageSize,
-}: BotResponseListControllerProps) {
+}: AssistantResponseListControllerProps) {
   return (
     <div className="py-4 flex gap-4">
       <Select
@@ -84,16 +84,16 @@ function BotResponseListController({
   );
 }
 
-interface CompanyBotResponseListProps {
+interface CompanyAssistantResponseListProps {
   id: Company["id"];
   maxPageSize: number;
 }
 
-function CompanyBotResponseList({
+function CompanyAssistantResponseList({
   id,
   maxPageSize,
-}: CompanyBotResponseListProps) {
-  const { data } = useCompanyBotResponseListInfinite({
+}: CompanyAssistantResponseListProps) {
+  const { data } = useCompanyAssistantResponseListInfinite({
     id,
     maxPageSize,
   });
@@ -103,7 +103,7 @@ function CompanyBotResponseList({
   return (
     <div className="flex flex-col gap-6">
       {_.orderBy(data.results, "created_at", "desc").map((br) => (
-        <BotResponseUI key={br.id} botResponse={br} />
+        <AssistantResponseUI key={br.id} botResponse={br} />
       ))}
     </div>
   );
