@@ -1,3 +1,4 @@
+import { Assistant } from "@/features/assistants/types";
 import { Company } from "@/features/companies";
 import { Conversation } from "@/features/conversations";
 import { Message } from "@/features/messages";
@@ -10,6 +11,7 @@ interface LLMMessage {
 export interface AssistantResponse {
   id: string;
   company_id: Company["id"];
+  assistant_id: Assistant["id"];
   conversation_id: Conversation["id"];
   source: "shopee";
   created_at: string;

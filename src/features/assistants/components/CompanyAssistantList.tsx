@@ -16,7 +16,7 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
   return (
     <div>
       {companyAssistantListQuery.data.results.map((a) => (
-        <UpdateAssistant id={a.id} />
+        <UpdateAssistant key={a.id} id={a.id} />
       ))}
     </div>
   );
