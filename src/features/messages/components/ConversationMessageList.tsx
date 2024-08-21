@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
-import { CreateAssistantResponse } from "@/features/assistants";
+import { CreateAssistantResponse } from "@/features/assistantResponses";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
 import { MessageCardUI } from "./MessageCardUI";
