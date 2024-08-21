@@ -5,7 +5,7 @@ import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
-import { Input, Textarea } from "@/components/form";
+import { Input } from "@/components/form";
 
 import { useCompany } from "../api/getCompany";
 import { useUpdateCompany } from "../api/updateCompany";
@@ -23,15 +23,9 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
   const updateCompanyMutation = useUpdateCompany({ id });
 
   const [updatedName, setUpdatedName] = useState("");
-  const [newChatAsstInstructions, setNewChatAsstInstructions] = useState("");
 
   useEffect(() => {
     if (companyQuery.data) setUpdatedName(companyQuery.data.name);
-  }, [companyQuery.data]);
-
-  useEffect(() => {
-    if (companyQuery.data)
-      setNewChatAsstInstructions(companyQuery.data.chat_asst_instructions);
   }, [companyQuery.data]);
 
   if (!companyQuery.data) return <Spinner />;
@@ -42,8 +36,6 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
     shopee_shop_id,
     shopee_is_authorized,
     shopee_authorized_at,
-    chat_is_auto_reply,
-    chat_asst_instructions,
   } = companyQuery.data;
 
   return (
@@ -55,7 +47,6 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           id,
           data: {
             name: updatedName,
-            chat_asst_instructions: newChatAsstInstructions,
           },
         });
       }}
@@ -115,36 +106,6 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
           }
           disabled
         />
-      </div>
-
-      <div className="max-w-screen-mobile">
-        <TypographySmall>Chat autoreply</TypographySmall>
-        <Input value={chat_is_auto_reply ? "Yes" : "No"} disabled />
-      </div>
-
-      <div className="max-w-screen-tablet">
-        <TypographySmall>Chat instructions</TypographySmall>
-        <div className="flex gap-4">
-          <Textarea
-            value={newChatAsstInstructions}
-            onChange={(e) => setNewChatAsstInstructions(e.currentTarget.value)}
-          />
-          <Button
-            variant={
-              chat_asst_instructions !== newChatAsstInstructions
-                ? "default"
-                : "secondary"
-            }
-            disabled={chat_asst_instructions === newChatAsstInstructions}
-            size="sm"
-            isLoading={
-              chat_asst_instructions !== newChatAsstInstructions &&
-              updateCompanyMutation.isMutating
-            }
-          >
-            Update
-          </Button>
-        </div>
       </div>
     </form>
   );
