@@ -8,7 +8,7 @@ interface LLMMessage {
   content: string;
 }
 
-export interface AssistantResponse {
+export interface Autoreply {
   id: string;
   company_id: Company["id"];
   assistant_id: Assistant["id"];

@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
-import { CreateAssistantResponse } from "@/features/assistantResponses";
+import { CreateAutoreply } from "@/features/autoreplies";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
 import { MessageCardUI } from "./MessageCardUI";
@@ -50,7 +50,7 @@ export function ConversationMessageList({
 
       <br />
 
-      <CreateAssistantResponse
+      <CreateAutoreply
         companyId={companyId}
         source="shopee"
         inputMessageList={conversationMessageListQuery.data.results}

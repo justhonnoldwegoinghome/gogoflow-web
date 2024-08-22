@@ -4,9 +4,9 @@ import { post } from "@/apiClient";
 import { Company } from "@/features/companies";
 import { Message } from "@/features/messages";
 
-import { AssistantResponse } from "../types";
+import { Autoreply } from "../types";
 
-interface CreateAssistantResponseParams {
+interface CreateAutoreplyParams {
   data: {
     companyId: Company["id"];
     source: "shopee";
@@ -14,25 +14,23 @@ interface CreateAssistantResponseParams {
   };
 }
 
-export function createAssistantResponse({
-  data,
-}: CreateAssistantResponseParams) {
-  return post<AssistantResponse>("/assistant-responses", {
+export function createAutoreply({ data }: CreateAutoreplyParams) {
+  return post<Autoreply>("/autoreplies", {
     company_id: data["companyId"],
     source: data["source"],
     input_message_list: data["inputMessageList"],
   });
 }
 
-export function useCreateAssistantResponse({
+export function useCreateAutoreply({
   companyId,
 }: {
   companyId: Company["id"];
 }) {
   return useSWRMutation(
-    `/companies/${companyId}/bot-responses`,
-    (_, { arg }: { arg: Pick<CreateAssistantResponseParams, "data"> }) =>
-      createAssistantResponse({
+    `/companies/${companyId}/autoreplies`,
+    (_, { arg }: { arg: Pick<CreateAutoreplyParams, "data"> }) =>
+      createAutoreply({
         data: arg["data"],
       }),
     {

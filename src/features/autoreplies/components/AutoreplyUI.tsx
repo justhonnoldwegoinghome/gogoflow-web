@@ -3,13 +3,13 @@ import Link from "next/link";
 
 import { formatDate, formatTime } from "@/utils";
 
-import { AssistantResponse } from "../types";
+import { Autoreply } from "../types";
 
-interface AssistantResponseUI {
-  botResponse: AssistantResponse;
+interface AutoreplyUI {
+  botResponse: Autoreply;
 }
 
-export function AssistantResponseUI({ botResponse }: AssistantResponseUI) {
+export function AutoreplyUI({ botResponse }: AutoreplyUI) {
   return (
     <div className="p-4 rounded-lg border">
       <div className="flex flex-col gap-4">

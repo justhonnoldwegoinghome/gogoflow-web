@@ -6,9 +6,9 @@ import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { getPaginationKey } from "@/utils";
 import { Company } from "@/features/companies";
 
-import { AssistantResponse } from "../types";
+import { Autoreply } from "../types";
 
-function getCompanyAssistantResponseList({
+function getCompanyAutoreplyList({
   id,
   maxPageSize,
   pageToken,
@@ -17,18 +17,15 @@ function getCompanyAssistantResponseList({
   maxPageSize: MaxPageSize;
   pageToken: PageToken;
 }) {
-  return get<APIList<AssistantResponse>>(
-    `/companies/${id}/assistant-responses`,
-    {
-      params: {
-        max_page_size: maxPageSize,
-        page_token: pageToken,
-      },
-    }
-  );
+  return get<APIList<Autoreply>>(`/companies/${id}/autoreplies`, {
+    params: {
+      max_page_size: maxPageSize,
+      page_token: pageToken,
+    },
+  });
 }
 
-export function useCompanyAssistantResponseListInfinite({
+export function useCompanyAutoreplyListInfinite({
   id,
   maxPageSize,
 }: {
@@ -37,11 +34,11 @@ export function useCompanyAssistantResponseListInfinite({
 }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (_, previousPageData) =>
-      getPaginationKey("bot-responses", maxPageSize, previousPageData, {
+      getPaginationKey("autoreplies", maxPageSize, previousPageData, {
         companyId: id,
       }),
     (k) =>
-      getCompanyAssistantResponseList({
+      getCompanyAutoreplyList({
         id,
         maxPageSize,
         pageToken: k.pageToken,
