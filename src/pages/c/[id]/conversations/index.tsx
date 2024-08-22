@@ -16,7 +16,16 @@ export default function Page() {
   return (
     <CompanyLayout id={id} tab="conversations">
       <LoggedIn>
-        {(userId) => <CompanyConversationListContainer id={id} />}
+        {(userId) => (
+          <div>
+            <div className="p-4 border-b">
+              <p className="text-2xl  font-semibold">Conversations</p>
+            </div>
+            <div className="p-4">
+              <CompanyConversationListContainer id={id} />
+            </div>
+          </div>
+        )}
       </LoggedIn>
     </CompanyLayout>
   );

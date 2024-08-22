@@ -14,7 +14,18 @@ export default function Page() {
 
   return (
     <CompanyLayout id={id} tab="bot-tester">
-      <LoggedIn>{(userId) => <p>Coming soon 🧸</p>}</LoggedIn>
+      <LoggedIn>
+        {(userId) => (
+          <div>
+            <div className="p-4 border-b">
+              <p className="text-2xl  font-semibold">Bot tester</p>
+            </div>
+            <div className="p-4">
+              <p>Coming soon 🧸</p>
+            </div>
+          </div>
+        )}
+      </LoggedIn>
     </CompanyLayout>
   );
 }

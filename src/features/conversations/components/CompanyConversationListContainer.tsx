@@ -36,7 +36,7 @@ export function CompanyConversationListContainer({
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
-    <div className="max-w-screen-tablet mx-auto">
+    <div className="max-w-screen-tablet">
       <ConversionListController
         source={source}
         changeSource={(s) => setSource(s)}

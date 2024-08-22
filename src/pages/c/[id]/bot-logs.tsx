@@ -16,7 +16,16 @@ export default function Page() {
   return (
     <CompanyLayout id={id} tab="bot-logs">
       <LoggedIn>
-        {(userId) => <CompanyAutoreplyListContainer id={id} />}
+        {(userId) => (
+          <div>
+            <div className="p-4 border-b">
+              <p className="text-2xl font-semibold">Bot logs</p>
+            </div>
+            <div className="p-4">
+              <CompanyAutoreplyListContainer id={id} />
+            </div>
+          </div>
+        )}
       </LoggedIn>
     </CompanyLayout>
   );

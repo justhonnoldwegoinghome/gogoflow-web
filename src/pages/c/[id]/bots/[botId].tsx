@@ -26,29 +26,32 @@ export default function Page() {
       <LoggedIn>
         {(userId) => (
           <div>
-            <div className="text-2xl font-semibold pb-2 px-4">Bots</div>
-
-            <div className="laptop:flex divide-x-[0px] hidden border-t">
-              <div className="flex-[2] p-4">
-                <CompanyAssistantList id={id} selectedAssistantId={botId} />
-              </div>
-              <div className="flex-[3] px-8 py-4">
-                <UpdateAssistant id={botId} />
-              </div>
+            <div className="p-4 border-b">
+              <p className="text-2xl font-semibold">Bot studio</p>
             </div>
-            <div className="laptop:hidden border-t">
-              <div className="py-4">
-                <div>
-                  <Button asChild variant="secondary">
-                    <Link href={`/c/${id}/bots`}>
-                      <ChevronLeft />
-                      Bots
-                    </Link>
-                  </Button>
-                  <br />
-                  <br />
+
+            <div className="laptop:block hidden">
+              <div className="flex">
+                <div className="flex-[2] p-4">
+                  <CompanyAssistantList id={id} selectedAssistantId={botId} />
+                </div>
+                <div className="flex-[3] px-8 py-4">
                   <UpdateAssistant id={botId} />
                 </div>
+              </div>
+            </div>
+
+            <div className="laptop:hidden">
+              <div className="p-4">
+                <Button asChild variant="secondary">
+                  <Link href={`/c/${id}/bots`}>
+                    <ChevronLeft />
+                    Bots
+                  </Link>
+                </Button>
+                <br />
+                <br />
+                <UpdateAssistant id={botId} />
               </div>
             </div>
           </div>

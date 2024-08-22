@@ -27,7 +27,7 @@ export function CompanyAutoreplyListContainer({
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
-    <div className="max-w-screen-tablet mx-auto">
+    <div className="max-w-screen-tablet">
       {/* <AutoreplyListController
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}

@@ -17,9 +17,16 @@ export default function Page() {
       <LoggedIn>
         {(userId) => (
           <div>
-            <UpdateCompany id={id} />
-            <br />
-            <DeleteCompany id={id} userId={userId} />
+            <div className="p-4 border-b">
+              <p className="text-2xl  font-semibold">Settings</p>
+            </div>
+            <div className="p-4">
+              <div>
+                <UpdateCompany id={id} />
+                <br />
+                <DeleteCompany id={id} userId={userId} />
+              </div>
+            </div>
           </div>
         )}
       </LoggedIn>

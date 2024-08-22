@@ -18,12 +18,11 @@ export default function Page() {
       <LoggedIn>
         {(userId) => (
           <div>
-            <div className="text-2xl font-semibold pb-2 px-4">Bots</div>
+            <div className="p-4 border-b">
+              <p className="text-2xl font-semibold">Bot studio</p>
+            </div>
 
-            <div className="border-t py-4">
-              <div className="text-2xl font-semibold pb-2 px-4 border-b">
-                Bots
-              </div>
+            <div className="p-4 max-w-screen-tablet">
               <CompanyAssistantList id={id} selectedAssistantId={null} />
             </div>
           </div>

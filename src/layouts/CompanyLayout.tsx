@@ -2,6 +2,7 @@ import {
   Menu,
   MessageCircle,
   Bot,
+  TestTubeDiagonal,
   NotepadText,
   File,
   Box,
@@ -65,14 +66,14 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
     icon: <MessageCircle className="h-4 w-4" />,
   },
   {
-    label: "Bots",
+    label: "Bot studio",
     value: "bots",
     icon: <Bot className="h-4 w-4" />,
   },
   {
     label: "Bot tester (coming soon)",
     value: "bot-tester",
-    icon: <Bot className="h-4 w-4" />,
+    icon: <TestTubeDiagonal className="h-4 w-4" />,
   },
   {
     label: "Bot logs",
@@ -98,9 +99,14 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
 
 function CompanySmallLayout({ id, children, tab }: CompanyLayoutProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-secondary">
       <TopBar id={id} tab={tab} />
-      <div className="flex-1 py-[3vh] px-[3vw]">{children}</div>
+
+      <div className="px-[10px] pb-[10px]">
+        <div className="bg-white h-[calc(100vh-74px)] overflow-auto rounded-xl">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
@@ -108,7 +114,7 @@ function CompanySmallLayout({ id, children, tab }: CompanyLayoutProps) {
 function TopBar({ id, tab }: { id: Company["id"]; tab: Tab }) {
   const { push } = useRouter();
   return (
-    <div className="py-6 px-[3vw] flex justify-between gap-2">
+    <div className="h-[64px] px-[3vw] flex justify-between items-center gap-2">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="ghost">
@@ -153,8 +159,10 @@ function CompanyLargeLayout({ id, children, tab }: CompanyLayoutProps) {
   return (
     <div className="flex">
       <SideBar id={id} tab={tab} />
-      <div className="flex-1 py-[3vh] px-[3vw] max-h-screen overflow-auto">
-        {children}
+      <div className="bg-secondary flex-1 p-[24px]">
+        <div className="bg-white h-[calc(100vh-48px)] overflow-auto rounded-xl">
+          {children}
+        </div>
       </div>
     </div>
   );
