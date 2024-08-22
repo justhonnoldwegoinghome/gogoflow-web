@@ -53,6 +53,10 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
         <Input value={assistantQuery.data.id} disabled />
       </div>
       <div className="max-w-screen-mobile">
+        <TypographySmall>Name</TypographySmall>
+        <Input value={assistantQuery.data.name} disabled />
+      </div>
+      <div className="max-w-screen-mobile">
         <TypographySmall>Created</TypographySmall>
         <Input
           value={formatDate(new Date(assistantQuery.data.created_at))}
