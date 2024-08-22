@@ -22,13 +22,13 @@ export function CompanyAssistantList({
   if (!companyAssistantListQuery.data) return <Spinner />;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col divide-y-[1px]">
       {companyAssistantListQuery.data.results.map((a) => (
         <Link
           key={a.id}
           href={`/c/${id}/bots/${a.id}`}
           className={clsx(
-            "p-3 rounded-lg flex gap-4 justify-between items-center hover:bg-secondary",
+            "p-3 rounded-lg flex gap-4 justify-between items-center hover:bg-secondary max-w-screen-tablet",
             {
               "bg-secondary": a.id === selectedAssistantId,
             }

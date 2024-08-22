@@ -78,7 +78,6 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
         <Button
           variant={isUpdated ? "default" : "secondary"}
           disabled={!isUpdated}
-          size="sm"
           isLoading={false}
         >
           Update

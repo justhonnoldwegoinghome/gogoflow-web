@@ -29,7 +29,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="p-4 max-w-screen-tablet">
+            <div className="p-4">
               <CompanyAssistantList id={id} selectedAssistantId={null} />
             </div>
           </div>

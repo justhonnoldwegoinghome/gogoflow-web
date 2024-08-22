@@ -6,6 +6,7 @@ import { CompanyLayout } from "@/layouts";
 import {
   Assistant,
   CompanyAssistantList,
+  DeleteAssistant,
   UpdateAssistant,
 } from "@/features/assistants";
 import { Company } from "@/features/companies";
@@ -27,7 +28,12 @@ export default function Page() {
         {(userId) => (
           <div>
             <div className="p-4 border-b">
-              <p className="text-2xl font-semibold">Bot studio</p>
+              <div className="flex gap-4 justify-between">
+                <p className="text-2xl font-semibold">Bot studio</p>
+                <Button asChild>
+                  <Link href={`/c/${id}/create-bot`}>Create bot</Link>
+                </Button>
+              </div>
             </div>
 
             <div className="laptop:block hidden">
@@ -37,6 +43,9 @@ export default function Page() {
                 </div>
                 <div className="flex-[3] px-8 py-4">
                   <UpdateAssistant id={botId} />
+                  <div className="mt-12">
+                    <DeleteAssistant id={botId} companyId={id} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -51,7 +60,12 @@ export default function Page() {
                 </Button>
                 <br />
                 <br />
-                <UpdateAssistant id={botId} />
+                <div>
+                  <UpdateAssistant id={botId} />
+                  <br />
+                  <div>Danger zone</div>
+                  <DeleteAssistant id={botId} companyId={id} />
+                </div>
               </div>
             </div>
           </div>
