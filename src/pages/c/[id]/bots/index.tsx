@@ -19,7 +19,7 @@ export default function Page() {
     <CompanyLayout id={id} tab="bots">
       <LoggedIn>
         {(userId) => (
-          <div>
+          <div className="h-full flex flex-col">
             <div className="p-4 border-b">
               <div className="flex gap-4 justify-between">
                 <p className="text-2xl font-semibold">Bot studio</p>
@@ -29,8 +29,17 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="max-w-[550px] p-4">
-              <CompanyAssistantList id={id} selectedAssistantId={null} />
+            <div className="flex-1">
+              <div className="laptop:flex divide-x-[1px] h-full hidden">
+                <div className="flex-1 max-w-[550px] p-4">
+                  <CompanyAssistantList id={id} selectedAssistantId={null} />
+                </div>
+                <div />
+              </div>
+
+              <div className="laptop:hidden">
+                <CompanyAssistantList id={id} selectedAssistantId={null} />
+              </div>
             </div>
           </div>
         )}

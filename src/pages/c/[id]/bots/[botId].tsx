@@ -25,7 +25,7 @@ export default function Page() {
     <CompanyLayout id={id} tab="bots">
       <LoggedIn>
         {(userId) => (
-          <div>
+          <div className="h-full flex flex-col">
             <div className="p-4 border-b">
               <div className="flex gap-4 justify-between">
                 <p className="text-2xl font-semibold">Bot studio</p>
@@ -35,8 +35,8 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="laptop:block hidden">
-              <div className="flex">
+            <div className="flex-1">
+              <div className="laptop:flex divide-x-[1px] h-full hidden">
                 <div className="flex-1 max-w-[550px] p-4">
                   <CompanyAssistantList id={id} selectedAssistantId={botId} />
                 </div>
@@ -46,20 +46,20 @@ export default function Page() {
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="laptop:hidden">
-              <div className="p-4">
-                <Button asChild variant="secondary">
-                  <Link href={`/c/${id}/bots`}>
-                    <ChevronLeft />
-                    Bots
-                  </Link>
-                </Button>
-                <br />
-                <br />
-                <div className="mx-auto w-full max-w-screen-tablet">
-                  <AssistantSettings id={botId} companyId={id} />
+              <div className="laptop:hidden">
+                <div className="p-4">
+                  <Button asChild variant="secondary">
+                    <Link href={`/c/${id}/bots`}>
+                      <ChevronLeft />
+                      Bots
+                    </Link>
+                  </Button>
+                  <br />
+                  <br />
+                  <div className="mx-auto w-full max-w-screen-tablet">
+                    <AssistantSettings id={botId} companyId={id} />
+                  </div>
                 </div>
               </div>
             </div>
