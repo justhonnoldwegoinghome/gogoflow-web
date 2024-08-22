@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { LoggedIn } from "@/features/authentication";
 import { CompanyLayout } from "@/layouts";
-import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
+import { Company, CompanySettings } from "@/features/companies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -21,11 +21,7 @@ export default function Page() {
               <p className="text-2xl  font-semibold">Settings</p>
             </div>
             <div className="p-4">
-              <div>
-                <UpdateCompany id={id} />
-                <br />
-                <DeleteCompany id={id} userId={userId} />
-              </div>
+              <CompanySettings id={id} userId={userId} />
             </div>
           </div>
         )}

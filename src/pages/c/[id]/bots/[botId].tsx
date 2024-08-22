@@ -1,17 +1,16 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
-import { LoggedIn } from "@/features/authentication";
+import { Button } from "@/components/button";
 import { CompanyLayout } from "@/layouts";
+import { LoggedIn } from "@/features/authentication";
 import {
   Assistant,
+  AssistantSettings,
   CompanyAssistantList,
-  DeleteAssistant,
-  UpdateAssistant,
 } from "@/features/assistants";
 import { Company } from "@/features/companies";
-import Link from "next/link";
-import { Button } from "@/components/button";
 
 export default function Page() {
   const { query } = useRouter();
@@ -38,13 +37,12 @@ export default function Page() {
 
             <div className="laptop:block hidden">
               <div className="flex">
-                <div className="flex-[2] p-4">
+                <div className="flex-1 max-w-[550px] p-4">
                   <CompanyAssistantList id={id} selectedAssistantId={botId} />
                 </div>
-                <div className="flex-[3] px-8 py-4">
-                  <UpdateAssistant id={botId} />
-                  <div className="mt-12">
-                    <DeleteAssistant id={botId} companyId={id} />
+                <div className="flex-1 px-8 py-4">
+                  <div className="mx-auto w-full max-w-screen-tablet">
+                    <AssistantSettings id={botId} companyId={id} />
                   </div>
                 </div>
               </div>
@@ -60,11 +58,8 @@ export default function Page() {
                 </Button>
                 <br />
                 <br />
-                <div>
-                  <UpdateAssistant id={botId} />
-                  <br />
-                  <div>Danger zone</div>
-                  <DeleteAssistant id={botId} companyId={id} />
+                <div className="mx-auto w-full max-w-screen-tablet">
+                  <AssistantSettings id={botId} companyId={id} />
                 </div>
               </div>
             </div>

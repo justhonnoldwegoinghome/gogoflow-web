@@ -35,6 +35,8 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
 
   if (!assistantQuery.data) return <Spinner />;
 
+  const { name, created_at, is_active, instructions } = assistantQuery.data;
+
   return (
     <form
       onSubmit={(e) => {
@@ -48,26 +50,23 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
       }}
       className="flex flex-col gap-4"
     >
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>ID</TypographySmall>
-        <Input value={assistantQuery.data.id} disabled />
+        <Input value={id} disabled />
       </div>
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Name</TypographySmall>
-        <Input value={assistantQuery.data.name} disabled />
+        <Input value={name} disabled />
       </div>
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Created</TypographySmall>
-        <Input
-          value={formatDate(new Date(assistantQuery.data.created_at))}
-          disabled
-        />
+        <Input value={formatDate(new Date(created_at))} disabled />
       </div>
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Active</TypographySmall>
-        <Input value={assistantQuery.data.is_active ? "Yes" : "No"} disabled />
+        <Input value={is_active ? "Yes" : "No"} disabled />
       </div>
-      <div className="max-w-screen-tablet">
+      <div>
         <TypographySmall>Instructions</TypographySmall>
         <Textarea
           value={updatedInstructions}
