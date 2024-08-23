@@ -2,7 +2,6 @@ import {
   Menu,
   MessageCircle,
   Bot,
-  TestTubeDiagonal,
   NotepadText,
   File,
   Box,
@@ -26,7 +25,6 @@ import { Company } from "@/features/companies";
 type Tab =
   | "conversations"
   | "bots"
-  | "bot-tester"
   | "bot-logs"
   | "files"
   | "products"
@@ -78,11 +76,6 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
     label: "Bot studio",
     value: "bots",
     icon: <Bot className="h-4 w-4" />,
-  },
-  {
-    label: "Bot tester (coming soon)",
-    value: "bot-tester",
-    icon: <TestTubeDiagonal className="h-4 w-4" />,
   },
   {
     label: "Bot logs",

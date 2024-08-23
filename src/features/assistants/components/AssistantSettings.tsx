@@ -1,6 +1,10 @@
+import { TestTubeDiagonal } from "lucide-react";
+import Link from "next/link";
+
 import { Company } from "@/features/companies";
 import { Spinner } from "@/components/spinner";
 import { formatDate } from "@/utils";
+import { Button } from "@/components/button";
 
 import { Assistant } from "../types";
 import { UpdateAssistant } from "./UpdateAssistant";
@@ -18,13 +22,12 @@ export function AssistantSettings({ id, companyId }: AssistantSettingsProps) {
   if (!assistantQuery.data) return <Spinner />;
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="p-4">
-        <p className="tracking-wider font-medium">BOT</p>
-        <p className="text-muted-foreground">{id}</p>
-      </div>
+    <div>
       <UpdateAssistant id={id} />
-      <div className="p-4 flex justify-between items-center gap-8">
+
+      <br />
+
+      <div className="flex justify-between items-center gap-8">
         <DeleteAssistant id={id} companyId={companyId} />
         <p className="text-muted-foreground text-sm">{`Created ${formatDate(
           new Date(assistantQuery.data.created_at)

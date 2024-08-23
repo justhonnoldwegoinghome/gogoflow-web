@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, TestTubeDiagonal } from "lucide-react";
 
 import { Button } from "@/components/button";
 import { CompanyLayout } from "@/layouts";
@@ -42,6 +42,18 @@ export default function Page() {
             </div>
             <div className="flex-1 px-8 py-4 overflow-auto">
               <div className="mx-auto w-full max-w-screen-tablet h-full">
+                <div className="w-fit ml-auto">
+                  <Button asChild variant="secondary" size="sm">
+                    <Link
+                      href={`/c/${id}/bots/${botId}/playground`}
+                      className="flex gap-2 items-center"
+                    >
+                      <TestTubeDiagonal size={16} />
+                      <p>Playground</p>
+                    </Link>
+                  </Button>
+                </div>
+                <br />
                 <AssistantSettings id={botId} companyId={id} />
               </div>
             </div>
@@ -49,12 +61,23 @@ export default function Page() {
 
           <div className="laptop:hidden">
             <div className="p-6">
-              <Button asChild variant="secondary">
-                <Link href={`/c/${id}/bots`}>
-                  <ChevronLeft />
-                  Bots
-                </Link>
-              </Button>
+              <div className="flex justify-between items-center">
+                <Button asChild variant="secondary">
+                  <Link href={`/c/${id}/bots`}>
+                    <ChevronLeft />
+                    Bots
+                  </Link>
+                </Button>
+                <Button asChild variant="secondary" size="sm">
+                  <Link
+                    href={`/c/${id}/bots/${botId}/playground`}
+                    className="flex gap-2 items-center"
+                  >
+                    <TestTubeDiagonal size={16} />
+                    <p>Playground</p>
+                  </Link>
+                </Button>
+              </div>
               <br />
               <br />
               <div className="mx-auto w-full max-w-screen-tablet">

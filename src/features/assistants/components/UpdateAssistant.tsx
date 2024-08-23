@@ -55,7 +55,7 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
           },
         });
       }}
-      className="flex flex-col gap-4 p-4"
+      className="flex flex-col gap-4"
     >
       <div>
         <TypographySmall>Name</TypographySmall>
