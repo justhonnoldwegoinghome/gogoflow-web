@@ -36,18 +36,27 @@ interface CompanyLayoutProps {
   id: Company["id"];
   children: ReactNode;
   tab: Tab;
+  header: {
+    title: string;
+    actionComponent?: ReactNode;
+  };
 }
 
-export function CompanyLayout({ id, children, tab }: CompanyLayoutProps) {
+export function CompanyLayout({
+  id,
+  children,
+  tab,
+  header,
+}: CompanyLayoutProps) {
   return (
     <>
       <div className="laptop:hidden min-h-screen">
-        <CompanySmallLayout id={id} tab={tab}>
+        <CompanySmallLayout id={id} tab={tab} header={header}>
           {children}
         </CompanySmallLayout>
       </div>
       <div className="hidden laptop:block">
-        <CompanyLargeLayout id={id} tab={tab}>
+        <CompanyLargeLayout id={id} tab={tab} header={header}>
           {children}
         </CompanyLargeLayout>
       </div>
@@ -97,14 +106,15 @@ const navItems: { label: string; value: Tab; icon: ReactElement }[] = [
   },
 ];
 
-function CompanySmallLayout({ id, children, tab }: CompanyLayoutProps) {
+function CompanySmallLayout({ id, children, tab, header }: CompanyLayoutProps) {
   return (
     <div className="flex flex-col bg-secondary">
       <TopBar id={id} tab={tab} />
 
       <div className="px-[10px] pb-[10px]">
-        <div className="bg-white h-[calc(100vh-74px)] overflow-auto rounded-xl">
-          {children}
+        <div className="bg-white h-[calc(100vh-74px)] rounded-xl flex flex-col">
+          <Header header={header} />
+          <div className="flex-1 overflow-auto">{children}</div>
         </div>
       </div>
     </div>
@@ -155,13 +165,14 @@ function TopBar({ id, tab }: { id: Company["id"]; tab: Tab }) {
   );
 }
 
-function CompanyLargeLayout({ id, children, tab }: CompanyLayoutProps) {
+function CompanyLargeLayout({ id, children, tab, header }: CompanyLayoutProps) {
   return (
     <div className="flex">
       <SideBar id={id} tab={tab} />
-      <div className="bg-secondary flex-1 p-[24px]">
-        <div className="bg-white h-[calc(100vh-48px)] overflow-auto rounded-xl">
-          {children}
+      <div className="bg-secondary flex-1 p-[2vh]">
+        <div className="bg-white h-[96vh] rounded-xl flex flex-col">
+          <Header header={header} />
+          <div className="flex-1 overflow-auto">{children}</div>
         </div>
       </div>
     </div>
@@ -198,6 +209,15 @@ function SideBar({ id, tab }: { id: Company["id"]; tab: Tab }) {
           {(userId) => <UserDropdownMenu id={userId} />}
         </LoggedIn>
       </div>
+    </div>
+  );
+}
+
+function Header({ header }: Pick<CompanyLayoutProps, "header">) {
+  return (
+    <div className="px-6 py-3 border-b bg-white rounded-t-xl flex justify-between gap-12">
+      <p className="text-xl font-semibold">{header?.title}</p>
+      {header?.actionComponent && header.actionComponent}
     </div>
   );
 }

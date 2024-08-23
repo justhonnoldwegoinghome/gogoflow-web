@@ -29,7 +29,9 @@ export function DeleteCompany({ id, userId }: DeleteCompanyProps) {
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="destructive">Delete company</Button>
+          <Button variant="destructive" size="sm">
+            Delete company
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

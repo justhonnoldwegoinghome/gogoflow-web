@@ -14,19 +14,18 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="conversations">
-      <LoggedIn>
-        {(userId) => (
-          <div>
-            <div className="px-6 py-3 border-b sticky top-0 bg-white z-10">
-              <p className="text-xl  font-semibold">Conversations</p>
-            </div>
-            <div className="p-6">
-              <CompanyConversationListContainer id={id} />
-            </div>
+    <LoggedIn>
+      {(userId) => (
+        <CompanyLayout
+          id={id}
+          tab="conversations"
+          header={{ title: "Conversations" }}
+        >
+          <div className="p-6 overflow-auto">
+            <CompanyConversationListContainer id={id} />
           </div>
-        )}
-      </LoggedIn>
-    </CompanyLayout>
+        </CompanyLayout>
+      )}
+    </LoggedIn>
   );
 }

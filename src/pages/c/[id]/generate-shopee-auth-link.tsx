@@ -13,14 +13,14 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="settings">
-      <LoggedIn>
-        {(userId) => (
+    <LoggedIn>
+      {(userId) => (
+        <CompanyLayout id={id} tab="settings" header={{ title: "Settings" }}>
           <div>
             <GenerateShopeeAuthorizationLink companyId={id} />
           </div>
-        )}
-      </LoggedIn>
-    </CompanyLayout>
+        </CompanyLayout>
+      )}
+    </LoggedIn>
   );
 }

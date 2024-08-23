@@ -18,12 +18,18 @@ export default function Page() {
   convoId = convoId as Conversation["id"];
 
   return (
-    <CompanyLayout id={id} tab="conversations">
-      <LoggedIn>
-        {(userId) => (
-          <ConversationMessageList companyId={id} conversationId={convoId} />
-        )}
-      </LoggedIn>
-    </CompanyLayout>
+    <LoggedIn>
+      {(userId) => (
+        <CompanyLayout
+          id={id}
+          tab="conversations"
+          header={{ title: "Conversations" }}
+        >
+          <div className="p-6">
+            <ConversationMessageList companyId={id} conversationId={convoId} />
+          </div>
+        </CompanyLayout>
+      )}
+    </LoggedIn>
   );
 }
