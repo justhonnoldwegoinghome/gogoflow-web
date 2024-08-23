@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Spinner } from "@/components/spinner";
 import { Input, Textarea } from "@/components/form";
@@ -51,16 +50,8 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
       className="flex flex-col gap-4"
     >
       <div>
-        <TypographySmall>ID</TypographySmall>
-        <Input value={id} disabled />
-      </div>
-      <div>
         <TypographySmall>Name</TypographySmall>
         <Input value={name} disabled />
-      </div>
-      <div>
-        <TypographySmall>Created</TypographySmall>
-        <Input value={formatDate(new Date(created_at))} disabled />
       </div>
       <div>
         <TypographySmall>Active</TypographySmall>
