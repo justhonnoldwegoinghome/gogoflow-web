@@ -17,10 +17,10 @@ export default function Page() {
       <LoggedIn>
         {(userId) => (
           <div>
-            <div className="p-4 border-b">
-              <p className="text-2xl  font-semibold">Settings</p>
+            <div className="px-6 py-3 border-b sticky top-0 bg-white z-10">
+              <p className="text-xl  font-semibold">Settings</p>
             </div>
-            <div className="p-4">
+            <div className="p-6">
               <CompanySettings id={id} userId={userId} />
             </div>
           </div>

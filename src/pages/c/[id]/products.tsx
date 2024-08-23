@@ -18,11 +18,11 @@ export default function Page() {
       <LoggedIn>
         {(userId) => (
           <div>
-            <div className="p-4 border-b">
-              <p className="text-2xl font-semibold">Products</p>
+            <div className="px-6 py-3 border-b sticky top-0 bg-white z-10">
+              <p className="text-xl  font-semibold">Products</p>
             </div>
 
-            <div className="p-4 max-w-screen-tablet">
+            <div className="p-6 max-w-screen-tablet">
               <CompanyProductListContainer id={id} />
             </div>
           </div>

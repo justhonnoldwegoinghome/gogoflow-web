@@ -31,7 +31,7 @@ export function DeleteAssistant({ id, companyId }: DeleteAssistantProps) {
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="destructive">
+          <Button variant="destructive" size="sm">
             <div className="flex items-center gap-2">
               <Trash2 size={16} />
               <p>Delete</p>
