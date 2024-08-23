@@ -15,26 +15,33 @@ interface UpdateAssistantProps {
 
 export function UpdateAssistant({ id }: UpdateAssistantProps) {
   const assistantQuery = useAssistant({ id });
+
   const updateAssistantMutation = useUpdateAssistant({
     id,
   });
 
+  const [updatedName, setUpdatedName] = useState("");
   const [updatedInstructions, setUpdatedInstructions] = useState("");
+
   useEffect(() => {
-    if (assistantQuery.data)
+    if (assistantQuery.data) {
+      setUpdatedName(assistantQuery.data.name);
       setUpdatedInstructions(assistantQuery.data.instructions);
+    }
   }, [assistantQuery.data]);
 
-  const isUpdated = useMemo(
-    () =>
-      assistantQuery.data &&
-      assistantQuery.data.instructions !== updatedInstructions,
-    [assistantQuery.data, updatedInstructions]
-  );
+  const isUpdated = useMemo(() => {
+    if (!assistantQuery.data) return false;
+
+    return (
+      assistantQuery.data.name !== updatedName ||
+      assistantQuery.data.instructions !== updatedInstructions
+    );
+  }, [assistantQuery.data, updatedName, updatedInstructions]);
 
   if (!assistantQuery.data) return <Spinner />;
 
-  const { name, created_at, is_active, instructions } = assistantQuery.data;
+  const { is_active } = assistantQuery.data;
 
   return (
     <form
@@ -43,15 +50,19 @@ export function UpdateAssistant({ id }: UpdateAssistantProps) {
         updateAssistantMutation.trigger({
           id,
           data: {
+            name: updatedName,
             instructions: updatedInstructions,
           },
         });
       }}
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 p-4"
     >
       <div>
         <TypographySmall>Name</TypographySmall>
-        <Input value={name} disabled />
+        <Input
+          value={updatedName}
+          onChange={(e) => setUpdatedName(e.currentTarget.value)}
+        />
       </div>
       <div>
         <TypographySmall>Active</TypographySmall>

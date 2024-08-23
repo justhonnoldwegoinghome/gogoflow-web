@@ -7,6 +7,7 @@ import { Assistant } from "../types";
 interface UpdateAssistantParams {
   id: Assistant["id"];
   data: {
+    name?: Assistant["name"];
     instructions?: Assistant["instructions"];
   };
 }
