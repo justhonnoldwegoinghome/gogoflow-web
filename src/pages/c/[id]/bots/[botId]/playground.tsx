@@ -3,6 +3,7 @@ import { CompanyLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Assistant, AssistantSettings } from "@/features/assistants";
 import { Company } from "@/features/companies";
+import { CreateTestAutoreply } from "@/features/testAutoreplies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -28,9 +29,7 @@ export default function Page() {
               <AssistantSettings id={botId} companyId={id} />
             </div>
             <div className="flex-1 px-8 py-4 overflow-auto">
-              <div className="mx-auto w-full max-w-screen-tablet h-full">
-                <p>Coming soon 🧸</p>
-              </div>
+              <CreateTestAutoreply assistantId={botId} source="shopee" />
             </div>
           </div>
         </CompanyLayout>
