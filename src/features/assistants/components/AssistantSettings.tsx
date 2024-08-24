@@ -23,7 +23,7 @@ export function AssistantSettings({ id, companyId }: AssistantSettingsProps) {
 
   return (
     <div>
-      <UpdateAssistant id={id} />
+      <UpdateAssistant id={id} assistant={assistantQuery.data} />
 
       <br />
 

@@ -1,47 +1,44 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { TypographySmall } from "@/components/typography";
-import { Spinner } from "@/components/spinner";
 import { Input, Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 
-import { useAssistant } from "../api/getAssistant";
 import { useUpdateAssistant } from "../api/updateAssistant";
 import { Assistant } from "../types";
 
+// 20240824 note
+// Have to refresh `updatedName` and `updatedInstructions` whenever `assistant` changes.
+// This is because `UpdateAssistant` doesn't get dismounted when user navigates to different assistant.
+// Alternative is to just fetch assistant from within UpdateAssistant.
+// Re-visit when <Form/> is added.
+
 interface UpdateAssistantProps {
   id: Assistant["id"];
+  assistant: Assistant;
 }
 
-export function UpdateAssistant({ id }: UpdateAssistantProps) {
-  const assistantQuery = useAssistant({ id });
-
+export function UpdateAssistant({ id, assistant }: UpdateAssistantProps) {
   const updateAssistantMutation = useUpdateAssistant({
     id,
   });
 
-  const [updatedName, setUpdatedName] = useState("");
-  const [updatedInstructions, setUpdatedInstructions] = useState("");
+  const [updatedName, setUpdatedName] = useState(assistant.name);
+  useEffect(() => setUpdatedName(assistant.name), [assistant]);
 
-  useEffect(() => {
-    if (assistantQuery.data) {
-      setUpdatedName(assistantQuery.data.name);
-      setUpdatedInstructions(assistantQuery.data.instructions);
-    }
-  }, [assistantQuery.data]);
+  const [updatedInstructions, setUpdatedInstructions] = useState(
+    assistant.instructions
+  );
+  useEffect(() => setUpdatedInstructions(assistant.instructions), [assistant]);
 
-  const isUpdated = useMemo(() => {
-    if (!assistantQuery.data) return false;
+  const isUpdated = useMemo(
+    () =>
+      assistant.name !== updatedName ||
+      assistant.instructions !== updatedInstructions,
+    [assistant, updatedName, updatedInstructions]
+  );
 
-    return (
-      assistantQuery.data.name !== updatedName ||
-      assistantQuery.data.instructions !== updatedInstructions
-    );
-  }, [assistantQuery.data, updatedName, updatedInstructions]);
-
-  if (!assistantQuery.data) return <Spinner />;
-
-  const { is_active } = assistantQuery.data;
+  const { is_active } = assistant;
 
   return (
     <form
