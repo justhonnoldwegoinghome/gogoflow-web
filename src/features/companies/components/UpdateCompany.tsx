@@ -1,42 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { formatDate } from "@/utils";
 import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
-import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/form";
 
-import { useCompany } from "../api/getCompany";
 import { useUpdateCompany } from "../api/updateCompany";
 import { Company } from "../types";
 
 interface UpdateCompanyProps {
   id: Company["id"];
+  company: Company;
 }
 
-export function UpdateCompany({ id }: UpdateCompanyProps) {
+export function UpdateCompany({ id, company }: UpdateCompanyProps) {
   const { push } = useRouter();
-
-  const companyQuery = useCompany({ id });
 
   const updateCompanyMutation = useUpdateCompany({ id });
 
-  const [updatedName, setUpdatedName] = useState("");
+  const [updatedName, setUpdatedName] = useState(company.name);
 
-  useEffect(() => {
-    if (companyQuery.data) setUpdatedName(companyQuery.data.name);
-  }, [companyQuery.data]);
+  useEffect(() => setUpdatedName(company.name), [company]);
 
-  if (!companyQuery.data) return <Spinner />;
+  const nameIsUpdated = useMemo(
+    () => company.name !== updatedName,
+    [updatedName, company]
+  );
 
-  const {
-    created_at,
-    name,
-    shopee_shop_id,
-    shopee_is_authorized,
-    shopee_authorized_at,
-  } = companyQuery.data;
+  const { shopee_shop_id, shopee_is_authorized, shopee_authorized_at } =
+    company;
 
   return (
     <form
@@ -51,7 +44,7 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
         });
       }}
     >
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Name</TypographySmall>
         <div className="flex gap-4">
           <Input
@@ -59,44 +52,37 @@ export function UpdateCompany({ id }: UpdateCompanyProps) {
             onChange={(e) => setUpdatedName(e.currentTarget.value)}
           />
           <Button
-            variant={name !== updatedName ? "default" : "secondary"}
-            disabled={name === updatedName}
+            variant={nameIsUpdated ? "default" : "secondary"}
+            disabled={!nameIsUpdated}
             size="sm"
-            isLoading={name !== updatedName && updateCompanyMutation.isMutating}
+            isLoading={updateCompanyMutation.isMutating}
           >
             Rename
           </Button>
         </div>
       </div>
 
-      <div className="max-w-screen-mobile">
-        <TypographySmall>Created</TypographySmall>
-        <Input value={formatDate(new Date(created_at))} disabled />
-      </div>
-
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Shopee connected</TypographySmall>
         <div className="flex gap-4">
           <Input value={shopee_is_authorized ? "Yes" : "No"} disabled />
-          {!shopee_is_authorized && (
-            <div>
-              <Button
-                onClick={() => push(`/c/${id}/generate-shopee-auth-link`)}
-                size="sm"
-              >
-                Connect
-              </Button>
-            </div>
-          )}
+          <Button
+            variant={shopee_is_authorized ? "secondary" : "default"}
+            onClick={() => push(`/c/${id}/generate-shopee-auth-link`)}
+            size="sm"
+            disabled={shopee_is_authorized}
+          >
+            Connect
+          </Button>
         </div>
       </div>
 
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Shopee shop ID</TypographySmall>
         <Input value={shopee_shop_id || ""} disabled />
       </div>
 
-      <div className="max-w-screen-mobile">
+      <div>
         <TypographySmall>Shopee connected on</TypographySmall>
         <Input
           value={
