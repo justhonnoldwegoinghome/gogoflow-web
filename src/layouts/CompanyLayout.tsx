@@ -208,7 +208,7 @@ function SideBar({ id, tab }: { id: Company["id"]; tab: Tab }) {
 
 function Header({ header }: Pick<CompanyLayoutProps, "header">) {
   return (
-    <div className="px-6 py-3 border-b bg-white rounded-t-xl flex justify-between gap-12">
+    <div className="px-6 py-3 border-b bg-white rounded-t-xl flex justify-between items-center gap-12">
       <p className="text-xl font-semibold">{header?.title}</p>
       {header?.actionComponent && header.actionComponent}
     </div>
