@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 import { LoggedIn } from "@/features/authentication";
 import { UserDropdownMenu } from "@/features/users";
+import { UserCompanyList } from "@/features/companies";
 
 interface AuthenticatedLayoutProps {
   children: ReactNode;
@@ -20,14 +21,19 @@ export function UserLayout({ children }: AuthenticatedLayoutProps) {
 
 function TopBar() {
   return (
-    <div className="px-[3vw] py-4 border-b">
-      <div className="max-w-screen-laptop mx-auto flex justify-end">
+    <div className="px-[3vw] py-2 bg-secondary">
+      <div className="">
         <LoggedIn
           loader={
             <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
           }
         >
-          {(userId) => <UserDropdownMenu id={userId} />}
+          {(userId) => (
+            <div className="flex justify-between items-center gap-8">
+              <UserCompanyList id={userId} selectedCompanyId={null} />
+              <UserDropdownMenu id={userId} />
+            </div>
+          )}
         </LoggedIn>
       </div>
     </div>

@@ -1,31 +1,84 @@
+import { Plus, ChevronsUpDown } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+} from "@/components/dropdownMenu";
 import { Button } from "@/components/button";
 import { User } from "@/features/users";
 
+import { Company } from "../types";
 import { useUserCompanyList } from "../api/getUserCompanyList";
 
 interface UserCompanyListProps {
   id: User["id"];
+  selectedCompanyId: Company["id"] | null;
 }
 
-export function UserCompanyList({ id }: UserCompanyListProps) {
-  const userCompanyListQuery = useUserCompanyList({ id });
-  if (!userCompanyListQuery.data) return <div></div>;
+export function UserCompanyList({
+  id,
+  selectedCompanyId,
+}: UserCompanyListProps) {
+  const { push } = useRouter();
 
-  return (
-    <div>
+  const userCompanyListQuery = useUserCompanyList({ id });
+
+  if (!userCompanyListQuery.data)
+    return <div className="w-32 h-9 rounded-md bg-secondary animate-pulse" />;
+
+  if (userCompanyListQuery.data.results.length === 0)
+    return (
       <div>
-        <Button key={id} asChild>
-          <Link href={"/create-company"}>Create company</Link>
+        <Button asChild size="sm">
+          <Link href="/create-company">
+            <Plus className="mr-2" size={16} />
+            <p>Create company</p>
+          </Link>
         </Button>
       </div>
-      <br />
-      {userCompanyListQuery.data.results.map(({ id, name }) => (
-        <Button key={id} asChild variant="link">
-          <Link href={`/c/${id}`}>{name}</Link>
+    );
+
+  const selectedCompany = selectedCompanyId
+    ? userCompanyListQuery.data.results.filter(
+        (c) => c.id === selectedCompanyId
+      )[0]
+    : null;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm">
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground">
+              {selectedCompany ? selectedCompany.name : "Select company"}
+            </span>
+            <ChevronsUpDown size={16} strokeWidth={1} />
+          </div>
         </Button>
-      ))}
-    </div>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent>
+        <DropdownMenuGroup>
+          {userCompanyListQuery.data.results.map((c) => (
+            <DropdownMenuItem key={c.id} onSelect={() => push(`/c/${c.id}`)}>
+              <span>{c.name}</span>
+            </DropdownMenuItem>
+          ))}
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem onSelect={() => push("/create-company")}>
+              <span className="font-medium">Create company</span>
+              <Plus size={16} className="ml-3" />
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
