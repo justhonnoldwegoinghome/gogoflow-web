@@ -53,14 +53,14 @@ export function UserCompanyList({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
+        <button className="text-sm bg-white px-3 py-1 rounded-md focus:ring-2 ring-ring focus:outline-none">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">
               {selectedCompany ? selectedCompany.name : "Select company"}
             </span>
-            <ChevronsUpDown size={16} strokeWidth={1} />
+            <ChevronsUpDown size={12} strokeWidth={1} />
           </div>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

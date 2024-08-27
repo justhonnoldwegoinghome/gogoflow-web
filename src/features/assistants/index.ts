@@ -1,4 +1,4 @@
 export { type Assistant } from "./types";
-export { CreateAssistant } from "./components/CreateAssistant";
-export { CompanyAssistantList } from "./components/CompanyAssistantList";
-export { AssistantSettings } from "./components/AssistantSettings";
+export { CreateAssistantPage } from "./pages/CreateAssistantPage";
+export { AssistantSettingsPage } from "./pages/AssistantSettingsPage";
+export { CompanyAssistantListPage } from "./pages/CompanyAssistantListPage";

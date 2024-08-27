@@ -1,17 +1,16 @@
 import { useState } from "react";
 
-import { TypographyH1 } from "@/components/typography";
 import { Button } from "@/components/button";
-import { Input, Textarea } from "@/components/form";
+import { FormContainer, Input, Textarea } from "@/components/form";
 import { Company } from "@/features/companies";
 
 import { useCreateAssistant } from "../api/createAssistant";
 
-interface CreateAssistantProps {
+interface CreateAssistantFormProps {
   companyId: Company["id"];
 }
 
-export function CreateAssistant({ companyId }: CreateAssistantProps) {
+export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
   const createAssistantMutation = useCreateAssistant({ companyId });
 
   const [name, setName] = useState("My chatbot");
@@ -20,10 +19,9 @@ export function CreateAssistant({ companyId }: CreateAssistantProps) {
   );
 
   return (
-    <div className="bg-white max-w-screen-mobile mx-auto p-4 rounded-xl flex flex-col items-center gap-12">
-      <TypographyH1>Create assistant</TypographyH1>
-
-      <div className="w-full">
+    <FormContainer
+      title="Create bot"
+      form={
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -44,15 +42,17 @@ export function CreateAssistant({ companyId }: CreateAssistantProps) {
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
             />
-            <Button
-              isLoading={createAssistantMutation.isMutating}
-              disabled={!name || !instructions}
-            >
-              Create
-            </Button>
           </div>
         </form>
-      </div>
-    </div>
+      }
+      submitButton={
+        <Button
+          isLoading={createAssistantMutation.isMutating}
+          disabled={!name || !instructions}
+        >
+          Create
+        </Button>
+      }
+    />
   );
 }

@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyLayout } from "@/layouts";
-import { CompanyAutoreplyListContainer } from "@/features/autoreplies";
+import { AuthenticatedLayout } from "@/layouts";
+import { CompanyAutoreplyListPage } from "@/features/autoreplies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -16,11 +16,13 @@ export default function Page() {
   return (
     <LoggedIn>
       {(userId) => (
-        <CompanyLayout id={id} tab="bot-logs" header={{ title: "Bot logs" }}>
-          <div className="p-6">
-            <CompanyAutoreplyListContainer id={id} />
-          </div>
-        </CompanyLayout>
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="bot-logs"
+        >
+          <CompanyAutoreplyListPage id={id} />
+        </AuthenticatedLayout>
       )}
     </LoggedIn>
   );

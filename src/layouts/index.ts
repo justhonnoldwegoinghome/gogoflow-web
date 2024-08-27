@@ -1,3 +1,3 @@
-export { UserLayout } from "./UserLayout";
+export { AuthenticatedLayout } from "./AuthenticatedLayout";
 export { UnauthenticatedLayout } from "./UnauthenticatedLayout";
-export { CompanyLayout } from "./CompanyLayout";
+export { PageWrapper } from "./PageWrapper";

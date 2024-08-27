@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-import { LoggedIn } from "@/features/authentication";
 import { Spinner } from "@/components/spinner";
-
-import { Company, CompleteShopeeAuth } from "@/features/companies";
+import { AuthenticatedLayout } from "@/layouts";
+import { LoggedIn } from "@/features/authentication";
+import { Company, CompleteShopeeAuthPage } from "@/features/companies";
 
 export default function Page() {
   const query = useRouter().query;
@@ -16,7 +16,15 @@ export default function Page() {
 
   return (
     <LoggedIn>
-      {(userId) => <CompleteShopeeAuth companyId={id} code={code} />}
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="settings"
+        >
+          <CompleteShopeeAuthPage companyId={id} code={code} />
+        </AuthenticatedLayout>
+      )}
     </LoggedIn>
   );
 }

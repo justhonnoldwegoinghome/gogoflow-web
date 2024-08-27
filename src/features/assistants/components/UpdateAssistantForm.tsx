@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { TypographySmall } from "@/components/typography";
-import { Input, Textarea } from "@/components/form";
+import { FormContainer, Input, Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 
 import { useUpdateAssistant } from "../api/updateAssistant";
@@ -13,12 +13,15 @@ import { Assistant } from "../types";
 // Alternative is to just fetch assistant from within UpdateAssistant.
 // Re-visit when <Form/> is added.
 
-interface UpdateAssistantProps {
+interface UpdateAssistantFormProps {
   id: Assistant["id"];
   assistant: Assistant;
 }
 
-export function UpdateAssistant({ id, assistant }: UpdateAssistantProps) {
+export function UpdateAssistantForm({
+  id,
+  assistant,
+}: UpdateAssistantFormProps) {
   const updateAssistantMutation = useUpdateAssistant({
     id,
   });
@@ -41,38 +44,42 @@ export function UpdateAssistant({ id, assistant }: UpdateAssistantProps) {
   const { is_active } = assistant;
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        updateAssistantMutation.trigger({
-          id,
-          data: {
-            name: updatedName,
-            instructions: updatedInstructions,
-          },
-        });
-      }}
-      className="flex flex-col gap-4"
-    >
-      <div>
-        <TypographySmall>Name</TypographySmall>
-        <Input
-          value={updatedName}
-          onChange={(e) => setUpdatedName(e.currentTarget.value)}
-        />
-      </div>
-      <div>
-        <TypographySmall>Active</TypographySmall>
-        <Input value={is_active ? "Yes" : "No"} disabled />
-      </div>
-      <div>
-        <TypographySmall>Instructions</TypographySmall>
-        <Textarea
-          value={updatedInstructions}
-          onChange={(e) => setUpdatedInstructions(e.currentTarget.value)}
-        />
-      </div>
-      <div>
+    <FormContainer
+      form={
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            updateAssistantMutation.trigger({
+              id,
+              data: {
+                name: updatedName,
+                instructions: updatedInstructions,
+              },
+            });
+          }}
+          className="flex flex-col gap-4"
+        >
+          <div>
+            <TypographySmall>Name</TypographySmall>
+            <Input
+              value={updatedName}
+              onChange={(e) => setUpdatedName(e.currentTarget.value)}
+            />
+          </div>
+          <div>
+            <TypographySmall>Active</TypographySmall>
+            <Input value={is_active ? "Yes" : "No"} disabled />
+          </div>
+          <div>
+            <TypographySmall>Instructions</TypographySmall>
+            <Textarea
+              value={updatedInstructions}
+              onChange={(e) => setUpdatedInstructions(e.currentTarget.value)}
+            />
+          </div>
+        </form>
+      }
+      submitButton={
         <Button
           variant={isUpdated ? "default" : "secondary"}
           disabled={!isUpdated}
@@ -80,7 +87,7 @@ export function UpdateAssistant({ id, assistant }: UpdateAssistantProps) {
         >
           Update
         </Button>
-      </div>
-    </form>
+      }
+    />
   );
 }

@@ -1,1 +1,1 @@
-export { CreateTestAutoreply } from "./components/CreateTestAutoreply";
+export { CreateTestAutoreplyPage } from "./pages/CreateTestAutoreplyPage";

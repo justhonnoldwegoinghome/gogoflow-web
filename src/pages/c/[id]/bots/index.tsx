@@ -1,11 +1,9 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyLayout } from "@/layouts";
 import { Company } from "@/features/companies";
-import { CompanyAssistantList } from "@/features/assistants";
-import { Button } from "@/components/button";
+import { CompanyAssistantListPage } from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
@@ -18,31 +16,13 @@ export default function Page() {
   return (
     <LoggedIn>
       {(userId) => (
-        <CompanyLayout
-          id={id}
-          tab="bots"
-          header={{
-            title: "Bot studio",
-            actionComponent: (
-              <Button asChild size="sm">
-                <Link href={`/c/${id}/create-bot`}>Create bot</Link>
-              </Button>
-            ),
-          }}
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="bots"
         >
-          <div className="laptop:flex divide-x-[1px] h-full hidden">
-            <div className="flex-1 max-w-[550px] p-6">
-              <CompanyAssistantList id={id} selectedAssistantId={null} />
-            </div>
-            <div />
-          </div>
-
-          <div className="laptop:hidden">
-            <div className="p-6">
-              <CompanyAssistantList id={id} selectedAssistantId={null} />
-            </div>
-          </div>
-        </CompanyLayout>
+          <CompanyAssistantListPage id={id} />
+        </AuthenticatedLayout>
       )}
     </LoggedIn>
   );

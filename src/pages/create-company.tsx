@@ -1,11 +1,19 @@
 import { LoggedIn } from "@/features/authentication";
-import { CreateCompany } from "@/features/companies";
-import { UserLayout } from "@/layouts";
+import { CreateCompanyPage } from "@/features/companies";
+import { AuthenticatedLayout } from "@/layouts";
 
 export default function Page() {
   return (
-    <UserLayout>
-      <LoggedIn>{() => <CreateCompany />}</LoggedIn>
-    </UserLayout>
+    <LoggedIn>
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={null}
+          companyTab={null}
+        >
+          <CreateCompanyPage />
+        </AuthenticatedLayout>
+      )}
+    </LoggedIn>
   );
 }

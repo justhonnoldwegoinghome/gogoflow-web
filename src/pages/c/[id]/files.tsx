@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
-import { CompanyFileList } from "@/features/files";
-import { CompanyLayout } from "@/layouts";
+import { CompanyFileListPage } from "@/features/files";
+import { AuthenticatedLayout } from "@/layouts";
 
 export default function Page() {
   const { query } = useRouter();
@@ -16,11 +16,13 @@ export default function Page() {
   return (
     <LoggedIn>
       {(userId) => (
-        <CompanyLayout id={id} tab="files" header={{ title: "Files" }}>
-          <div className="p-6">
-            <CompanyFileList id={id} />
-          </div>
-        </CompanyLayout>
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="files"
+        >
+          <CompanyFileListPage id={id} />
+        </AuthenticatedLayout>
       )}
     </LoggedIn>
   );

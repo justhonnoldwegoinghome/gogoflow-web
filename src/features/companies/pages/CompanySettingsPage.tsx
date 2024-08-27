@@ -1,32 +1,35 @@
-import { Spinner } from "@/components/spinner";
 import { formatDate } from "@/utils";
+import { PageWrapper } from "@/layouts";
+import { Spinner } from "@/components/spinner";
 import { User } from "@/features/users";
 
-import { UpdateCompany } from "./UpdateCompany";
-import { DeleteCompany } from "./DeleteCompany";
 import { Company } from "../types";
 import { useCompany } from "../api/getCompany";
+import { UpdateCompanyForm } from "../components/UpdateCompanyForm";
+import { DeleteCompany } from "../components/DeleteCompany";
 
-interface CompanySettingsProps {
+interface CompanySettingsPageProps {
   id: Company["id"];
   userId: User["id"];
 }
 
-export function CompanySettings({ id, userId }: CompanySettingsProps) {
+export function CompanySettingsPage({ id, userId }: CompanySettingsPageProps) {
   const companyQuery = useCompany({ id });
 
   if (!companyQuery.data) return <Spinner />;
 
   return (
-    <div className="max-w-screen-tablet">
-      <UpdateCompany id={id} company={companyQuery.data} />
+    <PageWrapper>
+      <UpdateCompanyForm id={id} company={companyQuery.data} />
+
       <br />
-      <div className="flex justify-between items-center gap-8">
+
+      <div className="px-6 flex justify-between items-center gap-8">
         <DeleteCompany id={id} userId={userId} />
         <p className="text-muted-foreground text-sm">{`Created on ${formatDate(
           new Date(companyQuery.data.created_at)
         )}`}</p>
       </div>
-    </div>
+    </PageWrapper>
   );
 }

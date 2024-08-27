@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import { CompanyLayout } from "@/layouts";
+
+import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Assistant, AssistantSettings } from "@/features/assistants";
+import { Assistant } from "@/features/assistants";
 import { Company } from "@/features/companies";
-import { CreateTestAutoreply } from "@/features/testAutoreplies";
+import { CreateTestAutoreplyPage } from "@/features/testAutoreplies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -17,22 +18,13 @@ export default function Page() {
   return (
     <LoggedIn>
       {(userId) => (
-        <CompanyLayout
-          id={id}
-          tab="bots"
-          header={{
-            title: "Bot playground",
-          }}
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="bots"
         >
-          <div className="laptop:flex divide-x-[1px] h-full hidden">
-            <div className="flex-1 max-w-[550px] p-6">
-              <AssistantSettings id={botId} companyId={id} />
-            </div>
-            <div className="flex-1 px-8 py-4 overflow-auto">
-              <CreateTestAutoreply assistantId={botId} source="shopee" />
-            </div>
-          </div>
-        </CompanyLayout>
+          <CreateTestAutoreplyPage assistantId={botId} source="shopee" />
+        </AuthenticatedLayout>
       )}
     </LoggedIn>
   );

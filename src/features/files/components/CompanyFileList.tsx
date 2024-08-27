@@ -15,7 +15,7 @@ export function CompanyFileList({ id }: CompanyFileListProps) {
   if (!companyFileListQuery.data) return <div></div>;
 
   return (
-    <div className="py-4 w-fit">
+    <div>
       <div className="flex flex-col gap-4">
         {companyFileListQuery.data.results.length === 0 ? (
           <TypographyP>No files added yet</TypographyP>
@@ -26,7 +26,7 @@ export function CompanyFileList({ id }: CompanyFileListProps) {
         )}
       </div>
       <br />
-      <div>
+      <div className="w-fit">
         <UploadFiles companyId={id} />
       </div>
     </div>
