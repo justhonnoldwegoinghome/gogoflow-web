@@ -50,6 +50,7 @@ export function UploadFiles({ assistantId }: UploadFilesProps) {
           </div>
         ))}
       </div>
+
       <Input
         type="file"
         multiple
@@ -57,6 +58,7 @@ export function UploadFiles({ assistantId }: UploadFilesProps) {
         onChange={(e) =>
           setFiles([...files, ...Array.from(e.target.files || [])])
         }
+        id="file-uploader"
         ref={fileInputRef}
       />
 
