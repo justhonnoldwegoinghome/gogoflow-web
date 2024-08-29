@@ -45,21 +45,24 @@ export function DeleteAssistantDialog({
           </DialogHeader>
 
           <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Cancel
+            <div className="flex gap-2 ml-auto">
+              <DialogClose asChild>
+                <Button type="button" variant="secondary" size="sm">
+                  Cancel
+                </Button>
+              </DialogClose>
+              <Button
+                type="button"
+                variant="destructive"
+                size="sm"
+                onClick={() =>
+                  deleteAssistantMutation.trigger().then(() => setIsOpen(false))
+                }
+                isLoading={deleteAssistantMutation.isMutating}
+              >
+                Delete
               </Button>
-            </DialogClose>
-            <Button
-              type="button"
-              variant="destructive"
-              onClick={() =>
-                deleteAssistantMutation.trigger().then(() => setIsOpen(false))
-              }
-              isLoading={deleteAssistantMutation.isMutating}
-            >
-              Delete
-            </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>

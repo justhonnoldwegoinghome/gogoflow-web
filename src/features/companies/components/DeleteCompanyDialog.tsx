@@ -43,21 +43,24 @@ export function DeleteCompanyDialog({
         </DialogHeader>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Cancel
+          <div className="flex gap-2 ml-auto">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary" size="sm">
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button
+              type="button"
+              variant="destructive"
+              size="sm"
+              onClick={() =>
+                deleteCompanyMutation.trigger().then(() => setIsOpen(false))
+              }
+              isLoading={deleteCompanyMutation.isMutating}
+            >
+              Delete
             </Button>
-          </DialogClose>
-          <Button
-            type="button"
-            variant="destructive"
-            onClick={() =>
-              deleteCompanyMutation.trigger().then(() => setIsOpen(false))
-            }
-            isLoading={deleteCompanyMutation.isMutating}
-          >
-            Delete
-          </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
