@@ -1,7 +1,7 @@
 import { Assistant } from "@/features/assistants/types";
 
-interface LLMMessage {
-  role: "assistant" | "user";
+export interface OutputLLMMessage {
+  role: "assistant";
   content: string;
 }
 
@@ -20,6 +20,6 @@ export interface TestAutoreply {
   source: "shopee";
   created_at: string;
   input_test_message_list: TestMessage[];
-  output_llm_message_list: LLMMessage[];
+  output_llm_message_list: OutputLLMMessage[];
   is_require_action: boolean;
 }
