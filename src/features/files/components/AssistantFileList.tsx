@@ -1,16 +1,16 @@
 import { TypographyP } from "@/components/typography";
-import { Company } from "@/features/companies";
+import { Assistant } from "@/features/assistants";
 
-import { useCompanyFileList } from "../api/getCompanyFileList";
+import { useAssistantFileList } from "../api/getAssistantFileList";
 import { UploadFiles } from "./UploadFiles";
 import { FileCard } from "./FileCard";
 
-interface CompanyFileListProps {
-  id: Company["id"];
+interface AssistantFileListProps {
+  id: Assistant["id"];
 }
 
-export function CompanyFileList({ id }: CompanyFileListProps) {
-  const companyFileListQuery = useCompanyFileList({ id });
+export function AssistantFileList({ id }: AssistantFileListProps) {
+  const companyFileListQuery = useAssistantFileList({ id });
 
   if (!companyFileListQuery.data) return <div></div>;
 
@@ -21,13 +21,13 @@ export function CompanyFileList({ id }: CompanyFileListProps) {
           <TypographyP>No files added yet</TypographyP>
         ) : (
           companyFileListQuery.data.results.map((f) => (
-            <FileCard key={f.id} id={f.id} companyId={id} />
+            <FileCard key={f.id} id={f.id} assistantId={id} />
           ))
         )}
       </div>
       <br />
       <div className="w-fit">
-        <UploadFiles companyId={id} />
+        <UploadFiles assistantId={id} />
       </div>
     </div>
   );

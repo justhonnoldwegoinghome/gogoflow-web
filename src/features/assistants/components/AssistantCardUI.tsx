@@ -29,13 +29,21 @@ export function AssistantCardUI({ assistant }: AssistantCardUIProps) {
       <div className="flex flex-col gap-4">
         <Button asChild variant="secondary" size="sm">
           <Link
+            href={`/c/${assistant.company_id}/bots/${assistant.id}/knowledge-center`}
+          >
+            <p>Knowledge center</p>
+            <ArrowUpRight size={16} />
+          </Link>
+        </Button>
+        <Button asChild variant="secondary" size="sm">
+          <Link
             href={`/c/${assistant.company_id}/bots/${assistant.id}/settings`}
           >
             <p>Settings</p>
             <ArrowUpRight size={16} />
           </Link>
         </Button>
-        <Button asChild variant="secondary" size="sm">
+        <Button asChild variant="default" size="sm">
           <Link
             href={`/c/${assistant.company_id}/bots/${assistant.id}/playground`}
           >

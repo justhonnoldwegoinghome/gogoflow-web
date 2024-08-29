@@ -12,28 +12,30 @@ export function CreateCompanyForm() {
   const [name, setName] = useState("");
 
   return (
-    <FormContainer
-      title="Create company"
-      form={
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            createCompanyMutation.trigger({ data: { name } });
-          }}
-        >
-          <Input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </form>
-      }
-      submitButton={
-        <Button isLoading={createCompanyMutation.isMutating} disabled={!name}>
-          Submit
-        </Button>
-      }
-    />
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        createCompanyMutation.trigger({ data: { name } });
+      }}
+    >
+      <FormContainer
+        title="Create company"
+        form={
+          <div>
+            <Input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        }
+        submitButton={
+          <Button isLoading={createCompanyMutation.isMutating} disabled={!name}>
+            Submit
+          </Button>
+        }
+      />
+    </form>
   );
 }

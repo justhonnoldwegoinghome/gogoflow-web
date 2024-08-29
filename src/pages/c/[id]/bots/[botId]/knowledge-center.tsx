@@ -1,17 +1,19 @@
 import { useRouter } from "next/router";
 
-import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
+import { Company } from "@/features/companies";
+import { AssistantFileListPage } from "@/features/files";
 import { AuthenticatedLayout } from "@/layouts";
-import { CompanyAutoreplyListPage } from "@/features/autoreplies";
+import { Assistant } from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
-  let { id } = query;
+  let { id, botId } = query;
 
-  if (!id) return <div />;
+  if (!id || !botId) return <div />;
 
   id = id as Company["id"];
+  botId = botId as Assistant["id"];
 
   return (
     <LoggedIn>
@@ -19,9 +21,9 @@ export default function Page() {
         <AuthenticatedLayout
           userId={userId}
           selectedCompanyId={id}
-          companyTab="bot-logs"
+          companyTab="bots"
         >
-          <CompanyAutoreplyListPage id={id} />
+          <AssistantFileListPage id={botId} />
         </AuthenticatedLayout>
       )}
     </LoggedIn>

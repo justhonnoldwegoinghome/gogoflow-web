@@ -19,17 +19,17 @@ export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
   );
 
   return (
-    <FormContainer
-      title="Create bot"
-      form={
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            createAssistantMutation.trigger({
-              data: { company_id: companyId, name, instructions },
-            });
-          }}
-        >
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        createAssistantMutation.trigger({
+          data: { company_id: companyId, name, instructions },
+        });
+      }}
+    >
+      <FormContainer
+        title="Create bot"
+        form={
           <div className="flex flex-col gap-2">
             <Input
               type="text"
@@ -43,16 +43,16 @@ export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
               onChange={(e) => setInstructions(e.target.value)}
             />
           </div>
-        </form>
-      }
-      submitButton={
-        <Button
-          isLoading={createAssistantMutation.isMutating}
-          disabled={!name || !instructions}
-        >
-          Create
-        </Button>
-      }
-    />
+        }
+        submitButton={
+          <Button
+            isLoading={createAssistantMutation.isMutating}
+            disabled={!name || !instructions}
+          >
+            Create
+          </Button>
+        }
+      />
+    </form>
   );
 }

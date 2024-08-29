@@ -1,15 +1,10 @@
-import { Company } from "@/features/companies";
+import { Assistant } from "@/features/assistants";
 import { User } from "@/features/users";
 
 export interface File {
   id: string;
   uploaded_at: string;
   uploader_id: User["id"];
-  company_id: Company["id"];
+  assistant_id: Assistant["id"];
   name: string;
-}
-
-export interface CompanyChat {
-  company_id: Company["id"];
-  is_shopee_authorized: boolean;
 }

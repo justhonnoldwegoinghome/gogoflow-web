@@ -1,12 +1,12 @@
 import useSWRMutation from "swr/mutation";
 
 import { post } from "@/apiClient";
-import { Company } from "@/features/companies";
+import { Assistant } from "@/features/assistants";
 
 interface UploadFilesParams {
   files: File[];
   data: {
-    company_id: Company["id"];
+    assistant_id: Assistant["id"];
   };
 }
 
@@ -20,9 +20,13 @@ function uploadFiles({ files, data }: UploadFilesParams) {
   return post<string>("/files", formData);
 }
 
-export function useUploadFiles({ companyId }: { companyId: Company["id"] }) {
+export function useUploadFiles({
+  assistantId,
+}: {
+  assistantId: Assistant["id"];
+}) {
   return useSWRMutation(
-    `/companies/${companyId}/files`,
+    `/assistants/${assistantId}/files`,
     (_, { arg }: { arg: UploadFilesParams }) => uploadFiles(arg),
     {
       throwOnError: false,

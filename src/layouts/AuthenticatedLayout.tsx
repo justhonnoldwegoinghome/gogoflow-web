@@ -1,12 +1,4 @@
-import {
-  Menu,
-  MessageCircle,
-  Bot,
-  NotepadText,
-  File,
-  Box,
-  Settings,
-} from "lucide-react";
+import { Menu, MessageCircle, Bot, Box, Settings } from "lucide-react";
 import { ReactElement, ReactNode } from "react";
 
 import { User, UserDropdownMenu } from "@/features/users";
@@ -104,13 +96,7 @@ function UserNavTopbar({
   );
 }
 
-type CompanyTab =
-  | "conversations"
-  | "bots"
-  | "bot-logs"
-  | "files"
-  | "products"
-  | "settings";
+type CompanyTab = "conversations" | "bots" | "products" | "settings";
 
 const companyNavItems: {
   label: string;
@@ -126,16 +112,6 @@ const companyNavItems: {
     label: "Bot studio",
     value: "bots",
     icon: <Bot className="h-4 w-4" />,
-  },
-  {
-    label: "Bot logs",
-    value: "bot-logs",
-    icon: <NotepadText className="h-4 w-4" />,
-  },
-  {
-    label: "Files",
-    value: "files",
-    icon: <File className="h-4 w-4" />,
   },
   {
     label: "Products",
