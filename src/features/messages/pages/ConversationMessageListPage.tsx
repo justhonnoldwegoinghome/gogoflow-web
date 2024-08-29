@@ -1,12 +1,11 @@
 import _ from "lodash";
 
+import { PageWrapper } from "@/layouts";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
-import { CreateAutoreply } from "@/features/autoreplies";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
 import { ConversationMessageList } from "../components/ConversationMessageList";
-import { PageWrapper } from "@/layouts";
 import { SendMessage } from "../components/SendMessage";
 
 interface ConversationMessageListPageProps {
@@ -33,14 +32,6 @@ export function ConversationMessageListPage({
       <ConversationMessageList
         companyId={companyId}
         conversationId={conversationId}
-      />
-
-      <br />
-
-      <CreateAutoreply
-        companyId={companyId}
-        source="shopee"
-        inputMessageList={conversationMessageListQuery.data.results}
       />
 
       <br />
