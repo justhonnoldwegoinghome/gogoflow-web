@@ -2,9 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { formatDate } from "@/utils";
-import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
-import { FormContainer, Input } from "@/components/form";
+import { Input } from "@/components/form";
 
 import { useUpdateCompany } from "../api/updateCompany";
 import { Company } from "../types";
@@ -32,22 +31,21 @@ export function UpdateCompanyForm({ id, company }: UpdateCompanyFormProps) {
     company;
 
   return (
-    <FormContainer
-      form={
-        <form
-          className="flex flex-col gap-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            updateCompanyMutation.trigger({
-              id,
-              data: {
-                name: updatedName,
-              },
-            });
-          }}
-        >
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        updateCompanyMutation.trigger({
+          id,
+          data: {
+            name: updatedName,
+          },
+        });
+      }}
+    >
+      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           <div>
-            <TypographySmall>Name</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">Name</label>
             <div className="flex gap-4">
               <Input
                 value={updatedName}
@@ -63,9 +61,10 @@ export function UpdateCompanyForm({ id, company }: UpdateCompanyFormProps) {
               </Button>
             </div>
           </div>
-
           <div>
-            <TypographySmall>Shopee connected</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">
+              Shopee connected
+            </label>
             <div className="flex gap-4">
               <Input value={shopee_is_authorized ? "Yes" : "No"} disabled />
               <Button
@@ -78,14 +77,16 @@ export function UpdateCompanyForm({ id, company }: UpdateCompanyFormProps) {
               </Button>
             </div>
           </div>
-
           <div>
-            <TypographySmall>Shopee shop ID</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">
+              Shopee shop ID
+            </label>
             <Input value={shopee_shop_id || ""} disabled />
           </div>
-
           <div>
-            <TypographySmall>Shopee connected on</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">
+              Shopee connected on
+            </label>
             <Input
               value={
                 shopee_authorized_at
@@ -95,8 +96,8 @@ export function UpdateCompanyForm({ id, company }: UpdateCompanyFormProps) {
               disabled
             />
           </div>
-        </form>
-      }
-    />
+        </div>
+      </div>
+    </form>
   );
 }

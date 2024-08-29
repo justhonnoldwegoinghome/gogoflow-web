@@ -1,5 +1,4 @@
 import { formatDate } from "@/utils";
-import { TypographySmall } from "@/components/typography";
 import { Button } from "@/components/button";
 import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/form";
@@ -32,7 +31,7 @@ export function UpdateUser({ id }: UpdateUserProps) {
       ].map(({ header, value, disabled }) => (
         <div key={header} className="flex gap-4 items-end">
           <div className="flex flex-col gap-2 w-full">
-            <TypographySmall>{header}</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">{header}</label>
             <Input
               id={header}
               value={value}

@@ -10,9 +10,7 @@ interface CreateAssistantPageProps {
 export function CreateAssistantPage({ companyId }: CreateAssistantPageProps) {
   return (
     <PageWrapper>
-      <div className="flex justify-center">
-        <CreateAssistantForm companyId={companyId} />
-      </div>
+      <CreateAssistantForm companyId={companyId} />
     </PageWrapper>
   );
 }

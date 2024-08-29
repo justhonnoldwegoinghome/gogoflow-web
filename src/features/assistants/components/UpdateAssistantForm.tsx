@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { TypographySmall } from "@/components/typography";
-import { FormContainer, Input, Textarea } from "@/components/form";
+import { Input, Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 
 import { useUpdateAssistant } from "../api/updateAssistant";
@@ -44,50 +43,51 @@ export function UpdateAssistantForm({
   const { is_active } = assistant;
 
   return (
-    <FormContainer
-      form={
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            updateAssistantMutation.trigger({
-              id,
-              data: {
-                name: updatedName,
-                instructions: updatedInstructions,
-              },
-            });
-          }}
-          className="flex flex-col gap-4"
-        >
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        updateAssistantMutation.trigger({
+          id,
+          data: {
+            name: updatedName,
+            instructions: updatedInstructions,
+          },
+        });
+      }}
+    >
+      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           <div>
-            <TypographySmall>Name</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">Name</label>
             <Input
               value={updatedName}
               onChange={(e) => setUpdatedName(e.currentTarget.value)}
             />
           </div>
           <div>
-            <TypographySmall>Active</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">Active</label>
             <Input value={is_active ? "Yes" : "No"} disabled />
           </div>
           <div>
-            <TypographySmall>Instructions</TypographySmall>
+            <label className="text-sm font-medium mb-1 block">
+              Instructions
+            </label>
             <Textarea
               value={updatedInstructions}
               onChange={(e) => setUpdatedInstructions(e.currentTarget.value)}
             />
           </div>
-        </form>
-      }
-      submitButton={
-        <Button
-          variant={isUpdated ? "default" : "secondary"}
-          disabled={!isUpdated}
-          isLoading={false}
-        >
-          Update
-        </Button>
-      }
-    />
+        </div>
+        <div>
+          <Button
+            variant={isUpdated ? "default" : "secondary"}
+            disabled={!isUpdated}
+            isLoading={false}
+          >
+            Update
+          </Button>
+        </div>
+      </div>
+    </form>
   );
 }
