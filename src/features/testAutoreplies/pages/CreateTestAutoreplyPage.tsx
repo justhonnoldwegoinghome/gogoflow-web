@@ -1,21 +1,15 @@
 import _ from "lodash";
+import { Plus, Trash } from "lucide-react";
 import { useState } from "react";
 
+import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 import { PageWrapper } from "@/layouts";
 
-import { CreateTestMessageForm } from "../components/CreateTestMessageForm";
+import { CreateTestMessageFormDialog } from "../components/CreateTestMessageFormDialog";
+import { TestMessageCardUI } from "../components/TestMessageCardUI";
 import { CreateTestAutoreplyForm } from "../components/CreateTestAutoreplyForm";
 import { TestMessage } from "../types";
-import { Bot, MessageCirclePlus, Trash } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/sheet";
-import { Button } from "@/components/button";
-import { TestMessageCardUI } from "../components/TestMessageCardUI";
 
 interface CreateTestAutoreplyPageProps {
   assistantId: Company["id"];
@@ -26,9 +20,6 @@ export function CreateTestAutoreplyPage({
   assistantId,
   source,
 }: CreateTestAutoreplyPageProps) {
-  const [createTestMessageFormIsOpen, setCreateTestMessageFormIsOpen] =
-    useState(false);
-
   const [inputTestMessageList, setInputTestMessageList] = useState<
     TestMessage[]
   >([]);
@@ -37,30 +28,20 @@ export function CreateTestAutoreplyPage({
     <PageWrapper>
       <div className="flex flex-col gap-8">
         <div className="flex gap-2 justify-end">
-          <Sheet
-            open={createTestMessageFormIsOpen}
-            onOpenChange={setCreateTestMessageFormIsOpen}
+          <CreateTestMessageFormDialog
+            onSubmit={(t) =>
+              setInputTestMessageList([...inputTestMessageList, t])
+            }
           >
-            <SheetTrigger asChild>
-              <Button variant="secondary" size="sm">
-                <div className="flex items-center gap-2">
-                  <MessageCirclePlus size={16} strokeWidth={1} />
+            {(openDialog) => (
+              <Button size="sm" onClick={openDialog}>
+                <div className="flex gap-2 items-center">
+                  <Plus size={16} />
                   <p>Add message</p>
                 </div>
               </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <SheetHeader>Add buyer's message</SheetHeader>
-              <div className="mt-8">
-                <CreateTestMessageForm
-                  onSubmit={(t) => {
-                    setInputTestMessageList([...inputTestMessageList, t]);
-                    setCreateTestMessageFormIsOpen(false);
-                  }}
-                />
-              </div>
-            </SheetContent>
-          </Sheet>
+            )}
+          </CreateTestMessageFormDialog>
           <Button
             size="sm"
             variant="outline"

@@ -1,0 +1,159 @@
+import _ from "lodash";
+import { ReactNode, useMemo, useState } from "react";
+
+import { Button } from "@/components/button";
+import { Input, Textarea } from "@/components/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/select";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/dialog";
+
+import { TestMessage } from "../types";
+
+interface CreateTestAutoreplyFormDialogProps {
+  onSubmit: (t: TestMessage) => void;
+  children: (openDialog: () => void) => ReactNode;
+}
+
+export function CreateTestMessageFormDialog({
+  onSubmit,
+  children,
+}: CreateTestAutoreplyFormDialogProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [text, setText] = useState<TestMessage["text"]>("");
+
+  const [referenceType, setReferenceType] = useState<
+    "order" | "product" | null
+  >(null);
+
+  const [referenceId, setReferenceId] = useState<string | null>(null);
+
+  const TestMessage = useMemo(() => {
+    const reference =
+      referenceType && referenceId
+        ? {
+            type: referenceType,
+            id: referenceId,
+          }
+        : null;
+
+    return {
+      text,
+      sender_role: "buyer" as TestMessage["sender_role"],
+      reference,
+    };
+  }, [text, referenceType, referenceId]);
+
+  const canSubmit = useMemo(() => {
+    const validText = text.length > 0;
+    const validReference =
+      (referenceType && referenceId) || (!referenceType && !referenceId);
+
+    return validText && validReference;
+  }, [text, referenceType, referenceId]);
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>{children(() => setIsOpen(true))}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add test message</DialogTitle>
+        </DialogHeader>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(TestMessage);
+            setIsOpen(false);
+          }}
+        >
+          <div className="flex flex-col gap-8 justify-between h-[80vh]">
+            <div className="flex flex-col gap-4 overflow-auto">
+              <div>
+                <label className="text-sm font-medium mb-1 block">
+                  Message
+                </label>
+                <Textarea
+                  placeholder="May I know how do I use this product?"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">From</label>
+                <Input value="Buyer" disabled />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">Source</label>
+                <Input value="Shopee" disabled />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">
+                  Reference type
+                </label>
+                <Select
+                  onValueChange={(v: "order" | "product" | "none") => {
+                    if (v === "order") setReferenceType("order");
+                    else if (v === "product") setReferenceType("product");
+                    else if (v === "none") setReferenceType(null);
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Optional" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="none">None</SelectItem>
+                      <SelectItem value="order">Order</SelectItem>
+                      <SelectItem value="product">Product</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">
+                  Reference ID
+                </label>
+                <Input
+                  placeholder="Optional"
+                  value={referenceId || ""}
+                  onChange={(e) => setReferenceId(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <DialogFooter>
+              <div className="flex gap-2 ml-auto">
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary" size="sm">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <Button
+                  variant={canSubmit ? "default" : "secondary"}
+                  disabled={!canSubmit}
+                  size="sm"
+                >
+                  Add message
+                </Button>
+              </div>
+            </DialogFooter>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
