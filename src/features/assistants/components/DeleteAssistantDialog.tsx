@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { ReactNode, useState } from "react";
 
 import {
   Dialog,
@@ -17,27 +16,25 @@ import { Company } from "@/features/companies";
 import { useDeleteAssistant } from "../api/deleteAssistant";
 import { Assistant } from "../types";
 
-interface DeleteAssistantProps {
+interface DeleteAssistantDialogProps {
   id: Assistant["id"];
   companyId: Company["id"];
+  children: (openDialog: () => void) => ReactNode;
 }
 
-export function DeleteAssistant({ id, companyId }: DeleteAssistantProps) {
-  const [open, setOpen] = useState(false);
+export function DeleteAssistantDialog({
+  id,
+  companyId,
+  children,
+}: DeleteAssistantDialogProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
   const deleteAssistantMutation = useDeleteAssistant({ id, companyId });
 
   return (
     <div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="destructive" size="sm">
-            <div className="flex items-center gap-2">
-              <Trash2 size={16} />
-              <p>Delete</p>
-            </div>
-          </Button>
-        </DialogTrigger>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>{children(() => setIsOpen(true))}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Delete bot</DialogTitle>
@@ -57,7 +54,7 @@ export function DeleteAssistant({ id, companyId }: DeleteAssistantProps) {
               type="button"
               variant="destructive"
               onClick={() =>
-                deleteAssistantMutation.trigger().then(() => setOpen(false))
+                deleteAssistantMutation.trigger().then(() => setIsOpen(false))
               }
               isLoading={deleteAssistantMutation.isMutating}
             >

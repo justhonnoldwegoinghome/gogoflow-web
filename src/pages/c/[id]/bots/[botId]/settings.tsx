@@ -22,7 +22,7 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantSettingsPage id={botId} companyId={id} />
+          <AssistantSettingsPage id={botId} />
         </AuthenticatedLayout>
       )}
     </LoggedIn>
