@@ -37,7 +37,7 @@ export function DeleteCompany({ id, userId }: DeleteCompanyProps) {
           <DialogHeader>
             <DialogTitle>Delete company</DialogTitle>
             <DialogDescription>
-              Once you delete your account, there is no going back. Please be
+              Once you delete your company, there is no going back. Please be
               certain.
             </DialogDescription>
           </DialogHeader>
