@@ -37,6 +37,14 @@ export function AssistantCardUI({ assistant }: AssistantCardUIProps) {
         </Button>
         <Button asChild variant="secondary" size="sm">
           <Link
+            href={`/c/${assistant.company_id}/bots/${assistant.id}/test-logs`}
+          >
+            <p>Test logs</p>
+            <ArrowUpRight size={16} />
+          </Link>
+        </Button>
+        <Button asChild variant="secondary" size="sm">
+          <Link
             href={`/c/${assistant.company_id}/bots/${assistant.id}/settings`}
           >
             <p>Settings</p>
