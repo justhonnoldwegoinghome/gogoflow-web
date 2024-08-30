@@ -1,2 +1,2 @@
 export { AssistantTestAutoreplyList } from "./components/AssistantTestAutoreplyList";
-export { CreateTestAutoreplyPage } from "./pages/CreateTestAutoreplyPage";
+export { CreateTestAutoreplyForm } from "./components/CreateTestAutoreplyForm";

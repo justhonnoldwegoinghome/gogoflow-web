@@ -4,6 +4,7 @@ import { AuthenticatedLayout, PageWrapper } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
 import { Company } from "@/features/companies";
+import { CreateTestAutoreplyForm } from "@/features/testAutoreplies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -26,7 +27,7 @@ export default function Page() {
             <AssistantSubpageBreadcrumb id={botId} subpageLabel="Playground" />
             <br />
             <br />
-            <div>Coming soon</div>
+            <CreateTestAutoreplyForm assistantId={botId} source="shopee" />
           </PageWrapper>
         </AuthenticatedLayout>
       )}

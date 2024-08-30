@@ -36,6 +36,9 @@ export function CreateTestMessageFormDialog({
 
   const [text, setText] = useState<TestMessage["text"]>("");
 
+  const [senderRole, setSenderRole] =
+    useState<TestMessage["sender_role"]>("buyer");
+
   const [referenceType, setReferenceType] = useState<
     "order" | "product" | null
   >(null);
@@ -53,7 +56,7 @@ export function CreateTestMessageFormDialog({
 
     return {
       text,
-      sender_role: "buyer" as TestMessage["sender_role"],
+      sender_role: senderRole,
       reference,
     };
   }, [text, referenceType, referenceId]);
@@ -77,6 +80,10 @@ export function CreateTestMessageFormDialog({
           onSubmit={(e) => {
             e.preventDefault();
             onSubmit(TestMessage);
+            setText("");
+            setReferenceType(null);
+            setReferenceId(null);
+            setSenderRole("buyer");
             setIsOpen(false);
           }}
         >
@@ -94,7 +101,22 @@ export function CreateTestMessageFormDialog({
               </div>
               <div>
                 <label className="text-sm font-medium mb-1 block">From</label>
-                <Input value="Buyer" disabled />
+                <Select
+                  defaultValue={senderRole}
+                  onValueChange={(s: TestMessage["sender_role"]) =>
+                    setSenderRole(s)
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="buyer">Buyer</SelectItem>
+                      <SelectItem value="seller">Seller</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="text-sm font-medium mb-1 block">Source</label>
