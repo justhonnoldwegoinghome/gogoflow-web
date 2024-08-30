@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-import { CreateAssistantPage } from "@/features/assistants";
+import { AuthenticatedLayout, PageWrapper } from "@/layouts";
+import { CreateAssistantForm } from "@/features/assistants";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
-import { AuthenticatedLayout } from "@/layouts";
 
 export default function Page() {
   const { query } = useRouter();
@@ -21,7 +21,9 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <CreateAssistantPage companyId={id} />
+          <PageWrapper>
+            <CreateAssistantForm companyId={id} />
+          </PageWrapper>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

@@ -12,12 +12,12 @@ import { useAssistant } from "../api/getAssistant";
 
 interface AssistantSubpageBreadcrumbProps {
   id: Assistant["id"];
-  subPageLabel: string;
+  subpageLabel: string;
 }
 
 export function AssistantSubpageBreadcrumb({
   id,
-  subPageLabel,
+  subpageLabel,
 }: AssistantSubpageBreadcrumbProps) {
   const assistantQuery = useAssistant({ id });
 
@@ -41,7 +41,7 @@ export function AssistantSubpageBreadcrumb({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{subPageLabel}</BreadcrumbPage>
+            <BreadcrumbPage>{subpageLabel}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

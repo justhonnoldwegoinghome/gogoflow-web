@@ -1,9 +1,13 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PageWrapper } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
-import { Assistant, AssistantSettingsPage } from "@/features/assistants";
+import {
+  Assistant,
+  AssistantSettings,
+  AssistantSubpageBreadcrumb,
+} from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
@@ -22,7 +26,12 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantSettingsPage id={botId} />
+          <PageWrapper>
+            <AssistantSubpageBreadcrumb id={botId} subpageLabel="Settings" />
+            <br />
+            <br />
+            <AssistantSettings id={botId} />
+          </PageWrapper>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

@@ -40,7 +40,7 @@ export function CompanyAutoreplyList({
           </div>
         </div>
         <Button asChild size="sm">
-          <Link href={`/c/${id}/create-bot`}>
+          <Link href={`/c/${id}/bots/create`}>
             <Plus className="mr-2" size={16} />
             <p>Create bot</p>
           </Link>

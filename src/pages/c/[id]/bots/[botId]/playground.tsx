@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PageWrapper } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Assistant, AssistantPlaygroundPage } from "@/features/assistants";
+import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
 import { Company } from "@/features/companies";
 
 export default function Page() {
@@ -22,7 +22,12 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantPlaygroundPage id={botId} />
+          <PageWrapper>
+            <AssistantSubpageBreadcrumb id={botId} subpageLabel="Playground" />
+            <br />
+            <br />
+            <div>Coming soon</div>
+          </PageWrapper>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

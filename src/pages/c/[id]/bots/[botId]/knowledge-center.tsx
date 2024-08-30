@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout, PageWrapper } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
-import { AuthenticatedLayout } from "@/layouts";
-import { Assistant } from "@/features/assistants";
-import { AssistantKnowledgePage } from "@/features/assistants/pages/AssistantKnowledgePage";
+import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
+import { AssistantFileList, UploadFiles } from "@/features/files";
 
 export default function Page() {
   const { query } = useRouter();
@@ -23,7 +23,18 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantKnowledgePage id={botId} />
+          <PageWrapper>
+            <AssistantSubpageBreadcrumb
+              id={botId}
+              subpageLabel="Knowledge center"
+            />
+            <br />
+            <br />
+            <AssistantFileList id={botId} />
+            <br />
+            <br />
+            <UploadFiles assistantId={botId} />
+          </PageWrapper>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

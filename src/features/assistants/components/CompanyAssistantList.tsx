@@ -32,7 +32,7 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
             </div>
           </div>
           <Button asChild size="sm">
-            <Link href={`/c/${id}/create-bot`}>
+            <Link href={`/c/${id}/bots/create`}>
               <Plus className="mr-2" size={16} />
               <p>Create bot</p>
             </Link>
@@ -45,7 +45,7 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
     <div className="flex flex-col gap-8">
       <div className="w-fit ml-auto">
         <Button asChild size="sm">
-          <Link href={`/c/${id}/create-bot`}>
+          <Link href={`/c/${id}/bots/create`}>
             <Plus className="mr-2" size={16} />
             <p>Create</p>
           </Link>
