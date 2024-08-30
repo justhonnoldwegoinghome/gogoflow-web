@@ -1,7 +1,8 @@
 import { PageWrapper } from "@/layouts";
 import { Assistant } from "@/features/assistants";
+import { AssistantTestAutoreplyList } from "@/features/testAutoreplies";
 
-import { AssistantTestAutoreplyList } from "../components/AssistantTestAutoreplyList";
+import { AssistantSubpageBreadcrumb } from "../components/AssistantSubpageBreadcrumb";
 
 interface AssistantTestAutoreplyListPageProps {
   id: Assistant["id"];
@@ -12,6 +13,9 @@ export function AssistantTestAutoreplyListPage({
 }: AssistantTestAutoreplyListPageProps) {
   return (
     <PageWrapper>
+      <AssistantSubpageBreadcrumb id={id} subPageLabel="Test logs" />
+      <br />
+      <br />
       <AssistantTestAutoreplyList id={id} />
     </PageWrapper>
   );

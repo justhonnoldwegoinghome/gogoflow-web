@@ -55,7 +55,7 @@ export function UpdateAssistantForm({
         });
       }}
     >
-      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
+      <div className="rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <div>
             <label className="text-sm font-medium mb-1 block">Name</label>

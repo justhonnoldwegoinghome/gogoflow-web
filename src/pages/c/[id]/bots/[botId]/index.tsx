@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 
 import { AuthenticatedLayout } from "@/layouts";
-import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { Assistant } from "@/features/assistants";
-import { AssistantTestAutoreplyListPage } from "@/features/assistants";
+import { Company } from "@/features/companies";
+import { Assistant, AssistantPage } from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
@@ -23,7 +22,7 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantTestAutoreplyListPage id={botId} />
+          <AssistantPage id={botId} companyId={id} />
         </AuthenticatedLayout>
       )}
     </LoggedIn>

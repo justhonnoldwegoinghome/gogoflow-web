@@ -2,9 +2,8 @@ import { useRouter } from "next/router";
 
 import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Assistant } from "@/features/assistants";
+import { Assistant, AssistantPlaygroundPage } from "@/features/assistants";
 import { Company } from "@/features/companies";
-import { CreateTestAutoreplyPage } from "@/features/testAutoreplies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -23,7 +22,7 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <CreateTestAutoreplyPage assistantId={botId} source="shopee" />
+          <AssistantPlaygroundPage id={botId} />
         </AuthenticatedLayout>
       )}
     </LoggedIn>

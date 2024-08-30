@@ -1,36 +1,20 @@
-import { Plus, ChevronsUpDown, Bot } from "lucide-react";
+import { Plus, Bot } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuGroup,
-} from "@/components/dropdownMenu";
 import { Button } from "@/components/button";
+import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
-import { Assistant } from "../types";
 import { useCompanyAssistantList } from "../api/getCompanyAssistantList";
 
 interface CompanyAssistantListProps {
   id: Company["id"];
-  selectedAssistantId: Assistant["id"] | null;
 }
 
-export function CompanyAssistantList({
-  id,
-  selectedAssistantId,
-}: CompanyAssistantListProps) {
-  const { push } = useRouter();
-
+export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
   const companyAssistantListQuery = useCompanyAssistantList({ id });
 
-  if (!companyAssistantListQuery.data)
-    return <div className="w-32 h-9 rounded-md bg-secondary animate-pulse" />;
+  if (!companyAssistantListQuery.data) return <Spinner />;
 
   if (companyAssistantListQuery.data.results.length === 0)
     return (
@@ -57,44 +41,28 @@ export function CompanyAssistantList({
       </div>
     );
 
-  const selectedAssistant = selectedAssistantId
-    ? companyAssistantListQuery.data.results.filter(
-        (c) => c.id === selectedAssistantId
-      )[0]
-    : null;
-
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="text-sm bg-white px-3 py-1 rounded-md focus:ring-2 ring-ring focus:outline-none border">
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground">
-              {selectedAssistant ? selectedAssistant.name : "Select bot"}
-            </span>
-            <ChevronsUpDown size={12} strokeWidth={1} />
-          </div>
-        </button>
-      </DropdownMenuTrigger>
-
-      <DropdownMenuContent>
-        <DropdownMenuGroup>
-          {companyAssistantListQuery.data.results.map((c) => (
-            <DropdownMenuItem
-              key={c.id}
-              onSelect={() => push(`/c/${id}/bots/${c.id}`)}
-            >
-              <span>{c.name}</span>
-            </DropdownMenuItem>
-          ))}
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => push(`/c/${id}/create-bot`)}>
-              <span className="font-medium">Create bot</span>
-              <Plus size={16} className="ml-3" />
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex flex-col gap-8">
+      <div className="w-fit ml-auto">
+        <Button asChild size="sm">
+          <Link href={`/c/${id}/create-bot`}>
+            <Plus className="mr-2" size={16} />
+            <p>Create</p>
+          </Link>
+        </Button>
+      </div>
+      <div className="flex flex-col divide-y-[1px]">
+        {companyAssistantListQuery.data.results.map((a) => (
+          <Link
+            href={`/c/${id}/bots/${a.id}`}
+            key={a.id}
+            className="p-4 focus:bg-secondary hover:bg-secondary focus:outline-none"
+          >
+            <p className="font-medium">{a.name}</p>
+            <p className="text-sm text-muted-foreground">{a.id}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }

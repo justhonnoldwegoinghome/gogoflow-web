@@ -1,3 +1,3 @@
 export { type File } from "./types";
-export { useFile } from "./api/getFile";
-export { AssistantFileListPage } from "./pages/AssistantFileListPage";
+export { AssistantFileList } from "./components/AssistantFileList";
+export { UploadFiles } from "./components/UploadFiles";
