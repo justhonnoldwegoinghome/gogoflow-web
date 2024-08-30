@@ -7,7 +7,7 @@ import { getPaginationKey } from "@/utils";
 import { Company } from "@/features/companies";
 
 import { Product } from "../types";
-import { Source, Status } from "../components/CompanyProductListContainer";
+import { Source, Status } from "../components/ProductListController";
 
 function getCompanyProductList({
   id,

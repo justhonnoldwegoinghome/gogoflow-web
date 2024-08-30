@@ -23,7 +23,6 @@ export function SendMessage({ companyId, conversationId }: SendMessageProps) {
 
   return (
     <div>
-      <p className="mb-2 font-semibold">Response:</p>
       <Textarea value={text} onChange={(e) => setText(e.target.value)} />
       <br />
       <Button

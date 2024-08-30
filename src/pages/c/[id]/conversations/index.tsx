@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout } from "@/layouts";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyConversationListContainer } from "@/features/conversations";
-import { CompanyLayout } from "@/layouts";
+import { CompanyConversationListPage } from "@/features/conversations";
 
 export default function Page() {
   const { query } = useRouter();
@@ -14,10 +14,16 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="conversations">
-      <LoggedIn>
-        {(userId) => <CompanyConversationListContainer id={id} />}
-      </LoggedIn>
-    </CompanyLayout>
+    <LoggedIn>
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="conversations"
+        >
+          <CompanyConversationListPage id={id} />
+        </AuthenticatedLayout>
+      )}
+    </LoggedIn>
   );
 }

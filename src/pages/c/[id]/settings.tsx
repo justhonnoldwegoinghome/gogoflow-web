@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Company, DeleteCompany, UpdateCompany } from "@/features/companies";
-import { CompanyLayout } from "@/layouts";
+import { Company, CompanySettingsPage } from "@/features/companies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -13,16 +13,16 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="settings">
-      <LoggedIn>
-        {(userId) => (
-          <div>
-            <UpdateCompany id={id} />
-            <br />
-            <DeleteCompany id={id} userId={userId} />
-          </div>
-        )}
-      </LoggedIn>
-    </CompanyLayout>
+    <LoggedIn>
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="settings"
+        >
+          <CompanySettingsPage id={id} userId={userId} />
+        </AuthenticatedLayout>
+      )}
+    </LoggedIn>
   );
 }

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout } from "@/layouts";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { CompanyProductListContainer } from "@/features/products";
-import { CompanyLayout } from "@/layouts";
+import { CompanyProductListPage } from "@/features/products";
 
 export default function Page() {
   const { query } = useRouter();
@@ -14,8 +14,16 @@ export default function Page() {
   id = id as Company["id"];
 
   return (
-    <CompanyLayout id={id} tab="products">
-      <LoggedIn>{(userId) => <CompanyProductListContainer id={id} />}</LoggedIn>
-    </CompanyLayout>
+    <LoggedIn>
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="products"
+        >
+          <CompanyProductListPage id={id} />
+        </AuthenticatedLayout>
+      )}
+    </LoggedIn>
   );
 }

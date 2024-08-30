@@ -7,10 +7,7 @@ import { APIList, get, MaxPageSize, PageToken } from "@/apiClient";
 import { Company } from "@/features/companies";
 
 import { Conversation } from "../types";
-import {
-  ConvoType,
-  Source,
-} from "../components/CompanyConversationListContainer";
+import { ConvoType, Source } from "../components/ConversationListController";
 
 function getCompanyConversationList({
   id,

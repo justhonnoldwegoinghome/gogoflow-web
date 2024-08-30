@@ -1,69 +1,48 @@
-import { Plus, Building2, Settings, LogOut } from "lucide-react";
+import { Settings, LogOut, User2 } from "lucide-react";
 import { useRouter } from "next/router";
 
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuSeparator,
   DropdownMenuItem,
   DropdownMenuGroup,
 } from "@/components/dropdownMenu";
-import { Button } from "@/components/button";
 import { useLogOut } from "@/features/authentication";
-import { useUserCompanyList } from "@/features/companies";
 
 import { useUser } from "../api/getUser";
 import { User } from "../types";
 
-interface UserMenuProps {
+interface UserDropdownMenuProps {
   id: User["id"];
 }
 
-export function UserDropdownMenu({ id }: UserMenuProps) {
+export function UserDropdownMenu({ id }: UserDropdownMenuProps) {
   const { push } = useRouter();
 
   const logOutMutation = useLogOut();
 
   const userQuery = useUser({ id });
-  const userCompanyListQuery = useUserCompanyList({ id });
 
-  if (!userQuery.data || !userCompanyListQuery.data)
+  if (!userQuery.data)
     return (
       <div className="w-full h-10 rounded-full bg-secondary animate-pulse" />
     );
 
-  const { email } = userQuery.data;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary">{email}</Button>
+        <button className="w-8 h-8 flex items-center justify-center bg-white rounded-full focus-visible:ring-2 ring-ring focus-visible:outline-none border">
+          <User2 size={16} className="text-muted-foreground" />
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem onSelect={() => push("/create-company")}>
-            <Plus className="mr-3 h-4 w-4" />
-            <span>Create company</span>
+          <DropdownMenuItem onSelect={() => push("/me")}>
+            <Settings className="mr-3 h-4 w-4" />
+            <span>Account</span>
           </DropdownMenuItem>
-          {userCompanyListQuery.data.results.map((c) => (
-            <DropdownMenuItem
-              key={c.id}
-              onSelect={() => push(`/c/${c.id}/conversations`)}
-            >
-              <Building2 className="mr-3 h-4 w-4" />
-              <span>{c.name}</span>
-            </DropdownMenuItem>
-          ))}
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => push("/me")}>
-              <Settings className="mr-3 h-4 w-4" />
-              <span>Account</span>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => logOutMutation.trigger()}>
             <LogOut className="mr-3 h-4 w-4" />
             Log out

@@ -1,8 +1,6 @@
 export { type Company } from "./types";
-export { useUserCompanyList } from "./api/getUserCompanyList";
 export { UserCompanyList } from "./components/UserCompanyList";
-export { UpdateCompany } from "./components/UpdateCompany";
-export { DeleteCompany } from "./components/DeleteCompany";
-export { CreateCompany } from "./components/CreateCompany";
-export { GenerateShopeeAuthorizationLink } from "./components/GenerateShopeeAuthorizationLink";
-export { CompleteShopeeAuth } from "./components/CompleteShopeeAuth";
+export { CompanySettingsPage } from "./pages/CompanySettingsPage";
+export { CreateCompanyPage } from "./pages/CreateCompanyPage";
+export { GenerateShopeeAuthorizationLinkPage } from "./pages/GenerateShopeeAuthorizationLinkPage";
+export { CompleteShopeeAuthPage } from "./pages/CompleteShopeeAuthPage";

@@ -1,7 +1,7 @@
 import useSWRMutation from "swr/mutation";
 
 import { del } from "@/apiClient";
-import { Company } from "@/features/companies";
+import { Assistant } from "@/features/assistants";
 
 import { File } from "../types";
 
@@ -11,13 +11,13 @@ function deleteFile({ id }: { id: File["id"] }) {
 
 export function useDeleteFile({
   id,
-  companyId,
+  assistantId,
 }: {
   id: File["id"];
-  companyId: Company["id"];
+  assistantId: Assistant["id"];
 }) {
   return useSWRMutation(
-    `/companies/${companyId}/files`,
+    `/assistants/${assistantId}/files`,
     () => deleteFile({ id }),
     {
       throwOnError: false,

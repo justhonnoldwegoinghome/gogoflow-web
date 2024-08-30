@@ -2,11 +2,9 @@ import { useRouter } from "next/router";
 
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import {
-  Conversation,
-  ConversationMessageList,
-} from "@/features/conversations";
-import { CompanyLayout } from "@/layouts";
+import { ConversationMessageListPage } from "@/features/messages";
+import { AuthenticatedLayout } from "@/layouts";
+import { Conversation } from "@/features/conversations";
 
 export default function Page() {
   const query = useRouter().query;
@@ -18,12 +16,19 @@ export default function Page() {
   convoId = convoId as Conversation["id"];
 
   return (
-    <CompanyLayout id={id} tab="conversations">
-      <LoggedIn>
-        {(userId) => (
-          <ConversationMessageList companyId={id} conversationId={convoId} />
-        )}
-      </LoggedIn>
-    </CompanyLayout>
+    <LoggedIn>
+      {(userId) => (
+        <AuthenticatedLayout
+          userId={userId}
+          selectedCompanyId={id}
+          companyTab="conversations"
+        >
+          <ConversationMessageListPage
+            companyId={id}
+            conversationId={convoId}
+          />
+        </AuthenticatedLayout>
+      )}
+    </LoggedIn>
   );
 }

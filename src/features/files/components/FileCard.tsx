@@ -7,10 +7,10 @@ import { DeleteFile } from "./DeleteFile";
 
 interface FileCardProps {
   id: File["id"];
-  companyId: Company["id"];
+  assistantId: Company["id"];
 }
 
-export function FileCard({ id, companyId }: FileCardProps) {
+export function FileCard({ id, assistantId }: FileCardProps) {
   const fileQuery = useFile({ id });
   if (!fileQuery.data) return <Spinner />;
 
@@ -19,7 +19,7 @@ export function FileCard({ id, companyId }: FileCardProps) {
       <a href={`${process.env.NEXT_PUBLIC_BASE_URL}/files/${id}/content`}>
         {fileQuery.data.name}
       </a>
-      <DeleteFile id={id} companyId={companyId} />
+      <DeleteFile id={id} assistantId={assistantId} />
     </div>
   );
 }

@@ -2,21 +2,21 @@ import { useState, useCallback, useRef } from "react";
 
 import { Button } from "@/components/button";
 import { Input } from "@/components/form";
-import { Company } from "@/features/companies";
+import { Assistant } from "@/features/assistants";
 
 import { useUploadFiles } from "../api/uploadFiles";
 
 interface UploadFilesProps {
-  companyId: Company["id"];
+  assistantId: Assistant["id"];
 }
 
-export function UploadFiles({ companyId }: UploadFilesProps) {
+export function UploadFiles({ assistantId }: UploadFilesProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [files, setFiles] = useState<File[]>([]);
 
   const uploadFilesMutation = useUploadFiles({
-    companyId,
+    assistantId,
   });
 
   const handleSubmit = useCallback(() => {
@@ -24,7 +24,7 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
       .trigger({
         files,
         data: {
-          company_id: companyId,
+          assistant_id: assistantId,
         },
       })
       .then(() => {
@@ -50,6 +50,7 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
           </div>
         ))}
       </div>
+
       <Input
         type="file"
         multiple
@@ -57,6 +58,7 @@ export function UploadFiles({ companyId }: UploadFilesProps) {
         onChange={(e) =>
           setFiles([...files, ...Array.from(e.target.files || [])])
         }
+        id="file-uploader"
         ref={fileInputRef}
       />
 
