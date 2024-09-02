@@ -27,7 +27,7 @@ export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
         });
       }}
     >
-      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
+      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">
         <h2 className="text-2xl font-semibold text-center">Create bot</h2>
         <div className="flex flex-col gap-4">
           <div>
