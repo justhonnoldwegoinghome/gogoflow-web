@@ -8,10 +8,9 @@ import { useAuthStore } from "../stores/useAuthStore";
 interface LoggedInProps {
   children: (userId: User["id"]) => ReactNode;
   loader?: ReactElement;
-  fallback?: ReactElement;
 }
 
-export function LoggedIn({ children, loader, fallback }: LoggedInProps) {
+export function LoggedIn({ children, loader }: LoggedInProps) {
   const isLoaded = useAuthStore((s) => s.isLoaded);
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const userId = useAuthStore((s) => s.userId);
@@ -22,5 +21,5 @@ export function LoggedIn({ children, loader, fallback }: LoggedInProps) {
     return children(userId as User["id"]);
   }
 
-  return fallback || <div>Forbidden</div>;
+  return <div></div>;
 }
