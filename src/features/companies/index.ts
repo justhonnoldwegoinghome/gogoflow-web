@@ -1,6 +1,6 @@
 export { type Company } from "./types";
+export { CreateCompanyForm } from "./components/CreateCompanyForm";
 export { UserCompanyList } from "./components/UserCompanyList";
-export { CompanySettingsPage } from "./pages/CompanySettingsPage";
-export { CreateCompanyPage } from "./pages/CreateCompanyPage";
-export { GenerateShopeeAuthorizationLinkPage } from "./pages/GenerateShopeeAuthorizationLinkPage";
-export { CompleteShopeeAuthPage } from "./pages/CompleteShopeeAuthPage";
+export { CompanySettings } from "./components/CompanySettings";
+export { GenerateShopeeAuthorizationLinkForm } from "./components/GenerateShopeeAuthorizationLinkForm";
+export { CompleteShopeeAuth } from "./components/CompleteShopeeAuth";

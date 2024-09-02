@@ -15,6 +15,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -75,6 +76,7 @@ export function CreateTestMessageFormDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add test message</DialogTitle>
+          <DialogDescription></DialogDescription>
         </DialogHeader>
         <form
           onSubmit={(e) => {
@@ -90,9 +92,7 @@ export function CreateTestMessageFormDialog({
           <div className="flex flex-col gap-8 justify-between h-[80vh]">
             <div className="flex flex-col gap-4 overflow-auto">
               <div>
-                <label className="text-sm font-medium mb-1 block">
-                  Message
-                </label>
+                <label className="text-sm font-medium mb-1 block">Text</label>
                 <Textarea
                   placeholder="May I know how do I use this product?"
                   value={text}

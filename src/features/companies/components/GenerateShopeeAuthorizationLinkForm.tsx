@@ -30,7 +30,7 @@ export function GenerateShopeeAuthorizationLinkForm({
         });
       }}
     >
-      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet min-w-[350px] flex flex-col gap-8">
+      <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">
         <h2 className="text-2xl font-semibold text-center">
           Connect to Shopee
         </h2>

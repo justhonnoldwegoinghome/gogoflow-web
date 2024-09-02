@@ -1,2 +1,2 @@
 export type { Conversation } from "./types";
-export { CompanyConversationListPage } from "./pages/CompanyConversationListPage";
+export { CompanyConversationListContainer } from "./components/CompanyConversationListContainer";

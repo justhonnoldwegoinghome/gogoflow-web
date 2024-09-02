@@ -2,27 +2,26 @@ import { Trash2 } from "lucide-react";
 
 import { Button } from "@/components/button";
 import { formatDate } from "@/utils";
-import { PageWrapper } from "@/layouts";
 import { Spinner } from "@/components/spinner";
 import { User } from "@/features/users";
 
 import { Company } from "../types";
 import { useCompany } from "../api/getCompany";
-import { UpdateCompanyForm } from "../components/UpdateCompanyForm";
-import { DeleteCompanyDialog } from "../components/DeleteCompanyDialog";
+import { UpdateCompanyForm } from "./UpdateCompanyForm";
+import { DeleteCompanyDialog } from "./DeleteCompanyDialog";
 
-interface CompanySettingsPageProps {
+interface CompanySettingsProps {
   id: Company["id"];
   userId: User["id"];
 }
 
-export function CompanySettingsPage({ id, userId }: CompanySettingsPageProps) {
+export function CompanySettings({ id, userId }: CompanySettingsProps) {
   const companyQuery = useCompany({ id });
 
   if (!companyQuery.data) return <Spinner />;
 
   return (
-    <PageWrapper>
+    <div>
       <UpdateCompanyForm id={id} company={companyQuery.data} />
 
       <br />
@@ -43,6 +42,6 @@ export function CompanySettingsPage({ id, userId }: CompanySettingsPageProps) {
           new Date(companyQuery.data.created_at)
         )}`}</p>
       </div>
-    </PageWrapper>
+    </div>
   );
 }

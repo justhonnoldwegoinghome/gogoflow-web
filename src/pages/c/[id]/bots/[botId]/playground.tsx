@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout, PageWrapper } from "@/layouts";
+import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
 import { Company } from "@/features/companies";
@@ -23,12 +23,10 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <PageWrapper>
-            <AssistantSubpageBreadcrumb id={botId} subpageLabel="Playground" />
-            <br />
-            <br />
-            <CreateTestAutoreplyForm assistantId={botId} source="shopee" />
-          </PageWrapper>
+          <AssistantSubpageBreadcrumb id={botId} subpageLabel="Playground" />
+          <br />
+          <br />
+          <CreateTestAutoreplyForm assistantId={botId} source="shopee" />
         </AuthenticatedLayout>
       )}
     </LoggedIn>

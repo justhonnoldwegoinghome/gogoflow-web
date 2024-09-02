@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { AuthenticatedLayout } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Company, CompanySettingsPage } from "@/features/companies";
+import { Company, CompanySettings } from "@/features/companies";
 
 export default function Page() {
   const { query } = useRouter();
@@ -20,7 +20,7 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="settings"
         >
-          <CompanySettingsPage id={id} userId={userId} />
+          <CompanySettings id={id} userId={userId} />
         </AuthenticatedLayout>
       )}
     </LoggedIn>
