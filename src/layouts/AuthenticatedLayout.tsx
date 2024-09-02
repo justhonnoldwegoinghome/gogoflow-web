@@ -53,7 +53,9 @@ export function AuthenticatedLayout({
               />
             )}
           </nav>
-          <div className="flex-1 overflow-auto">{children}</div>
+          <div className="flex-1 overflow-auto">
+            <PageWrapper>{children}</PageWrapper>
+          </div>
         </div>
       </div>
 
@@ -73,14 +75,26 @@ export function AuthenticatedLayout({
                   companyTab={companyTab}
                 />
               </div>
-              <div className="flex-1 overflow-auto">{children}</div>
+              <div className="flex-1 overflow-auto">
+                <PageWrapper>{children}</PageWrapper>
+              </div>
             </div>
           ) : (
-            <div className="flex-1 overflow-auto">{children}</div>
+            <div className="flex-1 overflow-auto">
+              <PageWrapper>{children}</PageWrapper>
+            </div>
           )}
         </div>
       </div>
     </>
+  );
+}
+
+function PageWrapper({ children }: { children: ReactNode }) {
+  return (
+    <div className="px-4 pt-8 pb-24 w-full max-w-screen-tablet mx-auto">
+      {children}
+    </div>
   );
 }
 

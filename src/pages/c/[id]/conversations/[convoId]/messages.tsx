@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 import { ConversationMessageListContainer } from "@/features/messages";
-import { AuthenticatedLayout, PageWrapper } from "@/layouts";
+import { AuthenticatedLayout } from "@/layouts";
 import { Conversation } from "@/features/conversations";
 
 export default function Page() {
@@ -23,12 +23,10 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="conversations"
         >
-          <PageWrapper>
-            <ConversationMessageListContainer
-              companyId={id}
-              conversationId={convoId}
-            />
-          </PageWrapper>
+          <ConversationMessageListContainer
+            companyId={id}
+            conversationId={convoId}
+          />
         </AuthenticatedLayout>
       )}
     </LoggedIn>
