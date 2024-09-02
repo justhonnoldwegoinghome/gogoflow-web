@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PageWrapper } from "@/layouts";
 import {
   Company,
-  GenerateShopeeAuthorizationLinkPage,
+  GenerateShopeeAuthorizationLinkForm,
 } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 
@@ -23,7 +23,9 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="settings"
         >
-          <GenerateShopeeAuthorizationLinkPage companyId={id} />
+          <PageWrapper>
+            <GenerateShopeeAuthorizationLinkForm companyId={id} />
+          </PageWrapper>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

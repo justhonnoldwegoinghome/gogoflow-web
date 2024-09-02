@@ -1,5 +1,5 @@
 import { LoggedIn } from "@/features/authentication";
-import { CreateCompanyPage } from "@/features/companies";
+import { CreateCompanyForm } from "@/features/companies";
 import { AuthenticatedLayout } from "@/layouts";
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
           selectedCompanyId={null}
           companyTab={null}
         >
-          <CreateCompanyPage />
+          <CreateCompanyForm />
         </AuthenticatedLayout>
       )}
     </LoggedIn>

@@ -1,42 +1,45 @@
 import { useState } from "react";
 
 import { MaxPageSize } from "@/apiClient";
-import { PageWrapper } from "@/layouts";
 import { Company } from "@/features/companies";
 
-import { CompanyProductList } from "../components/CompanyProductList";
 import {
-  ProductListController,
+  ConversationListController,
+  ConvoType,
   Source,
-  Status,
-} from "../components/ProductListController";
+} from "./ConversationListController";
+import { CompanyConversationList } from "./CompanyConversationList";
 
-interface CompanyProductListPageProps {
+interface CompanyConversationListContainerProps {
   id: Company["id"];
 }
 
-export function CompanyProductListPage({ id }: CompanyProductListPageProps) {
+export function CompanyConversationListContainer({
+  id,
+}: CompanyConversationListContainerProps) {
   const [source, setSource] = useState<Source>("shopee");
-  const [status, setStatus] = useState<Status>("normal");
+  const [convoType, setConvoType] = useState<ConvoType>("all");
   const [maxPageSize, setPageSize] = useState<MaxPageSize>(10);
 
   return (
-    <PageWrapper>
-      <ProductListController
+    <div>
+      <ConversationListController
         source={source}
         changeSource={(s) => setSource(s)}
-        status={status}
-        changeStatus={(s) => setStatus(s)}
+        convoType={convoType}
+        changeConvoType={(ct) => setConvoType(ct)}
         maxPageSize={maxPageSize}
         changePageSize={(ps) => setPageSize(ps)}
       />
+
       <br />
-      <CompanyProductList
+
+      <CompanyConversationList
         id={id}
         source={source}
-        status={status}
+        convoType={convoType}
         maxPageSize={maxPageSize}
       />
-    </PageWrapper>
+    </div>
   );
 }

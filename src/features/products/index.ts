@@ -1,2 +1,2 @@
 export type { Product } from "./types";
-export { CompanyProductListPage } from "./pages/CompanyProductListPage";
+export { CompanyProductListContainer } from "./components/CompanyProductListContainer";

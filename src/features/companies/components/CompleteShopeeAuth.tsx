@@ -5,15 +5,15 @@ import { Spinner } from "@/components/spinner";
 import { Company } from "../types";
 import { useCompleteShopeeAuth } from "../api/completeShopeeAuth";
 
-interface CompleteShopeeAuthPageProps {
+interface CompleteShopeeAuthProps {
   companyId: Company["id"];
   code: string;
 }
 
-export function CompleteShopeeAuthPage({
+export function CompleteShopeeAuth({
   companyId,
   code,
-}: CompleteShopeeAuthPageProps) {
+}: CompleteShopeeAuthProps) {
   const completeShopeeAuthMutation = useCompleteShopeeAuth({
     companyId,
   });

@@ -1,22 +1,21 @@
 import _ from "lodash";
 
-import { PageWrapper } from "@/layouts";
 import { Spinner } from "@/components/spinner";
 import { Company } from "@/features/companies";
 
 import { useConversationMessageList } from "../api/getConversationMessageList";
-import { ConversationMessageList } from "../components/ConversationMessageList";
-import { SendMessage } from "../components/SendMessage";
+import { ConversationMessageList } from "./ConversationMessageList";
+import { SendMessage } from "./SendMessage";
 
-interface ConversationMessageListPageProps {
+interface ConversationMessageListContainerProps {
   companyId: Company["id"];
   conversationId: string;
 }
 
-export function ConversationMessageListPage({
+export function ConversationMessageListContainer({
   companyId,
   conversationId,
-}: ConversationMessageListPageProps) {
+}: ConversationMessageListContainerProps) {
   const conversationMessageListQuery = useConversationMessageList({
     companyId,
     conversationId,
@@ -28,7 +27,7 @@ export function ConversationMessageListPage({
   if (!conversationMessageListQuery.data) return <Spinner />;
 
   return (
-    <PageWrapper>
+    <div>
       <ConversationMessageList
         companyId={companyId}
         conversationId={conversationId}
@@ -37,6 +36,6 @@ export function ConversationMessageListPage({
       <br />
 
       <SendMessage companyId={companyId} conversationId={conversationId} />
-    </PageWrapper>
+    </div>
   );
 }

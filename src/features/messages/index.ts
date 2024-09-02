@@ -1,2 +1,2 @@
 export { type Message } from "./types";
-export { ConversationMessageListPage } from "./pages/ConversationMessageListPage";
+export { ConversationMessageListContainer } from "./components/ConversationMessageListContainer";
