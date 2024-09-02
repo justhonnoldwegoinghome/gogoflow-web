@@ -1,4 +1,5 @@
 import { ReactElement, ReactNode } from "react";
+import { useRouter } from "next/router";
 
 import { Spinner } from "@/components/spinner";
 import { User } from "@/features/users";
@@ -15,9 +16,13 @@ export function LoggedIn({ children, loader }: LoggedInProps) {
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const userId = useAuthStore((s) => s.userId);
 
+  const { push } = useRouter();
+
   if (!isLoaded) return loader || <Spinner />;
 
-  if (isLoggedIn && userId) {
+  if (!isLoggedIn) push("/auth/log-in");
+
+  if (userId) {
     return children(userId as User["id"]);
   }
 
