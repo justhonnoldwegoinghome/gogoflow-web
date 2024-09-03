@@ -1,10 +1,10 @@
 import { Menu, MessageCircle, Bot, Box, Settings } from "lucide-react";
 import { ReactElement, ReactNode } from "react";
+import { useRouter } from "next/router";
 
 import { User, UserDropdownMenu } from "@/features/users";
 import { Company, UserCompanyList } from "@/features/companies";
 import { Button } from "@/components/button";
-import { useRouter } from "next/router";
 import {
   Sheet,
   SheetClose,
@@ -29,84 +29,62 @@ export function AuthenticatedLayout({
   const isCompanyView = selectedCompanyId && companyTab;
 
   return (
-    <>
-      <div id="smol-layout" className="laptop:hidden">
-        <div className="flex flex-col h-[100vh]">
-          <nav className="px-4 py-2 bg-secondary">
-            {isCompanyView ? (
-              <div className="flex gap-4">
-                <CompanyNavSheet
-                  id={selectedCompanyId}
-                  companyTab={companyTab}
-                />
-                <div className="flex-1">
-                  <UserNavTopbar
-                    userId={userId}
-                    selectedCompanyId={selectedCompanyId}
-                  />
-                </div>
-              </div>
-            ) : (
-              <UserNavTopbar
-                userId={userId}
-                selectedCompanyId={selectedCompanyId}
-              />
-            )}
-          </nav>
-          <div className="flex-1 overflow-auto">
-            <PageWrapper>{children}</PageWrapper>
-          </div>
-        </div>
-      </div>
+    <div className="h-screen overflow-auto flex flex-col">
+      <Header
+        userId={userId}
+        selectedCompanyId={selectedCompanyId}
+        companyTab={companyTab}
+      />
 
-      <div id="large-layout" className="hidden laptop:block">
-        <div className="flex flex-col h-[100vh]">
-          <div className="px-4 py-2 bg-secondary">
-            <UserNavTopbar
-              userId={userId}
-              selectedCompanyId={selectedCompanyId}
-            />
-          </div>
-          {isCompanyView ? (
-            <div className="flex-1 overflow-auto flex">
-              <div className="pl-4 pr-16 py-8 h-full overflow-auto bg-white border-r">
-                <CompanyNavSidebar
-                  id={selectedCompanyId}
-                  companyTab={companyTab}
-                />
-              </div>
-              <div className="flex-1 overflow-auto">
-                <PageWrapper>{children}</PageWrapper>
-              </div>
-            </div>
-          ) : (
-            <div className="flex-1 overflow-auto">
-              <PageWrapper>{children}</PageWrapper>
-            </div>
+      <div className="flex flex-1 overflow-hidden">
+        <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto">
+          {isCompanyView && (
+            <CompanyNavBar id={selectedCompanyId} companyTab={companyTab} />
           )}
-        </div>
-      </div>
-    </>
-  );
-}
+        </aside>
 
-function PageWrapper({ children }: { children: ReactNode }) {
-  return (
-    <div className="px-4 pt-8 pb-24 w-full max-w-screen-tablet mx-auto">
-      {children}
+        <main className="flex-1 overflow-auto bg-white">
+          <div className="px-4 pt-8 pb-24 w-full max-w-screen-tablet mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
 
-function UserNavTopbar({
+function Header({
+  userId,
+  selectedCompanyId,
+  companyTab,
+}: Pick<
+  AuthenticatedLayoutProps,
+  "userId" | "selectedCompanyId" | "companyTab"
+>) {
+  const isCompanyView = selectedCompanyId && companyTab;
+  return (
+    <header className="flex bg-secondary px-4 py-2 gap-4">
+      <div className="laptop:hidden">
+        {isCompanyView && (
+          <CompanyNavSheet id={selectedCompanyId} companyTab={companyTab} />
+        )}
+      </div>
+      <div className="flex-1">
+        <UserNavBar userId={userId} selectedCompanyId={selectedCompanyId} />
+      </div>
+    </header>
+  );
+}
+
+function UserNavBar({
   userId,
   selectedCompanyId,
 }: Pick<AuthenticatedLayoutProps, "userId" | "selectedCompanyId">) {
   return (
-    <div className="flex justify-between items-center gap-8">
+    <nav className="flex justify-between items-center gap-8">
       <UserCompanyList id={userId} selectedCompanyId={selectedCompanyId} />
       <UserDropdownMenu id={userId} />
-    </div>
+    </nav>
   );
 }
 
@@ -143,7 +121,7 @@ function getHref(id: Company["id"], companyTab: CompanyTab) {
   return `/c/${id}/${companyTab}`;
 }
 
-function CompanyNavSidebar({
+function CompanyNavBar({
   id,
   companyTab,
 }: {
@@ -153,7 +131,7 @@ function CompanyNavSidebar({
   const { push } = useRouter();
 
   return (
-    <aside className="flex flex-col gap-6 w-fit">
+    <nav className="flex flex-col gap-6 w-fit">
       <span className="block text-lg font-medium tracking-wider">
         Shopeeflow
       </span>
@@ -172,7 +150,7 @@ function CompanyNavSidebar({
           ))}
         </div>
       </div>
-    </aside>
+    </nav>
   );
 }
 
