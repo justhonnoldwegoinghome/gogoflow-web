@@ -1,4 +1,4 @@
-import { Menu, MessageCircle, Bot, Box, Settings } from "lucide-react";
+import { Menu, Bot, Settings } from "lucide-react";
 import { ReactElement, ReactNode } from "react";
 import { useRouter } from "next/router";
 
@@ -38,16 +38,12 @@ export function AuthenticatedLayout({
 
       <div className="flex flex-1 overflow-hidden">
         {isCompanyView && (
-          <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto border-r">
+          <aside className="hidden laptop:block bg-white h-full pl-4 pr-20 pt-4 pb-24 overflow-auto border-r">
             <CompanyNavBar id={selectedCompanyId} companyTab={companyTab} />
           </aside>
         )}
 
-        <main className="flex-1 overflow-auto">
-          {/* <div className="px-4 py-8 h-full w-full max-w-screen-tablet mx-auto"> */}
-          {children}
-          {/* </div> */}
-        </main>
+        <main className="flex-1 overflow-auto">{children}</main>
       </div>
     </div>
   );
@@ -96,19 +92,9 @@ const companyNavItems: {
   icon: ReactElement;
 }[] = [
   {
-    label: "Conversations",
-    value: "conversations",
-    icon: <MessageCircle className="h-4 w-4" />,
-  },
-  {
-    label: "Bot studio",
+    label: "Bots",
     value: "bots",
     icon: <Bot className="h-4 w-4" />,
-  },
-  {
-    label: "Products",
-    value: "products",
-    icon: <Box className="h-4 w-4" />,
   },
   {
     label: "Settings",
