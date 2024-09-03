@@ -56,10 +56,23 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
           <Link
             href={`/c/${id}/bots/${a.id}`}
             key={a.id}
-            className="p-4 focus:bg-secondary hover:bg-secondary focus:outline-none"
+            className="p-4 focus:bg-secondary hover:bg-secondary focus:outline-none flex justify-between items-center"
           >
-            <p className="font-medium">{a.name}</p>
-            <p className="text-sm text-muted-foreground">{a.id}</p>
+            <div>
+              <p className="font-medium">{a.name}</p>
+              <p className="text-sm text-muted-foreground">{a.id}</p>
+            </div>
+            <div>
+              {a.is_active ? (
+                <span className="bg-teal-100 text-teal-600 px-3 py-1 rounded-md text-sm">
+                  Active
+                </span>
+              ) : (
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-md text-sm">
+                  Inactive
+                </span>
+              )}
+            </div>
           </Link>
         ))}
       </div>

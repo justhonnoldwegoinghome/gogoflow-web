@@ -19,11 +19,11 @@ export function AssistantBio({ id }: { id: Assistant["id"] }) {
 
       <div className="flex justify-between gap-4">
         {is_active ? (
-          <span className="bg-teal-100 text-teal-600 px-2 rounded-full text-sm">
+          <span className="bg-teal-100 text-teal-600 px-3 py-1 rounded-md text-sm">
             Active
           </span>
         ) : (
-          <span className="bg-yellow-100 text-yellow-600 px-2 rounded-full text-sm">
+          <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-md text-sm">
             Inactive
           </span>
         )}
