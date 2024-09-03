@@ -23,7 +23,7 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="conversations"
         >
-          <div className="h-full flex flex-col relative">
+          <div className="pt-8 px-4 pb-8 h-full w-full max-w-screen-tablet mx-auto flex flex-col gap-8 relative">
             <div className="flex-1 overflow-auto">
               <ConversationMessageList
                 companyId={id}
@@ -31,7 +31,7 @@ export default function Page() {
               />
             </div>
 
-            <div className="absolute bottom-0 inset-x-0">
+            <div>
               <SendMessage companyId={id} conversationId={convoId} />
             </div>
           </div>

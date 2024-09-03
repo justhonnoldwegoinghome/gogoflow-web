@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
 import { CompanyProductListContainer } from "@/features/products";
@@ -21,7 +21,11 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="products"
         >
-          <CompanyProductListContainer id={id} />
+          <PagePadding>
+            <div className="w-full max-w-screen-tablet mx-auto">
+              <CompanyProductListContainer id={id} />
+            </div>
+          </PagePadding>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

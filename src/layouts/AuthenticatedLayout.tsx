@@ -37,16 +37,16 @@ export function AuthenticatedLayout({
       />
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto border-r">
-          {isCompanyView && (
+        {isCompanyView && (
+          <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto border-r">
             <CompanyNavBar id={selectedCompanyId} companyTab={companyTab} />
-          )}
-        </aside>
+          </aside>
+        )}
 
-        <main className="flex-1 overflow-auto bg-white">
-          <div className="px-4 py-8 h-full w-full max-w-screen-tablet mx-auto">
-            {children}
-          </div>
+        <main className="flex-1 overflow-auto">
+          {/* <div className="px-4 py-8 h-full w-full max-w-screen-tablet mx-auto"> */}
+          {children}
+          {/* </div> */}
         </main>
       </div>
     </div>

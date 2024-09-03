@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Company, CompanySettings } from "@/features/companies";
 
@@ -20,7 +20,11 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="settings"
         >
-          <CompanySettings id={id} userId={userId} />
+          <PagePadding>
+            <div className="w-full max-w-screen-tablet mx-auto">
+              <CompanySettings id={id} userId={userId} />
+            </div>
+          </PagePadding>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

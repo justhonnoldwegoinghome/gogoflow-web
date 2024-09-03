@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import {
   Company,
   GenerateShopeeAuthorizationLinkForm,
@@ -23,7 +23,11 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="settings"
         >
-          <GenerateShopeeAuthorizationLinkForm companyId={id} />
+          <PagePadding>
+            <div className="w-full max-w-screen-tablet mx-auto">
+              <GenerateShopeeAuthorizationLinkForm companyId={id} />
+            </div>
+          </PagePadding>
         </AuthenticatedLayout>
       )}
     </LoggedIn>
