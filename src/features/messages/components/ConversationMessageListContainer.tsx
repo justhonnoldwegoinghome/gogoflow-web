@@ -27,15 +27,17 @@ export function ConversationMessageListContainer({
   if (!conversationMessageListQuery.data) return <Spinner />;
 
   return (
-    <div>
-      <ConversationMessageList
-        companyId={companyId}
-        conversationId={conversationId}
-      />
+    <div className="h-full flex flex-col relative">
+      <div className="flex-1 overflow-auto">
+        <ConversationMessageList
+          companyId={companyId}
+          conversationId={conversationId}
+        />
+      </div>
 
-      <br />
-
-      <SendMessage companyId={companyId} conversationId={conversationId} />
+      <div className="absolute bottom-0 inset-x-0">
+        <SendMessage companyId={companyId} conversationId={conversationId} />
+      </div>
     </div>
   );
 }

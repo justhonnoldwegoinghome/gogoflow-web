@@ -44,7 +44,7 @@ export function AuthenticatedLayout({
         </aside>
 
         <main className="flex-1 overflow-auto bg-white">
-          <div className="px-4 pt-8 pb-24 w-full max-w-screen-tablet mx-auto">
+          <div className="px-4 py-8 h-full w-full max-w-screen-tablet mx-auto">
             {children}
           </div>
         </main>

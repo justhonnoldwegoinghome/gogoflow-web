@@ -22,27 +22,33 @@ export function SendMessage({ companyId, conversationId }: SendMessageProps) {
   const [text, setText] = useState("");
 
   return (
-    <div>
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} />
+    <div className="bg-white">
+      <textarea
+        className="ring-2 ring-input focus-visible:ring-ring w-full rounded-lg px-4 py-2 laptop:shadow-lg focus:outline-none"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
       <br />
-      <Button
-        disabled={!text}
-        isLoading={sendMessageMutation.isMutating}
-        onClick={() =>
-          sendMessageMutation
-            .trigger({
-              conversationId,
-              data: {
-                source: "shopee",
-                companyId,
-                text,
-              },
-            })
-            .then(() => setText(""))
-        }
-      >
-        Send message
-      </Button>
+      <div className="ml-auto w-fit">
+        <Button
+          disabled={!text}
+          isLoading={sendMessageMutation.isMutating}
+          onClick={() =>
+            sendMessageMutation
+              .trigger({
+                conversationId,
+                data: {
+                  source: "shopee",
+                  companyId,
+                  text,
+                },
+              })
+              .then(() => setText(""))
+          }
+        >
+          Send
+        </Button>
+      </div>
     </div>
   );
 }
