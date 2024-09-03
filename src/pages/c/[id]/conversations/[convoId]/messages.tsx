@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 
+import { AuthenticatedLayout } from "@/layouts";
 import { Company } from "@/features/companies";
 import { LoggedIn } from "@/features/authentication";
-import { ConversationMessageListContainer } from "@/features/messages";
-import { AuthenticatedLayout } from "@/layouts";
 import { Conversation } from "@/features/conversations";
+import { ConversationMessageList, SendMessage } from "@/features/messages";
 
 export default function Page() {
   const query = useRouter().query;
@@ -23,10 +23,18 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="conversations"
         >
-          <ConversationMessageListContainer
-            companyId={id}
-            conversationId={convoId}
-          />
+          <div className="h-full flex flex-col relative">
+            <div className="flex-1 overflow-auto">
+              <ConversationMessageList
+                companyId={id}
+                conversationId={convoId}
+              />
+            </div>
+
+            <div className="absolute bottom-0 inset-x-0">
+              <SendMessage companyId={id} conversationId={convoId} />
+            </div>
+          </div>
         </AuthenticatedLayout>
       )}
     </LoggedIn>
