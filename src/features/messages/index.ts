@@ -1,2 +1,3 @@
 export { type Message } from "./types";
-export { ConversationMessageListContainer } from "./components/ConversationMessageListContainer";
+export { ConversationMessageList } from "./components/ConversationMessageList";
+export { SendMessage } from "./components/SendMessage";

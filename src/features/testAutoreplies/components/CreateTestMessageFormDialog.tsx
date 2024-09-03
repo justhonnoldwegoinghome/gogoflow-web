@@ -90,7 +90,7 @@ export function CreateTestMessageFormDialog({
           }}
         >
           <div className="flex flex-col gap-8 justify-between h-[80vh]">
-            <div className="flex flex-col gap-4 overflow-auto">
+            <div className="flex flex-col gap-4 overflow-auto px-1 pb-1">
               <div>
                 <label className="text-sm font-medium mb-1 block">Text</label>
                 <Textarea

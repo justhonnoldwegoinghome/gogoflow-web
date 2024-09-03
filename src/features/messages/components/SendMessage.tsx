@@ -1,12 +1,11 @@
 import _ from "lodash";
 import { useState } from "react";
 
-import { Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
+import { Conversation } from "@/features/conversations";
 
 import { useSendMessage } from "../api/sendMessage";
-import { Conversation } from "../../conversations/types";
 
 interface SendMessageProps {
   companyId: Company["id"];
@@ -22,9 +21,12 @@ export function SendMessage({ companyId, conversationId }: SendMessageProps) {
   const [text, setText] = useState("");
 
   return (
-    <div>
-      <Textarea value={text} onChange={(e) => setText(e.target.value)} />
-      <br />
+    <div className="bg-white flex flex-col gap-2">
+      <textarea
+        className="ring-2 ring-input focus-visible:ring-ring w-full rounded-md px-4 py-2 laptop:shadow-lg focus:outline-none"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
       <Button
         disabled={!text}
         isLoading={sendMessageMutation.isMutating}
@@ -41,7 +43,7 @@ export function SendMessage({ companyId, conversationId }: SendMessageProps) {
             .then(() => setText(""))
         }
       >
-        Send message
+        Send
       </Button>
     </div>
   );

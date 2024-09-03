@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { AuthenticatedLayout } from "@/layouts";
+import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
 import {
@@ -26,10 +26,14 @@ export default function Page() {
           selectedCompanyId={id}
           companyTab="bots"
         >
-          <AssistantSubpageBreadcrumb id={botId} subpageLabel="Settings" />
-          <br />
-          <br />
-          <AssistantSettings id={botId} />
+          <PagePadding>
+            <div className="w-full max-w-screen-tablet mx-auto">
+              <AssistantSubpageBreadcrumb id={botId} subpageLabel="Settings" />
+              <br />
+              <br />
+              <AssistantSettings id={botId} />
+            </div>
+          </PagePadding>
         </AuthenticatedLayout>
       )}
     </LoggedIn>

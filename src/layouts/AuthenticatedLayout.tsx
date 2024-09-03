@@ -37,16 +37,16 @@ export function AuthenticatedLayout({
       />
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto">
-          {isCompanyView && (
+        {isCompanyView && (
+          <aside className="hidden laptop:block bg-white h-full pl-4 pr-16 pt-4 pb-24 overflow-auto border-r">
             <CompanyNavBar id={selectedCompanyId} companyTab={companyTab} />
-          )}
-        </aside>
+          </aside>
+        )}
 
-        <main className="flex-1 overflow-auto bg-white">
-          <div className="px-4 pt-8 pb-24 w-full max-w-screen-tablet mx-auto">
-            {children}
-          </div>
+        <main className="flex-1 overflow-auto">
+          {/* <div className="px-4 py-8 h-full w-full max-w-screen-tablet mx-auto"> */}
+          {children}
+          {/* </div> */}
         </main>
       </div>
     </div>
@@ -166,7 +166,7 @@ function CompanyNavSheet({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="w-8 h-8 rounded-full flex justify-center items-center bg-white focus:outline-none focus:ring-2 ring-ring">
+        <button className="w-8 h-8 rounded-full flex justify-center items-center bg-white focus:outline-none">
           <Menu size={16} strokeWidth={1} />
         </button>
       </SheetTrigger>
