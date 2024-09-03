@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { Input, Textarea } from "@/components/form";
+import { Switch } from "@/components/switch";
 import { Button } from "@/components/button";
 
 import { useUpdateAssistant } from "../api/updateAssistant";
@@ -57,16 +58,18 @@ export function UpdateAssistantForm({
     >
       <div className="rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">
         <div className="flex flex-col gap-4">
+          <div className="ml-auto flex items-center gap-2">
+            <Switch id="is-active" checked={is_active} disabled />
+            <label className="text-sm font-medium block">
+              {is_active ? "Deactivate" : "Activate (coming soon)"}
+            </label>
+          </div>
           <div>
             <label className="text-sm font-medium mb-1 block">Name</label>
             <Input
               value={updatedName}
               onChange={(e) => setUpdatedName(e.currentTarget.value)}
             />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-1 block">Active</label>
-            <Input value={is_active ? "Yes" : "No"} disabled />
           </div>
           <div>
             <label className="text-sm font-medium mb-1 block">
