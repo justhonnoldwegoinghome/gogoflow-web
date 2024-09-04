@@ -9,6 +9,7 @@ import { useAssistant } from "../api/getAssistant";
 import { UpdateAssistantForm } from "./UpdateAssistantForm";
 import { DeleteAssistantDialog } from "./DeleteAssistantDialog";
 import { ActivateAssistantDialog } from "./ActivateAssistantDialog";
+import { DeactivateAssistantDialog } from "./DeactivateAssistantDialog";
 
 interface AssistantSettingsProps {
   id: Assistant["id"];
@@ -23,16 +24,27 @@ export function AssistantSettings({ id }: AssistantSettingsProps) {
 
   return (
     <div className="flex flex-col gap-8">
-      <ActivateAssistantDialog id={id}>
-        {(openDialog) => (
-          <div className="ml-auto flex items-center gap-2">
-            <Switch checked={is_active} onCheckedChange={openDialog} />
-            <label className="text-sm font-medium block">
-              {is_active ? "Active" : "Inactive"}
-            </label>
-          </div>
+      <div className="ml-auto">
+        {is_active ? (
+          <DeactivateAssistantDialog id={id}>
+            {(openDialog) => (
+              <div className="flex items-center gap-2">
+                <Switch checked={true} onCheckedChange={openDialog} />
+                <label className="text-sm font-medium block">Active</label>
+              </div>
+            )}
+          </DeactivateAssistantDialog>
+        ) : (
+          <ActivateAssistantDialog id={id}>
+            {(openDialog) => (
+              <div className="flex items-center gap-2">
+                <Switch checked={false} onCheckedChange={openDialog} />
+                <label className="text-sm font-medium block">Inactive</label>
+              </div>
+            )}
+          </ActivateAssistantDialog>
         )}
-      </ActivateAssistantDialog>
+      </div>
 
       <UpdateAssistantForm id={id} assistant={assistantQuery.data} />
 
