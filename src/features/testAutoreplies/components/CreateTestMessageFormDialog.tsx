@@ -19,7 +19,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/dialog";
 
 import { TestMessage } from "../types";
@@ -72,7 +71,7 @@ export function CreateTestMessageFormDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>{children(() => setIsOpen(true))}</DialogTrigger>
+      {children(() => setIsOpen(true))}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add test message</DialogTitle>
