@@ -20,11 +20,7 @@ export function TestAutoreplyCardUI({
   testAutoreply,
 }: TestAutoreplyCardUIProps) {
   return (
-    <div className="bg-secondary p-4 rounded-lg flex flex-col gap-4">
-      <div>
-        <p className="font-medium">Bot ID</p>
-        <p className="text-muted-foreground">{testAutoreply.assistant_id}</p>
-      </div>
+    <div className="bg-white p-4 flex flex-col gap-4 relative">
       <div>
         <p className="font-medium">Timestamp</p>
         <p className="text-muted-foreground">{`${formatDate(
@@ -38,10 +34,10 @@ export function TestAutoreplyCardUI({
         </p>
       </div>
 
-      <div className="ml-auto">
+      <div className="absolute bottom-4 right-4">
         <Dialog>
           <DialogTrigger asChild>
-            <Button>View thread</Button>
+            <Button variant="ghost">View thread</Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

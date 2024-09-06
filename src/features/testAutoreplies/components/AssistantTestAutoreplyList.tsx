@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Bot } from "lucide-react";
 
 import { Assistant } from "@/features/assistants";
@@ -32,8 +33,12 @@ export function AssistantTestAutoreplyList({
     );
 
   return (
-    <div className="flex flex-col gap-4">
-      {assistantTestAutoreplyListQuery.data.results.map((t) => (
+    <div className="flex flex-col gap-4 divide-y-[1px]">
+      {_.orderBy(
+        assistantTestAutoreplyListQuery.data.results,
+        "created_at",
+        "desc"
+      ).map((t) => (
         <TestAutoreplyCardUI key={t.id} testAutoreply={t} />
       ))}
     </div>

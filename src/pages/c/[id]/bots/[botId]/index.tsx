@@ -36,7 +36,7 @@ export default function Page() {
               <AssistantBio id={botId} />
               <br />
               <br />
-              <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
                 <AssistantSubpageLink
                   href={`/c/${id}/bots/${botId}/knowledge-center`}
                   Icon={Database}
