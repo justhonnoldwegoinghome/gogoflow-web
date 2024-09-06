@@ -84,7 +84,7 @@ function UserNavBar({
   );
 }
 
-type CompanyTab = "conversations" | "bots" | "products" | "settings";
+type CompanyTab = "conversations" | "assistants" | "products" | "settings";
 
 const companyNavItems: {
   label: string;
@@ -92,8 +92,8 @@ const companyNavItems: {
   icon: ReactElement;
 }[] = [
   {
-    label: "Bots",
-    value: "bots",
+    label: "Assistants",
+    value: "assistants",
     icon: <Bot className="h-4 w-4" />,
   },
   {

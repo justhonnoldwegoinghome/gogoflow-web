@@ -33,10 +33,10 @@ export function ActivateAssistantDialog({
         {children(() => setIsOpen(true))}
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Activate bot</DialogTitle>
+            <DialogTitle>Activate assistant</DialogTitle>
             <DialogDescription>
-              Once you activate the bot, it will start replying to messages
-              automatically.
+              Once you activate the assistant, it will start replying to
+              messages automatically.
             </DialogDescription>
           </DialogHeader>
 

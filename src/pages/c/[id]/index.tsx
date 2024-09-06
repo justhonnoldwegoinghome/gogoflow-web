@@ -8,7 +8,7 @@ export default function Page() {
   let { id } = query;
 
   useEffect(() => {
-    if (id) push(`/c/${id}/bots`);
+    if (id) push(`/c/${id}/assistants`);
   }, [id]);
 
   return (

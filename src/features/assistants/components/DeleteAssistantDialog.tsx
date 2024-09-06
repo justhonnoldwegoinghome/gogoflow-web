@@ -36,9 +36,9 @@ export function DeleteAssistantDialog({
         {children(() => setIsOpen(true))}
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete bot</DialogTitle>
+            <DialogTitle>Delete assistant</DialogTitle>
             <DialogDescription>
-              Once you delete the bot, there is no going back. Please be
+              Once you delete the assistant, there is no going back. Please be
               certain.
             </DialogDescription>
           </DialogHeader>

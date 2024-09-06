@@ -13,7 +13,7 @@ interface CreateAssistantFormProps {
 export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
   const createAssistantMutation = useCreateAssistant({ companyId });
 
-  const [name, setName] = useState("My chatbot");
+  const [name, setName] = useState("Chat assistant");
   const [instructions, setInstructions] = useState(
     "You are a friendly assistant."
   );
@@ -28,7 +28,7 @@ export function CreateAssistantForm({ companyId }: CreateAssistantFormProps) {
       }}
     >
       <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">
-        <h2 className="text-2xl font-semibold text-center">Create bot</h2>
+        <h2 className="text-2xl font-semibold text-center">Create assistant</h2>
         <div className="flex flex-col gap-4">
           <div>
             <label className="text-sm font-medium mb-1 block">Name</label>

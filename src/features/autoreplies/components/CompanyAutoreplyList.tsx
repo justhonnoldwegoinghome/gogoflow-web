@@ -33,16 +33,16 @@ export function CompanyAutoreplyList({
             <Bot size={30} strokeWidth={1} />
           </div>
           <div>
-            <p className="font-medium text-center">No bot logs found</p>
+            <p className="font-medium text-center">No assistant logs found</p>
             <p className="text-sm text-muted-foreground text-center">
-              Create your first bot below
+              Create your first assistant below
             </p>
           </div>
         </div>
         <Button asChild size="sm">
-          <Link href={`/c/${id}/bots/create`}>
+          <Link href={`/c/${id}/assistants/create`}>
             <Plus className="mr-2" size={16} />
-            <p>Create bot</p>
+            <p>Create assistant</p>
           </Link>
         </Button>
       </div>

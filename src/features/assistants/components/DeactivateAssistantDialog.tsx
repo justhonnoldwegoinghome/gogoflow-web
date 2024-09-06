@@ -33,10 +33,10 @@ export function DeactivateAssistantDialog({
         {children(() => setIsOpen(true))}
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Deactivate bot</DialogTitle>
+            <DialogTitle>Deactivate assistant</DialogTitle>
             <DialogDescription>
-              Once you deactivate the bot, it will stop replying to messages
-              automatically.
+              Once you deactivate the assistant, it will stop replying to
+              messages automatically.
             </DialogDescription>
           </DialogHeader>
 

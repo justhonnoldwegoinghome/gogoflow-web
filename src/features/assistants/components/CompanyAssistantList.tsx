@@ -25,16 +25,16 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
               <Bot size={30} strokeWidth={1} />
             </div>
             <div>
-              <p className="font-medium text-center">No bots found</p>
+              <p className="font-medium text-center">No assistants found</p>
               <p className="text-sm text-muted-foreground text-center">
-                Create your first bot below
+                Create your first assistant below
               </p>
             </div>
           </div>
           <Button asChild size="sm">
-            <Link href={`/c/${id}/bots/create`}>
+            <Link href={`/c/${id}/assistants/create`}>
               <Plus className="mr-2" size={16} />
-              <p>Create bot</p>
+              <p>Create assistant</p>
             </Link>
           </Button>
         </div>
@@ -45,7 +45,7 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
     <div className="flex flex-col gap-8">
       <div className="w-fit ml-auto">
         <Button asChild size="sm">
-          <Link href={`/c/${id}/bots/create`}>
+          <Link href={`/c/${id}/assistants/create`}>
             <Plus className="mr-2" size={16} />
             <p>Create</p>
           </Link>
@@ -54,7 +54,7 @@ export function CompanyAssistantList({ id }: CompanyAssistantListProps) {
       <div className="flex flex-col divide-y-[1px]">
         {companyAssistantListQuery.data.results.map((a) => (
           <Link
-            href={`/c/${id}/bots/${a.id}`}
+            href={`/c/${id}/assistants/${a.id}`}
             key={a.id}
             className="p-4 focus:bg-secondary hover:bg-secondary focus:outline-none flex justify-between items-center"
           >

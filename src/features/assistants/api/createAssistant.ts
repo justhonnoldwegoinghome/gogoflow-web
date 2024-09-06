@@ -28,7 +28,7 @@ export function useCreateAssistant({
   return useSWRMutation(
     `/companies/${companyId}/assistants`,
     (_, { arg }: { arg: CreateAssistantParams }) =>
-      createAssistant(arg).then((res) => push(`/c/${companyId}/bots`)),
+      createAssistant(arg).then((res) => push(`/c/${companyId}/assistants`)),
     {
       throwOnError: false,
     }

@@ -26,7 +26,7 @@ export function AssistantTestAutoreplyList({
             <Bot size={30} strokeWidth={1} />
           </div>
           <div>
-            <p className="font-medium text-center">No bot test logs found</p>
+            <p className="font-medium text-center">No test logs found</p>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export default function Page() {
         <AuthenticatedLayout
           userId={userId}
           selectedCompanyId={id}
-          companyTab="bots"
+          companyTab="assistants"
         >
           <PagePadding>
             <div className="w-full max-w-screen-tablet mx-auto">
