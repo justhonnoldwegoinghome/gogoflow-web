@@ -44,6 +44,12 @@ export default function Page() {
                   Knowledge center
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
+                  href={`/c/${id}/assistants/${assistantId}/logs`}
+                  Icon={Scroll}
+                >
+                  Logs
+                </AssistantSubpageLink>
+                <AssistantSubpageLink
                   href={`/c/${id}/assistants/${assistantId}/test-logs`}
                   Icon={Scroll}
                 >
