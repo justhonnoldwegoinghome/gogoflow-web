@@ -3,17 +3,20 @@ import { useRouter } from "next/router";
 import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
 import { Company } from "@/features/companies";
-import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
-import { AssistantFileList, UploadFiles } from "@/features/files";
+import {
+  Assistant,
+  AssistantSettings,
+  AssistantSubpageBreadcrumb,
+} from "@/features/assistants";
 
 export default function Page() {
   const { query } = useRouter();
-  let { id, botId } = query;
+  let { id, assistantId } = query;
 
-  if (!id || !botId) return <div />;
+  if (!id || !assistantId) return <div />;
 
   id = id as Company["id"];
-  botId = botId as Assistant["id"];
+  assistantId = assistantId as Assistant["id"];
 
   return (
     <LoggedIn>
@@ -21,20 +24,17 @@ export default function Page() {
         <AuthenticatedLayout
           userId={userId}
           selectedCompanyId={id}
-          companyTab="bots"
+          companyTab="assistants"
         >
           <PagePadding>
             <div className="w-full max-w-screen-tablet mx-auto">
               <AssistantSubpageBreadcrumb
-                id={botId}
-                subpageLabel="Knowledge center"
+                id={assistantId}
+                subpageLabel="Settings"
               />
               <br />
               <br />
-              <AssistantFileList id={botId} />
-              <br />
-              <br />
-              <UploadFiles assistantId={botId} />
+              <AssistantSettings id={assistantId} />
             </div>
           </PagePadding>
         </AuthenticatedLayout>

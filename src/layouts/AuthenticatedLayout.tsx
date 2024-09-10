@@ -84,7 +84,7 @@ function UserNavBar({
   );
 }
 
-type CompanyTab = "conversations" | "bots" | "products" | "settings";
+type CompanyTab = "conversations" | "assistants" | "products" | "settings";
 
 const companyNavItems: {
   label: string;
@@ -92,8 +92,8 @@ const companyNavItems: {
   icon: ReactElement;
 }[] = [
   {
-    label: "Bots",
-    value: "bots",
+    label: "Assistants",
+    value: "assistants",
     icon: <Bot className="h-4 w-4" />,
   },
   {
@@ -118,9 +118,7 @@ function CompanyNavBar({
 
   return (
     <nav className="flex flex-col gap-6 w-fit">
-      <span className="block text-lg font-medium tracking-wider">
-        Shopeeflow
-      </span>
+      <span className="block text-lg font-medium tracking-wider">gogoflow</span>
       <div className="flex flex-col gap-12 justify-between flex-1">
         <div className="flex flex-col gap-1 items-start">
           {companyNavItems.map((n) => (
@@ -159,7 +157,7 @@ function CompanyNavSheet({
       <SheetContent side="left">
         <SheetHeader>
           <span className="text-start block text-lg font-medium tracking-wider">
-            Shopeeflow
+            gogoflow
           </span>
         </SheetHeader>
         <div className="flex flex-col gap-1 py-4">

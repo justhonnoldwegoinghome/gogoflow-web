@@ -21,7 +21,8 @@ export function useDeleteAssistant({
 
   return useSWRMutation(
     `/companies/${companyId}/assistants`,
-    () => deleteAssistant({ id }).then(() => push(`/c/${companyId}/bots`)),
+    () =>
+      deleteAssistant({ id }).then(() => push(`/c/${companyId}/assistants`)),
     {
       throwOnError: false,
     }

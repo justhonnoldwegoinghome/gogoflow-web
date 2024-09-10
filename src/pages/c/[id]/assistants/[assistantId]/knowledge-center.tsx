@@ -2,18 +2,18 @@ import { useRouter } from "next/router";
 
 import { AuthenticatedLayout, PagePadding } from "@/layouts";
 import { LoggedIn } from "@/features/authentication";
-import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
 import { Company } from "@/features/companies";
-import { CreateTestAutoreplyForm } from "@/features/testAutoreplies";
+import { Assistant, AssistantSubpageBreadcrumb } from "@/features/assistants";
+import { AssistantFileList, UploadFiles } from "@/features/files";
 
 export default function Page() {
   const { query } = useRouter();
-  let { id, botId } = query;
+  let { id, assistantId } = query;
 
-  if (!id || !botId) return <div />;
+  if (!id || !assistantId) return <div />;
 
   id = id as Company["id"];
-  botId = botId as Assistant["id"];
+  assistantId = assistantId as Assistant["id"];
 
   return (
     <LoggedIn>
@@ -21,17 +21,20 @@ export default function Page() {
         <AuthenticatedLayout
           userId={userId}
           selectedCompanyId={id}
-          companyTab="bots"
+          companyTab="assistants"
         >
           <PagePadding>
             <div className="w-full max-w-screen-tablet mx-auto">
               <AssistantSubpageBreadcrumb
-                id={botId}
-                subpageLabel="Playground"
+                id={assistantId}
+                subpageLabel="Knowledge center"
               />
               <br />
               <br />
-              <CreateTestAutoreplyForm assistantId={botId} source="shopee" />
+              <AssistantFileList id={assistantId} />
+              <br />
+              <br />
+              <UploadFiles assistantId={assistantId} />
             </div>
           </PagePadding>
         </AuthenticatedLayout>

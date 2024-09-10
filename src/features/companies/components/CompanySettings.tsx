@@ -21,10 +21,8 @@ export function CompanySettings({ id, userId }: CompanySettingsProps) {
   if (!companyQuery.data) return <Spinner />;
 
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <UpdateCompanyForm id={id} company={companyQuery.data} />
-
-      <br />
 
       <div className="px-6 flex justify-between items-center gap-8">
         <DeleteCompanyDialog id={id} userId={userId}>

@@ -13,12 +13,12 @@ import {
 
 export default function Page() {
   const { query } = useRouter();
-  let { id, botId } = query;
+  let { id, assistantId } = query;
 
-  if (!id || !botId) return <div />;
+  if (!id || !assistantId) return <div />;
 
   id = id as Company["id"];
-  botId = botId as Assistant["id"];
+  assistantId = assistantId as Assistant["id"];
 
   return (
     <LoggedIn>
@@ -26,37 +26,43 @@ export default function Page() {
         <AuthenticatedLayout
           userId={userId}
           selectedCompanyId={id}
-          companyTab="bots"
+          companyTab="assistants"
         >
           <PagePadding>
             <div className="w-full max-w-screen-tablet mx-auto">
-              <AssistantPageBreadcrumb id={botId} />
+              <AssistantPageBreadcrumb id={assistantId} />
               <br />
               <br />
-              <AssistantBio id={botId} />
+              <AssistantBio id={assistantId} />
               <br />
               <br />
-              <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
                 <AssistantSubpageLink
-                  href={`/c/${id}/bots/${botId}/knowledge-center`}
+                  href={`/c/${id}/assistants/${assistantId}/knowledge-center`}
                   Icon={Database}
                 >
                   Knowledge center
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
-                  href={`/c/${id}/bots/${botId}/test-logs`}
+                  href={`/c/${id}/assistants/${assistantId}/logs`}
+                  Icon={Scroll}
+                >
+                  Logs
+                </AssistantSubpageLink>
+                <AssistantSubpageLink
+                  href={`/c/${id}/assistants/${assistantId}/test-logs`}
                   Icon={Scroll}
                 >
                   Test logs
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
-                  href={`/c/${id}/bots/${botId}/settings`}
+                  href={`/c/${id}/assistants/${assistantId}/settings`}
                   Icon={Settings}
                 >
                   Settings
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
-                  href={`/c/${id}/bots/${botId}/playground`}
+                  href={`/c/${id}/assistants/${assistantId}/playground`}
                   Icon={FlaskConical}
                 >
                   Playground

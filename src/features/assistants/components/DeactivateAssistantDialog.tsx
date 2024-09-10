@@ -10,25 +10,22 @@ import {
   DialogClose,
 } from "@/components/dialog";
 import { Button } from "@/components/button";
-import { Company } from "@/features/companies";
 
-import { useDeleteAssistant } from "../api/deleteAssistant";
+import { useDeactivateAssistant } from "../api/deactivateAssistant";
 import { Assistant } from "../types";
 
-interface DeleteAssistantDialogProps {
+interface DeactivateAssistantDialogProps {
   id: Assistant["id"];
-  companyId: Company["id"];
   children: (openDialog: () => void) => ReactNode;
 }
 
-export function DeleteAssistantDialog({
+export function DeactivateAssistantDialog({
   id,
-  companyId,
   children,
-}: DeleteAssistantDialogProps) {
+}: DeactivateAssistantDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const deleteAssistantMutation = useDeleteAssistant({ id, companyId });
+  const deactivateAssistantMutation = useDeactivateAssistant({ id });
 
   return (
     <div>
@@ -36,10 +33,10 @@ export function DeleteAssistantDialog({
         {children(() => setIsOpen(true))}
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete assistant</DialogTitle>
+            <DialogTitle>Deactivate assistant</DialogTitle>
             <DialogDescription>
-              Once you delete the assistant, there is no going back. Please be
-              certain.
+              Once you deactivate the assistant, it will stop replying to
+              messages automatically.
             </DialogDescription>
           </DialogHeader>
 
@@ -52,14 +49,16 @@ export function DeleteAssistantDialog({
               </DialogClose>
               <Button
                 type="button"
-                variant="destructive"
+                variant="default"
                 size="sm"
                 onClick={() =>
-                  deleteAssistantMutation.trigger().then(() => setIsOpen(false))
+                  deactivateAssistantMutation
+                    .trigger()
+                    .then(() => setIsOpen(false))
                 }
-                isLoading={deleteAssistantMutation.isMutating}
+                isLoading={deactivateAssistantMutation.isMutating}
               >
-                Delete
+                Deactivate
               </Button>
             </div>
           </DialogFooter>

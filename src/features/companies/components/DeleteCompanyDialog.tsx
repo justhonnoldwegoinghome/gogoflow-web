@@ -2,7 +2,6 @@ import { ReactNode, useState } from "react";
 
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -32,7 +31,7 @@ export function DeleteCompanyDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>{children(() => setIsOpen(true))}</DialogTrigger>
+      {children(() => setIsOpen(true))}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete company</DialogTitle>

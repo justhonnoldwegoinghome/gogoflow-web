@@ -31,11 +31,13 @@ export function AssistantSubpageBreadcrumb({
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href={`/c/${company_id}/bots`}>Bots</BreadcrumbLink>
+            <BreadcrumbLink href={`/c/${company_id}/assistants`}>
+              Assistants
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href={`/c/${company_id}/bots/${id}`}>
+            <BreadcrumbLink href={`/c/${company_id}/assistants/${id}`}>
               {name}
             </BreadcrumbLink>
           </BreadcrumbItem>

@@ -27,7 +27,9 @@ export function AssistantPageBreadcrumb({ id }: AssistantPageBreadcrumbProps) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href={`/c/${company_id}/bots`}>Bots</BreadcrumbLink>
+            <BreadcrumbLink href={`/c/${company_id}/assistants`}>
+              Assistants
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

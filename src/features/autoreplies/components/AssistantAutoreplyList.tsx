@@ -4,21 +4,19 @@ import { Bot } from "lucide-react";
 import { Assistant } from "@/features/assistants";
 import { Spinner } from "@/components/spinner";
 
-import { useAssistantTestAutoreplyList } from "../api/getAssistantTestAutoreplyList";
-import { TestAutoreplyCardUI } from "./TestAutoreplyUI";
+import { useAssistantAutoreplyList } from "../api/getAssistantAutoreplyList";
+import { AutoreplyCardUI } from "./AutoreplyUI";
 
-interface AssistantTestAutoreplyListProps {
+interface AssistantAutoreplyListProps {
   id: Assistant["id"];
 }
 
-export function AssistantTestAutoreplyList({
-  id,
-}: AssistantTestAutoreplyListProps) {
-  const assistantTestAutoreplyListQuery = useAssistantTestAutoreplyList({ id });
+export function AssistantAutoreplyList({ id }: AssistantAutoreplyListProps) {
+  const assistantAutoreplyListQuery = useAssistantAutoreplyList({ id });
 
-  if (!assistantTestAutoreplyListQuery.data) return <Spinner />;
+  if (!assistantAutoreplyListQuery.data) return <Spinner />;
 
-  if (assistantTestAutoreplyListQuery.data.results.length === 0)
+  if (assistantAutoreplyListQuery.data.results.length === 0)
     return (
       <div className="w-full h-full flex flex-col justify-center items-center gap-4">
         <div className="flex flex-col justify-center items-center gap-4">
@@ -33,13 +31,13 @@ export function AssistantTestAutoreplyList({
     );
 
   return (
-    <div className="flex flex-col divide-y-[1px]">
+    <div className="flex flex-col gap-4 divide-y-[1px]">
       {_.orderBy(
-        assistantTestAutoreplyListQuery.data.results,
+        assistantAutoreplyListQuery.data.results,
         "created_at",
         "desc"
-      ).map((t) => (
-        <TestAutoreplyCardUI key={t.id} testAutoreply={t} />
+      ).map((a) => (
+        <AutoreplyCardUI key={a.id} autoreply={a} />
       ))}
     </div>
   );

@@ -24,7 +24,7 @@ function NavBar() {
   return (
     <div className="max-w-screen-tablet mx-auto flex justify-between items-center py-10 px-[3vw]">
       <Link href="/" className="block text-lg font-medium tracking-wider">
-        Shopeeflow
+        gogoflow
       </Link>
       <div className="flex gap-2">
         <Button asChild>
