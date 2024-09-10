@@ -138,8 +138,8 @@ export function CreateTestMessageFormDialog({
                   <SelectContent>
                     <SelectGroup>
                       <SelectItem value="none">None</SelectItem>
-                      <SelectItem value="order">Order</SelectItem>
                       <SelectItem value="product">Product</SelectItem>
+                      <SelectItem value="order">Order</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -152,6 +152,7 @@ export function CreateTestMessageFormDialog({
                   placeholder="Optional"
                   value={referenceId || ""}
                   onChange={(e) => setReferenceId(e.target.value)}
+                  disabled={referenceType === null}
                 />
               </div>
             </div>
