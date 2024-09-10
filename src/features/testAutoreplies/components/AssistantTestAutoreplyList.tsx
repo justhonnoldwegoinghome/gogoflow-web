@@ -33,7 +33,7 @@ export function AssistantTestAutoreplyList({
     );
 
   return (
-    <div className="flex flex-col gap-4 divide-y-[1px]">
+    <div className="flex flex-col divide-y-[1px]">
       {_.orderBy(
         assistantTestAutoreplyListQuery.data.results,
         "created_at",

@@ -19,22 +19,25 @@ interface TestAutoreplyCardUIProps {
 export function TestAutoreplyCardUI({
   testAutoreply,
 }: TestAutoreplyCardUIProps) {
+  const { created_at, input_test_message_list, is_require_action } =
+    testAutoreply;
+
   return (
-    <div className="bg-white p-4 flex flex-col gap-4 relative">
+    <div className="bg-white p-4">
       <div>
-        <p className="font-medium">Timestamp</p>
-        <p className="text-muted-foreground">{`${formatDate(
-          new Date(testAutoreply.created_at)
-        )} | ${formatTime(new Date(testAutoreply.created_at))}`}</p>
-      </div>
-      <div>
-        <p className="font-medium">Action required</p>
-        <p className="text-muted-foreground">
-          {testAutoreply.is_require_action ? "Yes" : "No"}
-        </p>
+        <p className="font-medium">{input_test_message_list[0].text}</p>
+        {is_require_action && (
+          <span className="bg-red-100 text-red-600 px-3 py-0.5 rounded-full text-sm">
+            Action required
+          </span>
+        )}
       </div>
 
-      <div className="absolute bottom-4 right-4">
+      <br />
+      <div className="flex justify-between items-center">
+        <p className="text-sm text-muted-foreground">{`${formatDate(
+          new Date(created_at)
+        )} | ${formatTime(new Date(testAutoreply.created_at))}`}</p>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">View thread</Button>
