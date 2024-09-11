@@ -37,7 +37,11 @@ export function CreateTestAutoreplyForm({
           }
         >
           {(openDialog) => (
-            <Button variant="secondary" onClick={openDialog}>
+            <Button
+              variant="secondary"
+              onClick={openDialog}
+              disabled={Boolean(response)}
+            >
               <p>Add message</p>
             </Button>
           )}
@@ -54,14 +58,19 @@ export function CreateTestAutoreplyForm({
               })
               .then((res) => res && setResponse(res.data))
           }
-          variant={inputTestMessageList.length === 0 ? "secondary" : "default"}
-          disabled={inputTestMessageList.length === 0}
+          variant={
+            inputTestMessageList.length === 0 || response
+              ? "secondary"
+              : "default"
+          }
+          disabled={Boolean(inputTestMessageList.length === 0 || response)}
           isLoading={createTestAutoreplyMutation.isMutating}
         >
           <p>Run</p>
         </Button>
         <Button
-          variant="outline"
+          variant={response ? "default" : "outline"}
+          disabled={!response}
           onClick={() => {
             setInputTestMessageList([]);
             setResponse(null);
