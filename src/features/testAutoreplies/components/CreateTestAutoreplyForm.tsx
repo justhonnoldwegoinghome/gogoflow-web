@@ -5,7 +5,7 @@ import { Button } from "@/components/button";
 import { Company } from "@/features/companies";
 
 import { useCreateTestAutoreply } from "../api/createTestautoreply";
-import { TestAutoreply, TestMessage } from "../types";
+import { OutputLLMMessage, TestMessage } from "../types";
 import { CreateTestMessageFormDialog } from "./CreateTestMessageFormDialog";
 import { TestThreadUI } from "./TestThreadUI";
 
@@ -22,19 +22,13 @@ export function CreateTestAutoreplyForm({
     assistantId,
   });
 
-  const [inputTestMessageList, setInputTestMessageList] = useState<
-    TestMessage[]
-  >([]);
-
-  const [response, setResponse] = useState<TestAutoreply | null>(null);
+  const [testMessageList, setTestMessageList] = useState<TestMessage[]>([]);
 
   return (
     <div>
       <div className="flex justify-end gap-2 mb-8">
         <CreateTestMessageFormDialog
-          onSubmit={(tm) =>
-            setInputTestMessageList([...inputTestMessageList, tm])
-          }
+          onSubmit={(tm) => setTestMessageList([...testMessageList, tm])}
         >
           {(openDialog) => (
             <Button variant="secondary" onClick={openDialog}>
@@ -49,13 +43,22 @@ export function CreateTestAutoreplyForm({
                 data: {
                   assistantId,
                   source,
-                  inputTestMessageList,
+                  inputTestMessageList: testMessageList,
                 },
               })
-              .then((res) => res && setResponse(res.data))
+              .then((res) => {
+                if (res) {
+                  setTestMessageList([
+                    ...testMessageList,
+                    ...res.data.output_llm_message_list.map(
+                      outputLLMMessageToTestMessage
+                    ),
+                  ]);
+                }
+              })
           }
-          variant={inputTestMessageList.length === 0 ? "secondary" : "default"}
-          disabled={inputTestMessageList.length === 0}
+          variant={testMessageList.length === 0 ? "secondary" : "default"}
+          disabled={Boolean(testMessageList.length === 0)}
           isLoading={createTestAutoreplyMutation.isMutating}
         >
           <p>Run</p>
@@ -63,18 +66,18 @@ export function CreateTestAutoreplyForm({
         <Button
           variant="outline"
           onClick={() => {
-            setInputTestMessageList([]);
-            setResponse(null);
+            setTestMessageList([]);
           }}
         >
           Reset
         </Button>
       </div>
 
-      <TestThreadUI
-        testMessageList={inputTestMessageList}
-        outputLLMMessageList={response ? response.output_llm_message_list : []}
-      />
+      <TestThreadUI testMessageList={testMessageList} />
     </div>
   );
+}
+
+function outputLLMMessageToTestMessage(o: OutputLLMMessage): TestMessage {
+  return { sender_role: "seller", text: o.content, reference: null };
 }

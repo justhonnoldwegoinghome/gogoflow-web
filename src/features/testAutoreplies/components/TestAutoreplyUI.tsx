@@ -1,7 +1,6 @@
 import { formatDate, formatTime } from "@/utils";
 import { Button } from "@/components/button";
 
-import { TestAutoreply } from "../types";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/dialog";
+
+import { TestAutoreply } from "../types";
 import { TestThreadUI } from "./TestThreadUI";
 
 interface TestAutoreplyCardUIProps {
