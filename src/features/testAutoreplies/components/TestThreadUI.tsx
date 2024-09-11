@@ -4,7 +4,7 @@ import { OutputLLMMessage, TestMessage } from "../types";
 
 interface TestThreadUIProps {
   testMessageList: TestMessage[];
-  outputLLMMessageList: OutputLLMMessage[];
+  outputLLMMessageList?: OutputLLMMessage[];
 }
 
 export function TestThreadUI({
@@ -26,7 +26,7 @@ export function TestThreadUI({
           )
         )}
       </div>
-      <div>
+      {outputLLMMessageList && (
         <div className="flex flex-col gap-4">
           {outputLLMMessageList.map((o, i) => (
             <div key={i} className="ml-24">
@@ -34,7 +34,7 @@ export function TestThreadUI({
             </div>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
