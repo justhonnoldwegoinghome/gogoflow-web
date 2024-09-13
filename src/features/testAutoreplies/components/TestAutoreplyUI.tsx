@@ -20,8 +20,12 @@ interface TestAutoreplyCardUIProps {
 export function TestAutoreplyCardUI({
   testAutoreply,
 }: TestAutoreplyCardUIProps) {
-  const { created_at, input_test_message_list, is_require_action } =
-    testAutoreply;
+  const {
+    created_at,
+    input_test_message_list,
+    is_require_action,
+    output_llm_message_list,
+  } = testAutoreply;
 
   return (
     <div className="bg-white p-4">
@@ -38,7 +42,7 @@ export function TestAutoreplyCardUI({
       <div className="flex justify-between items-center">
         <p className="text-sm text-muted-foreground">{`${formatDate(
           new Date(created_at)
-        )} | ${formatTime(new Date(testAutoreply.created_at))}`}</p>
+        )} | ${formatTime(new Date(created_at))}`}</p>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost">View thread</Button>
@@ -51,8 +55,8 @@ export function TestAutoreplyCardUI({
 
             <div className="h-[80vh] overflow-auto">
               <TestThreadUI
-                testMessageList={testAutoreply.input_test_message_list}
-                outputLLMMessageList={testAutoreply.output_llm_message_list}
+                testMessageList={input_test_message_list}
+                outputLLMMessageList={output_llm_message_list}
               />
             </div>
           </DialogContent>
