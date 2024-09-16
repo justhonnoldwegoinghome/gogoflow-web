@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
+import { useToast } from "@/components/toaster";
 import { Button } from "@/components/button";
 import { Input } from "@/components/form";
 
 import { useCreateCompany } from "../api/createCompany";
 
 export function CreateCompanyForm() {
+  const { toast } = useToast();
+  const { push } = useRouter();
+
   const createCompanyMutation = useCreateCompany();
 
   const [name, setName] = useState("");
@@ -14,7 +19,15 @@ export function CreateCompanyForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createCompanyMutation.trigger({ data: { name } });
+        createCompanyMutation.trigger({ data: { name } }).then((res) => {
+          if (res) {
+            push(`/c/${res.data.id}`);
+            toast({
+              variant: "default",
+              title: "Company created successfully!",
+            });
+          }
+        });
       }}
     >
       <div className="p-6 rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">

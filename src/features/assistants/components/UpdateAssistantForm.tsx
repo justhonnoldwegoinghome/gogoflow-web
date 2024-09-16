@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
+import { useToast } from "@/components/toaster";
 import { Input, Textarea } from "@/components/form";
 import { Button } from "@/components/button";
 
@@ -21,6 +22,8 @@ export function UpdateAssistantForm({
   id,
   assistant,
 }: UpdateAssistantFormProps) {
+  const { toast } = useToast();
+
   const updateAssistantMutation = useUpdateAssistant({
     id,
   });
@@ -40,19 +43,26 @@ export function UpdateAssistantForm({
     [assistant, updatedName, updatedInstructions]
   );
 
-  const { is_active } = assistant;
-
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        updateAssistantMutation.trigger({
-          id,
-          data: {
-            name: updatedName,
-            instructions: updatedInstructions,
-          },
-        });
+        updateAssistantMutation
+          .trigger({
+            id,
+            data: {
+              name: updatedName,
+              instructions: updatedInstructions,
+            },
+          })
+          .then((res) => {
+            if (res) {
+              toast({
+                variant: "default",
+                title: "Assistant updated",
+              });
+            }
+          });
       }}
     >
       <div className="rounded-lg bg-white w-full max-w-screen-tablet  flex flex-col gap-8">

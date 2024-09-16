@@ -1,5 +1,4 @@
 import useSWRMutation from "swr/mutation";
-import { useRouter } from "next/router";
 
 import { post } from "@/apiClient";
 
@@ -16,12 +15,9 @@ function createCompany({ data }: CreateCompanyParams) {
 }
 
 export function useCreateCompany() {
-  const push = useRouter().push;
-
   return useSWRMutation(
     "/companies",
-    (_, { arg }: { arg: CreateCompanyParams }) =>
-      createCompany(arg).then((res) => push(`/c/${res.data.id}`)),
+    (_, { arg }: { arg: CreateCompanyParams }) => createCompany(arg),
     {
       throwOnError: false,
     }
