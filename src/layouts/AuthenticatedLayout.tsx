@@ -58,29 +58,24 @@ function Header({
   "userId" | "selectedCompanyId" | "companyTab"
 >) {
   const isCompanyView = selectedCompanyId && companyTab;
-  return (
-    <header className="flex bg-secondary px-4 py-2 gap-4">
-      <div className="laptop:hidden">
-        {isCompanyView && (
-          <CompanyNavSheet id={selectedCompanyId} companyTab={companyTab} />
-        )}
-      </div>
-      <div className="flex-1">
-        <UserNavBar userId={userId} selectedCompanyId={selectedCompanyId} />
-      </div>
-    </header>
-  );
-}
 
-function UserNavBar({
-  userId,
-  selectedCompanyId,
-}: Pick<AuthenticatedLayoutProps, "userId" | "selectedCompanyId">) {
   return (
-    <nav className="flex justify-between items-center gap-8">
-      <UserCompanyList id={userId} selectedCompanyId={selectedCompanyId} />
+    <header className="flex bg-secondary px-4 py-2 justify-between">
+      {isCompanyView ? (
+        <div className="flex items-center gap-2">
+          <div className="laptop:hidden">
+            <CompanyNavSheet id={selectedCompanyId} companyTab={companyTab} />
+          </div>
+          <UserCompanyList id={userId} selectedCompanyId={selectedCompanyId} />
+        </div>
+      ) : (
+        <div>
+          <UserCompanyList id={userId} selectedCompanyId={selectedCompanyId} />
+        </div>
+      )}
+
       <UserDropdownMenu id={userId} />
-    </nav>
+    </header>
   );
 }
 
