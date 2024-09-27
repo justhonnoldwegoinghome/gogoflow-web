@@ -1,4 +1,4 @@
-import { Database, FlaskConical, Scroll, Settings } from "lucide-react";
+import { FlaskConical, Scroll, Settings } from "lucide-react";
 import { useRouter } from "next/router";
 
 import { AuthenticatedLayout, PagePadding } from "@/layouts";
@@ -38,10 +38,10 @@ export default function Page() {
               <br />
               <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
                 <AssistantSubpageLink
-                  href={`/c/${id}/assistants/${assistantId}/knowledge-center`}
-                  Icon={Database}
+                  href={`/c/${id}/assistants/${assistantId}/settings`}
+                  Icon={Settings}
                 >
-                  Knowledge center
+                  Settings
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
                   href={`/c/${id}/assistants/${assistantId}/logs`}
@@ -50,22 +50,16 @@ export default function Page() {
                   Logs
                 </AssistantSubpageLink>
                 <AssistantSubpageLink
-                  href={`/c/${id}/assistants/${assistantId}/test-logs`}
-                  Icon={Scroll}
-                >
-                  Test logs
-                </AssistantSubpageLink>
-                <AssistantSubpageLink
-                  href={`/c/${id}/assistants/${assistantId}/settings`}
-                  Icon={Settings}
-                >
-                  Settings
-                </AssistantSubpageLink>
-                <AssistantSubpageLink
                   href={`/c/${id}/assistants/${assistantId}/playground`}
                   Icon={FlaskConical}
                 >
                   Playground
+                </AssistantSubpageLink>
+                <AssistantSubpageLink
+                  href={`/c/${id}/assistants/${assistantId}/test-logs`}
+                  Icon={Scroll}
+                >
+                  Test logs
                 </AssistantSubpageLink>
               </div>
             </div>
