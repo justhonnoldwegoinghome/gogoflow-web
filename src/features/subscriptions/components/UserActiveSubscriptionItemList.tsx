@@ -2,6 +2,7 @@ import { Spinner } from "@/components/spinner";
 import { User } from "@/features/users";
 
 import { useUserActiveSubscriptionItemList } from "../api/getUserActiveSubscriptionItemList";
+import { CustomerPortalSessionLink } from "./CustomerPortalSessionLink";
 
 interface UserActiveSubscriptionItemListProps {
   id: User["id"];
@@ -31,7 +32,11 @@ export function UserActiveSubscriptionItemList({
           <div key={i}>{as.tier}</div>
         ))}
       </div>
-      <button>Manage subscription</button>
+      <CustomerPortalSessionLink
+        returnUrl={`${process.env.NEXT_PUBLIC_CLIENT_ORIGIN}/me`}
+      >
+        Manage subscription
+      </CustomerPortalSessionLink>
     </div>
   );
 }
