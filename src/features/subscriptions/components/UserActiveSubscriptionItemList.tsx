@@ -3,6 +3,7 @@ import { User } from "@/features/users";
 
 import { useUserActiveSubscriptionItemList } from "../api/getUserActiveSubscriptionItemList";
 import { CustomerPortalSessionLink } from "./CustomerPortalSessionLink";
+import { CheckoutSessionLink } from "./CheckoutSessionLink";
 
 interface UserActiveSubscriptionItemListProps {
   id: User["id"];
@@ -20,8 +21,13 @@ export function UserActiveSubscriptionItemList({
   if (userActiveSubscriptionItemListQuery.data.results.length === 0)
     return (
       <div>
-        <p>Not subscribed</p>
-        <button>Upgrade to Pro</button>
+        <CheckoutSessionLink
+          plan="pro"
+          successUrl={`${process.env.NEXT_PUBLIC_CLIENT_ORIGIN}/me`}
+          returnUrl={`${process.env.NEXT_PUBLIC_CLIENT_ORIGIN}/me`}
+        >
+          Upgrade to Pro
+        </CheckoutSessionLink>
       </div>
     );
 
