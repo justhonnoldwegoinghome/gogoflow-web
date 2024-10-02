@@ -5,3 +5,4 @@ export { LogIn } from "./components/LogIn";
 export { RequestSignUp } from "./components/RequestSignUp";
 export { CompleteSignUp } from "./components/CompleteSignUp";
 export { LoggedIn } from "./components/LoggedIn";
+export { ChangePasswordForm } from "./components/ChangePasswordForm";
