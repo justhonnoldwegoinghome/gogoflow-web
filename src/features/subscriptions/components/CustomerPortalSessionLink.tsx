@@ -16,6 +16,7 @@ export function CustomerPortalSessionLink({
 
   return (
     <Button
+      variant="secondary"
       onClick={() =>
         generateCustomerPortalSessionMutation
           .trigger({ data: { return_url: returnUrl } })

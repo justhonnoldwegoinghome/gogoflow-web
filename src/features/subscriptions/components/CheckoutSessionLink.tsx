@@ -19,6 +19,8 @@ export function CheckoutSessionLink({
 
   return (
     <Button
+      variant="secondary"
+      className="w-full rounded-full text-md"
       onClick={() =>
         generateCheckoutSessionMutation
           .trigger({
