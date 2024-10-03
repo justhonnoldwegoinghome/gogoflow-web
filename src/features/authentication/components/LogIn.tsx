@@ -5,6 +5,7 @@ import { Input } from "@/components/form";
 import { Button } from "@/components/button";
 
 import { useLogIn } from "../api/logIn";
+import Link from "next/link";
 
 export function LogIn() {
   const logInMutation = useLogIn();
@@ -42,6 +43,14 @@ export function LogIn() {
             >
               Submit
             </Button>
+          </div>
+          <div className="mt-4 flex justify-center">
+            <Link
+              href="/auth/request-password-reset"
+              className="text-muted-foreground hover:underline underline-offset-4"
+            >
+              Forgot password?
+            </Link>
           </div>
         </form>
       </div>
