@@ -13,12 +13,17 @@ function completePasswordReset({ data }: CompletePasswordResetParams) {
   return post<boolean>("/auth/complete-password-reset", data);
 }
 
-export function useCompletePasswordReset() {
+export function useCompletePasswordReset({
+  onSuccess,
+}: {
+  onSuccess: () => void;
+}) {
   return useSWRMutation(
     "/complete-password-reset",
     (_, { arg }: { arg: CompletePasswordResetParams }) =>
       completePasswordReset(arg),
     {
+      onSuccess,
       throwOnError: false,
     }
   );
