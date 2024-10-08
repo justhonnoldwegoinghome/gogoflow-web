@@ -1,5 +1,6 @@
 import { SWRConfig, SWRConfiguration } from "swr";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
 import "@/styles/globals.css";
@@ -30,12 +31,18 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <SWRConfig value={swrConfig}>
-      <div className={font.className}>
-        <Component {...pageProps} />
-        <Toaster />
-        <Analytics mode="production" />
-      </div>
-    </SWRConfig>
+    <>
+      <Head>
+        <link rel="icon" href="/logo.svg" />
+        <title>Gogoflow | AI for Shopee sellers</title>
+      </Head>
+      <SWRConfig value={swrConfig}>
+        <div className={font.className}>
+          <Component {...pageProps} />
+          <Toaster />
+          <Analytics mode="production" />
+        </div>
+      </SWRConfig>
+    </>
   );
 }
