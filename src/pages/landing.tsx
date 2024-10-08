@@ -15,7 +15,7 @@ function NavBar() {
   return (
     <div className="flex justify-between items-center py-12 px-[3vw]">
       <Link href="/" className="block text-lg font-medium tracking-wider">
-        gogoflow
+        Gogoflow
       </Link>
       <div className="flex gap-2">
         <Button asChild variant="ghost">
