@@ -12,7 +12,7 @@ export default function Page() {
   useEffect(() => {
     if (!isLoaded) return;
     else if (isLoggedIn) push("/me");
-    else push("/landing");
+    else push(process.env.NEXT_PUBLIC_LANDING_PAGE_URL || "");
   }, [isLoaded, isLoggedIn]);
 
   return (

@@ -23,7 +23,10 @@ export function UnauthenticatedLayout({
 function NavBar() {
   return (
     <div className="max-w-screen-tablet mx-auto flex justify-between items-center py-10 px-[3vw]">
-      <Link href="/" className="block text-lg font-medium tracking-wider">
+      <Link
+        href={process.env.NEXT_PUBLIC_LANDING_PAGE_URL || ""}
+        className="block text-lg font-medium tracking-wider"
+      >
         Gogoflow
       </Link>
       <div className="flex gap-2">
